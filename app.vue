@@ -1,6 +1,10 @@
+<script setup lang="ts">
+    import '~/src/assets/css/tailwind.css'
+    const colorMode = useColorMode();
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+    <NuxtLayout>
+        <NuxtPage/>
+    </NuxtLayout>
 </template>
