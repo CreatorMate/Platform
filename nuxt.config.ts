@@ -56,6 +56,9 @@ export default defineNuxtConfig({
       BASE_URL: process.env.BASE_URL,
     },
   },
+  image: {
+    domains: ['https://mfouoyeneddsfujxfjci.supabase.co'],
+  },
   dir: {
     assets: './src/assets',
     layouts: './src/layouts',
