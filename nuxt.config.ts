@@ -52,12 +52,13 @@ export default defineNuxtConfig({
     STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_KEY: process.env.STRIPE_WEBHOOK_KEY,
+    NUXT_SUPABASE_SECRET: process.env.NUXT_SUPABASE_SECRET,
     public: {
       BASE_URL: process.env.BASE_URL,
     },
   },
   image: {
-    domains: ['https://mfouoyeneddsfujxfjci.supabase.co'],
+    domains: ['https://mfouoyeneddsfujxfjci.supabase.co', 'https://s.gravatar.com'],
   },
   dir: {
     assets: './src/assets',
