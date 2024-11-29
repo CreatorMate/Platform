@@ -9,23 +9,32 @@
         premium: boolean
         children: NavItem[]
     }>();
+    const route = useRoute();
+    const isActive = route.fullPath === linkTo
+
+    const isHoveringParent = ref(false)
 
     const show = ref(false)
 </script>
 
 <template>
-    <div @click="show = !show" class="flex py-3 px-5 items-center justify-between cursor-pointer">
-        <div class="flex items-center gap-3">
+    <div @mouseenter="isHoveringParent = true" @mouseleave="isHoveringParent = false" :class="{
+        'bg-background-foreground text-text-dark border border-black border-opacity-10' : route.fullPath === linkTo
+    }" @click="show = !show" class="flex py-3 px-5 items-center justify-between cursor-pointer rounded-2xl">
+        <div :class="{'translate-x-4': isHoveringParent}" class="flex items-center gap-3 transition duration-100">
             <Icon width="20" :icon="iconName"/>
             <nuxt-link class="text-sm" :to="linkTo">{{name}}</nuxt-link>
         </div>
         <div class="bg-background-foreground rounded-2xl py-1 px-4" v-if="premium">
             <p class="text-xs ">upgrade</p>
         </div>
-        <Icon :class="{'rotate-180': show}" v-else-if="children.length > 0" icon="solar:alt-arrow-down-line-duotone" />
+        <div v-else-if="children.length > 0">
+            <Icon :class="{'rotate-180': show}" icon="solar:alt-arrow-down-line-duotone" />
+        </div>
+
     </div>
     <div class="text-sm ml-7 pl-4 border-l border-black border-opacity-20 flex flex-col" v-if="show">
-        <nuxt-link :to="linkTo" class="py-3 px-5 first-of-type:bg-white rounded-3xl first-of-type:text-text-dark first-of-type:border border-black border-opacity-10" v-for="child of children">
+        <nuxt-link :to="child.linkTo" class="py-3 px-5 rounded-3xl border-black border-opacity-10" v-for="child of children">
             {{child.name}}
         </nuxt-link>
     </div>

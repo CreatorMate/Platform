@@ -1,16 +1,48 @@
-<script setup>
-    import {Icon} from "@iconify/vue";
-    import {useColorMode} from "@vueuse/core";
-    const colorMode = useColorMode();
-    const {logout} = useOidcAuth();
+<script setup lang='ts'>
+    import PageTitle from "~/components/Core/PageTitle.vue";
+    const {user} = useOidcAuth();
 </script>
+
 <template>
-    <div class="relative ">
-        <Icon @click="colorMode = 'dark'"
-              icon="radix-icons:moon"
-              class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"/>
-        <Icon @click="colorMode = 'light'"
-              icon="radix-icons:sun"
-              class="absolute h-[1.2rem] top-0 w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"/>
-    </div>
+    <section class="w-full h-full">
+        <div class="flex h-fit justify-between items-center w-full">
+            <PageTitle :title="'hey, ' + user.userInfo.nickname" sub-title="thursday, oct 24, 2024"></PageTitle>
+            <div class="flex gap-3">
+                <button class="bg-black py-3 px-6 text-white rounded-lg">request feature</button>
+            </div>
+        </div>
+    </section>
 </template>
+
+<style>
+tr:hover {
+    background-color: #f0f8ff;
+    transition: background-color 0.2s ease;
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+table {
+    animation: 1s fadeInUp;
+}
+
+.card-1 {
+    animation: 1s fadeInUp;
+}
+.card-2 {
+    animation: 1.5s fadeInUp;
+}
+
+.card-3 {
+    animation: 2s fadeInUp;
+}
+</style>

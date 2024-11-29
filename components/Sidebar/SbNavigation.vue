@@ -14,7 +14,7 @@
         iconName: 'lineicons:user-4',
         children: [
             {
-                linkTo: '/creators/all',
+                linkTo: '/creators',
                 name: 'all creators',
                 iconName: 'lineicons:user-4',
                 children: [],
