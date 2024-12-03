@@ -7,4 +7,5 @@
     <NuxtLayout>
         <NuxtPage/>
     </NuxtLayout>
+    <div class="absolute top-0 left-0" id="teleport-zone"></div>
 </template>

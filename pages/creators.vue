@@ -158,6 +158,9 @@
             </tr>
         </table>
     </section>
+    <modal-popup :model-active="true">
+        <p>testing this out</p>
+    </modal-popup>
 </template>
 
 <style>
