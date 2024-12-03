@@ -1,8 +1,10 @@
 <script setup lang='ts'>
     import PageTitle from "~/components/Core/PageTitle.vue";
     import {Icon} from "@iconify/vue";
+    import InviteCreatorModal from "~/components/Modal/InviteCreatorModal.vue";
 
     const {user} = useOidcAuth();
+    const open = ref(false);
 
     const creators = [
         {
@@ -86,7 +88,7 @@
             <PageTitle title="all creators" sub-title="manage all connections"></PageTitle>
             <div class="flex gap-3">
                 <button class="bg-background py-3 px-6 text-text-dark rounded-lg">export</button>
-                <button class="bg-black py-3 px-6 text-white rounded-lg">invite creator</button>
+                <button @click="open = true" class="bg-black py-3 px-6 text-white rounded-lg">invite creator</button>
             </div>
         </div>
         <div class="flex items-center mt-3 gap-3">
@@ -158,8 +160,8 @@
             </tr>
         </table>
     </section>
-    <modal-popup :model-active="true">
-        <p>testing this out</p>
+    <modal-popup @close="open = false" :model-active="open">
+        <InviteCreatorModal @close="open = false"/>
     </modal-popup>
 </template>
 

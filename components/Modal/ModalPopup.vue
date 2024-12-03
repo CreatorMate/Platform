@@ -1,11 +1,12 @@
 <script setup lang='ts'>
+    import {Icon} from "@iconify/vue";
+
     defineProps({
         modelActive: {
             type: Boolean,
             default: false,
         }
     })
-
     const emit = defineEmits(["close"]);
 </script>
 
@@ -13,19 +14,14 @@
     <Teleport to="#teleport-zone">
         <Transition name="modal-outer">
             <div @click="emit('close')" v-show="modelActive"
-                 class="screen-size flex justify-center items-center z-40 bg-black bg-opacity-60 backdrop-blur-[8px]">
+                 class="screen-size flex justify-center items-center z-40 bg-black bg-opacity-10 backdrop-blur-[2px]">
                 <Transition name="modal-inner">
-                    <div @click.stop v-if="modelActive"
-                         class="p-10 bg-black w-[425px] flex flex-col items-center rounded-2xl">
-                        <slot></slot>
+                    <div v-if="modelActive" @click.stop>
+                        <slot  ></slot>
                     </div>
                 </Transition>
             </div>
         </Transition>
-        <div @click="emit('close')" v-if="modelActive"
-             class="absolute w-9 h-9 top-6 right-6 z-50 flex justify-center items-center rounded-full bg-white bg-opacity-10 text-white text-opacity-60 hover:text-opacity-100 cursor-pointer hover:bg-opacity-20 transition duration-75">
-            <Icon size="20px" name="material-symbols:close"></Icon>
-        </div>
     </Teleport>
 </template>
 
