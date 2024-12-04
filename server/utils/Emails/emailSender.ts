@@ -1,18 +1,27 @@
 import type {EmailTemplate} from './types/EmailTypes'
 import nodemailer from 'nodemailer';
+// @ts-ignore
+import { useRuntimeConfig } from '#imports';
 
-type SendMail = { template: EmailTemplate, to: string, from: string, subject: string }
-
-const fromName = "creatormate";
-
-export async function sendEmail(request: SendMail) {
+export async function sendEmail(to: string, subject: string, template: EmailTemplate) {
+    const config = useRuntimeConfig();
     const transporter = nodemailer.createTransport({
-        host: 'smtp.resend.com',
-        port: 465,
+        host: config.mailerHost,
+        port: config.mailerPort,
         secure: true,
         auth: {
-            user: 'resend',
-            pass: 're_eZQqhxWh_9j15zJ6epuMBHTz7aw998Ey2'
+            user: config.mailerUser,
+            pass: config.mailerPass
         }
     });
+
+    const mailOptions = {
+        from: 'hello@creatormate.com',
+        to: to,
+        subject: subject,
+        html: template.html,
+        text: template.text
+    }
+
+    const info = await transporter.sendMail(mailOptions);
 }

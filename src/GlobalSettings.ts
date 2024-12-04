@@ -1,3 +1,3 @@
 export const settings = {
-    unGuardedRoutes: ["/invitation"]
+    unGuardedRoutes: ["/invitation", /^\/invitation\/[^/]+\/[^/]+$/,]
 }

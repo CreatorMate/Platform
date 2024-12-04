@@ -55,13 +55,8 @@ export default defineNuxtConfig({
     NUXT_SUPABASE_SECRET: process.env.NUXT_SUPABASE_SECRET,
     mailerUser: '',
     mailerPass: '',
-    mailerLog: '',
-    mailerDriver: '',
     mailerHost: '',
     mailerPort: '',
-    mailerSmtpTls: '',
-    mailerFromAddress: '',
-    mailerToAddress: '',
     public: {
       BASE_URL: process.env.BASE_URL,
     },

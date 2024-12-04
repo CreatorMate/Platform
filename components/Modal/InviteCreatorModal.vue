@@ -40,7 +40,7 @@
     }
 
     async function sendInvite() {
-        const result = await $fetch('/api/emails/sendEmail', {
+        const result = await $fetch('/api/emails/inviteCreators', {
             method: 'POST',
             body: JSON.stringify({
                 emails: emails.value
