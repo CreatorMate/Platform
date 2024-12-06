@@ -1,6 +1,7 @@
 <script setup lang='ts'>
     import {Icon} from "@iconify/vue";
     import type {NavItem} from "./NavItem";
+    import {onMounted} from "vue";
 
     const {name, iconName, linkTo, children, premium} = defineProps<{
         name: string,
@@ -10,16 +11,28 @@
         children: NavItem[]
     }>();
     const route = useRoute();
-    const isActive = route.fullPath === linkTo
 
     const isHoveringParent = ref(false)
-
     const show = ref(false)
+    function isActive(path: string) {
+        return route.fullPath === path;
+    }
+
+    watch(route, () => {
+        for (const child of children) {
+            if(isActive(child.linkTo)) {
+                show.value = true;
+                break;
+            }
+        }
+    })
+
+
 </script>
 
 <template>
     <div @mouseenter="isHoveringParent = true" @mouseleave="isHoveringParent = false" :class="{
-        'bg-background-foreground text-text-dark border border-black border-opacity-10' : route.fullPath === linkTo
+        'bg-background-foreground text-text-dark border border-black border-opacity-10' : isActive(linkTo) && children.length === 0
     }" @click="show = !show" class="flex py-3 px-5 items-center justify-between cursor-pointer rounded-2xl">
         <div :class="{'translate-x-4': isHoveringParent}" class="flex items-center gap-3 transition duration-100">
             <Icon width="20" :icon="iconName"/>
@@ -34,7 +47,9 @@
 
     </div>
     <div class="text-sm ml-7 pl-4 border-l border-black border-opacity-20 flex flex-col" v-if="show">
-        <nuxt-link :to="child.linkTo" class="py-3 px-5 rounded-3xl border-black border-opacity-10" v-for="child of children">
+        <nuxt-link :class="{
+           'bg-background-foreground text-text-dark border border-black border-opacity-10': isActive(child.linkTo)
+        }" :to="child.linkTo" class="py-3 px-5 rounded-3xl border-black border-opacity-10" v-for="child of children">
             {{child.name}}
         </nuxt-link>
     </div>

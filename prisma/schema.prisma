@@ -9,7 +9,7 @@ datasource db {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model brands {
-  id          BigInt     @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   name        String     @db.VarChar
   is_premium  String?    @db.VarChar
   customer_id String?    @db.VarChar
@@ -27,21 +27,23 @@ model connected_accounts {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model creators {
-  id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  status   String  @db.VarChar
-  email    String? @db.VarChar
-  type     String? @db.VarChar
-  accepted String? @db.VarChar
-  brand_id BigInt?
-  country  String? @db.VarChar
-  brands   brands? @relation(fields: [brand_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  status   String    @db.VarChar
+  email    String?   @db.VarChar
+  type     String?   @db.VarChar
+  accepted String?   @db.VarChar
+  brand_id Int?
+  country  String?   @db.VarChar
+  created  DateTime? @default(now()) @db.Timestamptz(6)
+  username String?
+  brands   brands?   @relation(fields: [brand_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model users {
   id        String  @id(map: "Users_pkey") @unique(map: "Users_id_key") @db.VarChar
   email     String  @db.VarChar
-  brand_id  BigInt?
+  brand_id  Int?
   full_name String? @db.VarChar
   picture   String? @db.VarChar
   brands    brands? @relation(fields: [brand_id], references: [id], onDelete: NoAction, onUpdate: NoAction)

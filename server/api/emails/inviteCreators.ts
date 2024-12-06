@@ -19,7 +19,7 @@ export default defineEventHandler(async event => {
             creator = await prisma.creators.create({
                 data: {
                     email: email,
-                    status: 'invited',
+                    status: 'pending',
                     type: 'commision',
                     brand_id: 1,
                     country: 'netherlands'
@@ -27,7 +27,7 @@ export default defineEventHandler(async event => {
             });
         }
 
-        if(creator.status !== 'invited') continue;
+        if(creator.status !== 'pending') continue;
 
         const template = InviteUserTemplate('{brand_name}', creator.id, 1);
         await sendEmail(email, "You are invited to work with {brand_name}", template);

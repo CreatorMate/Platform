@@ -5,8 +5,6 @@
 
     const {user} = useOidcAuth();
     const accountState = useAccountStore();
-
-    const acceptableTypes = ["image/jpg", "image/png", "image/jpeg", "image/gif", "image/svg"];
     const files = ref();
     const imageLink = ref("");
     const image = ref("");
@@ -23,9 +21,6 @@
     });
 
     async function selectImage(evt: any) {
-        if (!acceptableTypes.includes(evt.target.files[0].type)) {
-            return;
-        }
         files.value = evt.target.files;
         imageLink.value = URL.createObjectURL(evt.target.files[0])
         image.value = evt.target.files[0];

@@ -10,7 +10,6 @@ export default defineEventHandler(async event => {
     const session = await getUserSession(event)
     const userId = session.userInfo.sub;
 
-
     const result = await prisma.users.update({
         where: {id: userId},
         data: {

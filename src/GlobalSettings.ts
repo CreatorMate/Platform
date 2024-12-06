@@ -1,3 +1,4 @@
-export const settings = {
-    unGuardedRoutes: ["/invitation", /^\/invitation\/[^/]+\/[^/]+$/,]
+export const appSettings = {
+    unGuardedRoutes: ["/invitation", /^\/invitation\/[^/]+\/[^/]+$/,],
+    defaultLimit: 10
 }

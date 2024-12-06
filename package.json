@@ -19,6 +19,7 @@
     "@stripe/stripe-js": "^5.2.0",
     "@supabase/supabase-js": "^2.46.2",
     "@vueuse/core": "^12.0.0",
+    "@vueuse/nuxt": "^12.0.0",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.16",
     "nuxt": "^3.14.1592",

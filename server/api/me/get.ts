@@ -2,9 +2,11 @@ import {PrismaClient} from "@prisma/client";
 import {createError, defineEventHandler, readBody} from "h3";
 //@ts-ignore
 import { getUserSession } from 'nuxt-oidc-auth/runtime/server/utils/session.js'
+import {APIResponse, errorResponse, successResponse} from "../../utils/APIResponse";
+import {User} from "../../types/SupabaseTypes";
 
 const prisma = new PrismaClient();
-export default defineEventHandler(async event => {
+export default defineEventHandler(async (event): Promise<APIResponse<User>>  => {
     const session = await getUserSession(event)
     const userId = session.userInfo.sub;
 
@@ -22,9 +24,9 @@ export default defineEventHandler(async event => {
         });
     }
 
-    if(!user) return createError('failed to create user');
+    if(!user) errorResponse("Something went wrong while creating the new user");
 
-    return {
-        data: user
-    }
+    return successResponse({
+        ...user,
+    });
 });

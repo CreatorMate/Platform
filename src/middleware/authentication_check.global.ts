@@ -1,5 +1,4 @@
 import type {RouteLocationNormalized} from "#vue-router";
-import {settings} from "~/src/GlobalSettings";
 import {checkUnguarded} from "~/src/utils/GuardChecker";
 
 export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {

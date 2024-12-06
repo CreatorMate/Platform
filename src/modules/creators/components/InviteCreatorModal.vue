@@ -2,12 +2,13 @@
     import {Icon} from "@iconify/vue";
     import type {Ref} from "vue";
 
-    const emits = defineEmits(['close']);
+    const emits = defineEmits(['close', 'submitted']);
     const emails: Ref<string[]> = ref([]);
     const validEmail = ref(true);
     const email = ref("");
     const fileInput = ref(null);
     const invalidCsvFormat = ref(false);
+    const loading = ref(false);
 
     function addToList() {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -40,14 +41,15 @@
     }
 
     async function sendInvite() {
+        loading.value = true;
         const result = await $fetch('/api/emails/inviteCreators', {
             method: 'POST',
             body: JSON.stringify({
                 emails: emails.value
             })
         });
-
-        emits('close');
+        loading.value = false;
+        emits('submitted');
     }
 
 </script>
@@ -92,8 +94,9 @@
             <button @click="emits('close')" class="border border-black border-opacity-30 py-2 px-3 rounded h-fit text-black text-opacity-80">
                 cancel
             </button>
-            <button @click="sendInvite" :disabled="emails.length == 0" class="border text-white border-green-700 bg-green-600 border-opacity-30 py-2 px-3 rounded h-fit">
+            <button @click="sendInvite" :disabled="emails.length == 0" class="border text-white border-green-700 bg-green-600 border-opacity-30 py-2 px-3 rounded h-fit flex items-center gap-1">
                 next
+                <Icon v-if="loading" icon="line-md:loading-loop"></Icon>
             </button>
         </div>
     </div>
