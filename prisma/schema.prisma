@@ -48,3 +48,11 @@ model users {
   picture   String? @db.VarChar
   brands    brands? @relation(fields: [brand_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model phyllo_connections {
+  id         String    @id @db.VarChar
+  user_id    String?
+  token      String?
+  expires_on DateTime? @db.Date
+}

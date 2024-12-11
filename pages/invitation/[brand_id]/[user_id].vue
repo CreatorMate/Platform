@@ -4,7 +4,7 @@
 
     definePageMeta({
         layout: 'empty'
-    })
+    });
 </script>
 
 <template>

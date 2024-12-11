@@ -39,7 +39,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'creatormate portal',
-      script: [],
+      script: [
+        {
+          async: false,
+          src: "https://cdn.getphyllo.com/connect/v2/phyllo-connect.js"
+        }
+      ],
       link: [
         {
           rel: 'stylesheet',
@@ -53,6 +58,7 @@ export default defineNuxtConfig({
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_KEY: process.env.STRIPE_WEBHOOK_KEY,
     NUXT_SUPABASE_SECRET: process.env.NUXT_SUPABASE_SECRET,
+    PHYLLO_KEY: process.env.PHYLLO_KEY,
     mailerUser: '',
     mailerPass: '',
     mailerHost: '',
