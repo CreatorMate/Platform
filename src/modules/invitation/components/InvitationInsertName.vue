@@ -12,6 +12,8 @@
     const accepted = ref(false);
     const acceptationError = ref(false);
 
+    const emits = defineEmits(['next']);
+
     async function acceptInvitation() {
         error.value = '';
         if (name.value.length === 0) {
@@ -23,12 +25,10 @@
             return;
         }
 
-        const result: APIResponse = await $fetch('/api/creators/acceptInvitation', {
-            method: 'POST',
+        const result: APIResponse = await $fetch(`/API/creators/${userId}`, {
+            method: 'PUT',
             body: JSON.stringify({
                 name: name.value,
-                brandId: brandId,
-                userId: userId
             }),
         });
 
@@ -37,6 +37,8 @@
             acceptationError.value = true;
             return;
         }
+
+        emits('next');
     }
 
 </script>

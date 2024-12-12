@@ -1,12 +1,13 @@
 <script setup lang='ts'>
     import PageTitle from "~/components/Core/PageTitle.vue";
+    import {onMounted} from "vue";
     const {user} = useOidcAuth();
 </script>
 
 <template>
     <section class="w-full h-full">
         <div class="flex h-fit justify-between items-center w-full">
-            <PageTitle :title="'hey, ' + user.userInfo.nickname" sub-title="thursday, oct 24, 2024"></PageTitle>
+            <PageTitle :title="'hey, ' + user?.userInfo?.nickname" sub-title="thursday, oct 24, 2024"></PageTitle>
             <div class="flex gap-3">
                 <button class="bg-black py-3 px-6 text-white rounded-lg">request feature</button>
             </div>

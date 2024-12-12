@@ -3,7 +3,7 @@
     import {Icon} from "@iconify/vue";
     import InviteCreatorModal from "~/src/modules/creators/components/InviteCreatorModal.vue";
     import {onMounted, type Ref} from "vue";
-    import type {Creator} from "~/server/types/SupabaseTypes";
+    import type {Creator} from "~/src/utils/SupabaseTypes";
     import {Paginator} from "~/src/utils/Pagination/Paginator";
     import CreatorsTable from "~/src/modules/creators/components/CreatorsTable.vue";
     import CreatorCountBlock from "~/src/modules/creators/components/CreatorCountBlock.vue";
@@ -17,7 +17,7 @@
 
     const loading = ref(true);
     const brand = 1;
-    const paginator = new Paginator<Creator>('/api/creators/brandCreators', `&brand=${brand}`, loading);
+    const paginator = new Paginator<Creator>('/API/brands/creators', `&brand=${brand}`, loading);
 
     onMounted(async () => {
         await paginator.getContent();

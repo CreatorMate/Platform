@@ -1,6 +1,4 @@
 <script setup lang='ts'>
-    import {Icon} from "@iconify/vue";
-
     defineProps({
         modelActive: {
             type: Boolean,
@@ -11,10 +9,10 @@
 </script>
 
 <template>
-    <Teleport to="#teleport-zone">
+    <Teleport to="body">
         <Transition name="modal-outer">
             <div @click="emit('close')" v-show="modelActive"
-                 class="screen-size flex justify-center items-center z-40 bg-black bg-opacity-10 backdrop-blur-[2px]">
+                 class="absolute top-0 screen-size flex justify-center items-center z-40 bg-black bg-opacity-10 backdrop-blur-[2px]">
                 <Transition name="modal-inner">
                     <div v-if="modelActive" @click.stop>
                         <slot  ></slot>

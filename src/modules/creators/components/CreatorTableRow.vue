@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-    import type {Creator} from "~/server/types/SupabaseTypes";
+    import type {Creator} from "~/src/utils/SupabaseTypes";
     import {Icon} from "@iconify/vue";
     import Dropdown from "~/components/Dropdown/Dropdown.vue";
     import AreYouSure from "~/components/Modal/AreYouSure.vue";
@@ -33,7 +33,7 @@
     }
 
     async function deleteCreator() {
-        const deleteCreatorResult = await $fetch('/api/creators/deleteCreator?creatorId=' + creator.id, {
+        const deleteCreatorResult = await $fetch('/API/brands/creators/' + creator.id, {
             method: 'DELETE'
         })
         open.value = false;

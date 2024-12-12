@@ -1,13 +1,13 @@
 import {defineStore} from "pinia";
-import type {User} from "~/server/types/User";
+import type {User} from "~/src/utils/User";
 import type {APIResponse} from "~/server/utils/APIResponse";
 
 export const useAccountStore = defineStore("account", () => {
     const user = ref<User|null>();
     async function initialize() {
         try {
-            const result: APIResponse<User> = await $fetch('/api/me/get');
-            if(!result.success) return errorResponse('failed to fetch user');
+            const result: APIResponse = await $fetch('http://localhost:3000/API/users/me');
+            if(!result.success) return;
             if(result.data) {
                 user.value = result.data
             }
@@ -18,8 +18,8 @@ export const useAccountStore = defineStore("account", () => {
     }
 
     async function save() {
-        const result = await $fetch('/api/me/update', {
-            method: "POST",
+        const result = await $fetch('http://localhost:3000/API/users/me', {
+            method: "PUT",
             body: JSON.stringify(user.value)
         });
     }

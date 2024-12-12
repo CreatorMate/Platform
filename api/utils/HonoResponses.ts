@@ -1,3 +1,5 @@
+import type {Context} from "hono";
+
 export type APIResponse<T = any> = {
     success: true,
     data: T,
@@ -7,7 +9,7 @@ export type APIResponse<T = any> = {
     error: string,
 }
 
-export function successResponse<T>(data: any, meta: any = null): APIResponse<T> {
+export function successResponse<T>(context: Context, data: any, meta: any = null) {
     return {
         success: true,
         data: data,
@@ -15,9 +17,9 @@ export function successResponse<T>(data: any, meta: any = null): APIResponse<T> 
     }
 }
 
-export function errorResponse(error: string): APIResponse {
-    return {
+export function errorResponse(context: Context, error: string) {
+    return context.json({
         success: false,
         error: error
-    }
+    })
 }
