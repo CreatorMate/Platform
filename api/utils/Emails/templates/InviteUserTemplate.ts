@@ -1,4 +1,4 @@
-import {EmailTemplate} from "../types/EmailTypes";
+import type {EmailTemplate} from "../types/EmailTypes";
 
 const verifyEmailTemplate = function (
     brandName: string,

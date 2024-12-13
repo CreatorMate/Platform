@@ -2,9 +2,11 @@ import {Endpoint} from "~/api/utils/Endpoint";
 import type {Context} from "hono";
 import InviteUserTemplate from "~/api/utils/Emails/templates/InviteUserTemplate";
 import {sendEmail} from "~/api/utils/Emails/emailSender";
+import {errorResponse} from "~/api/utils/HonoResponses";
 
 export type inviteUsers = {
-    emails: string[]
+    emails: string[],
+    brandId: number
 }
 
 export class InviteCreatorEndpoint extends Endpoint {
@@ -12,10 +14,17 @@ export class InviteCreatorEndpoint extends Endpoint {
     protected readonly route: string = '/creators/invite'
 
     protected async handle(context: Context) {
-        const {emails} = await context.req.json() as inviteUsers;
+        const {emails, brandId} = await context.req.json() as inviteUsers;
+
+        const brand = await this.prismaClient.brands.findUnique({
+            where: {id: brandId}
+        })
+
+        if(!brand) return errorResponse(context, 'this brand does not exist');
+
         for(const email of emails) {
             let creator = await this.prismaClient.creators.findFirst({
-                where: { email: email, brand_id: 1},
+                where: { email: email, brand_id: brandId},
             });
             if (!creator) {
                 creator = await this.prismaClient.creators.create({
@@ -23,7 +32,7 @@ export class InviteCreatorEndpoint extends Endpoint {
                         email: email,
                         status: 'pending',
                         type: 'commision',
-                        brand_id: 1,
+                        brand_id: brandId,
                         country: 'netherlands'
                     },
                 });
@@ -31,8 +40,8 @@ export class InviteCreatorEndpoint extends Endpoint {
 
             if(creator.status !== 'pending') continue;
 
-            const template = InviteUserTemplate('{brand_name}', creator.id, 1);
-            await sendEmail(email, "You are invited to work with {brand_name}", template);
+            const template = InviteUserTemplate(brand.name, creator.id, brand.id);
+            await sendEmail(email, `You are invited to work with ${brand.name}`, template);
         }
 
         return {

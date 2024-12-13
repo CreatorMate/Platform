@@ -17,3 +17,10 @@ export type Creator = {
     created: string,
     username: string
 }
+
+export type Brand = {
+    id: number,
+    name: string,
+    is_premium: string,
+    customer_id: string
+}

@@ -3,6 +3,7 @@
     import InvitationConnectIG from "~/src/modules/invitation/components/InvitationConnectIG.vue";
     import {onMounted} from "vue";
     import type {APIResponse} from "~/api/utils/HonoResponses";
+    import {appSettings} from "~/src/GlobalSettings";
     const invitationStep = ref(1);
 
     const route = useRoute();
@@ -15,7 +16,7 @@
     const expired = ref(false);
 
     onMounted(async () => {
-        const response: APIResponse = await $fetch(`http://localhost:3000/API/creators/${userId}`);
+        const response: APIResponse = await $fetch(`${appSettings.baseUrl}/API/creators/${userId}`);
         if(!response.success) {
             error.value = true;
             return;
@@ -24,6 +25,10 @@
         if(response.data.status != 'pending') {
             expired.value = true;
             return;
+        }
+
+        if(response.data.username) {
+            invitationStep.value = 2;
         }
     });
 </script>

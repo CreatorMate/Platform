@@ -1,6 +1,7 @@
 <script setup lang='ts'>
     import {Icon} from "@iconify/vue";
     import type {Ref} from "vue";
+    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
 
     const emits = defineEmits(['close', 'submitted']);
     const emails: Ref<string[]> = ref([]);
@@ -9,6 +10,7 @@
     const fileInput = ref(null);
     const invalidCsvFormat = ref(false);
     const loading = ref(false);
+    const accountStore = useAccountStore();
 
     function addToList() {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -45,7 +47,8 @@
         const result = await $fetch('/API/creators/invite', {
             method: 'POST',
             body: JSON.stringify({
-                emails: emails.value
+                emails: emails.value,
+                brandId: accountStore.brand?.id
             })
         });
         loading.value = false;

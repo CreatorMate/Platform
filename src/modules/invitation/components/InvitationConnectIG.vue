@@ -4,6 +4,7 @@
     import type {PhylloConnection} from "~/src/utils/Phyllo/PhylloConnection";
     import type {Ref} from "vue";
     import type {APIResponse} from "~/api/utils/HonoResponses";
+    import {appSettings} from "~/src/GlobalSettings";
 
     const route = useRoute();
     const creatorId = route.params.user_id;
@@ -30,13 +31,13 @@
             token: connection.value.token,
             redirect: false,
             workPlatformId: '9bb8913b-ddd9-430b-a66a-d74d846e6c66',
-            'redirect URL': 'http://localhost:3000',
+            'redirect URL': `${appSettings.baseUrl}`,
         };
 
         const phylloConnect = PhylloConnect.initialize(config);
 
         phylloConnect.on("accountConnected", async (accountId: any, workplatformId: any, userId: any) => {  // gives the successfully connected account ID and work platform ID for the given user ID
-            const result: APIResponse = await $fetch(`http://localhost:3000/API/creators/${userId}/accounts`, {
+            const result: APIResponse = await $fetch(`${appSettings.baseUrl}/API/creators/${userId}/accounts`, {
                 method: 'POST',
                 body: JSON.stringify({
                     accountId: accountId,
@@ -61,7 +62,7 @@
              */
         });
         phylloConnect.on("accountDisconnected", async (accountId: any, workplatformId: any, userId: any) => {  // gives the successfully disconnected account ID and work platform ID for the given user ID
-            const result: APIResponse = await $fetch(`http://localhost:3000/API/creators/${userId}/accounts/${accountId}`, {
+            const result: APIResponse = await $fetch(`${appSettings.baseUrl}/API/creators/${userId}/accounts/${accountId}`, {
                 method: 'DELETE'
             });
             /* @todo

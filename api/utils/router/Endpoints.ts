@@ -10,6 +10,7 @@ import {GetCreatorEndpoint} from "~/api/modules/creators/GetCreator/GetCreatorEn
 import {GetSupabaseEndpoint} from "~/api/modules/misc/GetSupabase/GetSupabaseEndpoint";
 import {InviteCreatorEndpoint} from "~/api/modules/creators/InviteCreator/InviteCreatorEndpoint";
 import {UpdateUserEndpoint} from "~/api/modules/users/UpdateUser/UpdateUserEndpoint";
+import {GetBrandEndpoint} from "~/api/modules/brands/GetBrand/GetBrandEndpoint";
 
 export const endpoints: Endpoint[] = [
     new GetUserEndpoint(),
@@ -22,5 +23,6 @@ export const endpoints: Endpoint[] = [
     new GetCreatorEndpoint(),
     new GetSupabaseEndpoint(),
     new InviteCreatorEndpoint(),
-    new UpdateUserEndpoint()
+    new UpdateUserEndpoint(),
+    new GetBrandEndpoint(),
 ];

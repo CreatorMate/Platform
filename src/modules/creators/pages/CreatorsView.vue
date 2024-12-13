@@ -9,15 +9,16 @@
     import CreatorCountBlock from "~/src/modules/creators/components/CreatorCountBlock.vue";
     import CreatorOverviewFilters from "~/src/modules/creators/components/CreatorOverviewFilters.vue";
     import TablePaginator from "~/components/Paginator/TablePaginator.vue";
+    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
 
     const {user} = useOidcAuth();
     const open = ref(false);
 
     const newCreators = ref(0);
+    const accountStore = useAccountStore();
 
     const loading = ref(true);
-    const brand = 1;
-    const paginator = new Paginator<Creator>('/API/brands/creators', `&brand=${brand}`, loading);
+    const paginator = new Paginator<Creator>('/API/brands/creators', `&brand=${accountStore.brand?.id}`, loading);
 
     onMounted(async () => {
         await paginator.getContent();

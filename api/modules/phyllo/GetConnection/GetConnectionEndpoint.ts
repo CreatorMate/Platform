@@ -1,6 +1,7 @@
 import {Endpoint} from "~/api/utils/Endpoint";
 import type {Context} from "hono";
 import {successResponse, errorResponse} from "~/api/utils/HonoResponses";
+import {decrypt, encrypt} from "~/api/utils/Encription/Encryptor";
 
 const phyllokey = useRuntimeConfig().PHYLLO_KEY as string
 
@@ -34,21 +35,25 @@ export class GetConnectionEndpoint extends Endpoint {
         if(!connection) errorResponse(context, 'could not get or create a connection');
         const currentDate = new Date();
 
-        if (!connection.expires_on || currentDate > connection.expires_on) {
-            const newTokenRequest = await this.getNewAccessToken(id, connection);
 
+        if (!connection.token || !connection.expires_on || currentDate > connection.expires_on) {
+            const newTokenRequest = await this.getNewAccessToken(id, connection);
             console.log(newTokenRequest);
 
             if(!newTokenRequest) return errorResponse(context, 'could not create a new token');
 
+            const token = encrypt(newTokenRequest.sdk_token)
+
             connection = await this.prismaClient.phyllo_connections.update({
                 where: {id: id},
                 data: {
-                    token: newTokenRequest.sdk_token,
+                    token: token,
                     expires_on: new Date(newTokenRequest.expires_at).toISOString()
                 }
             });
         }
+
+        connection.token = decrypt(<string>connection.token);
 
         return successResponse(context, connection);
     }
