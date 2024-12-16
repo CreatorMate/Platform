@@ -1,7 +1,7 @@
 import {Endpoint} from "~/api/utils/Endpoint";
 import type {Context} from "hono";
 import {successResponse, errorResponse} from "~/api/utils/HonoResponses";
-import {decrypt, encrypt} from "~/api/utils/Encription/Encryptor";
+import {decrypt, encrypt} from "~/api/utils/Encryption/Encryptor";
 
 const phyllokey = useRuntimeConfig().PHYLLO_KEY as string
 

@@ -11,7 +11,7 @@
 <template>
     <div class="bg-background-foreground rounded-3xl p-2 flex justify-between items-center text-text-light border border-background">
         <div class="flex gap-4 items-center">
-            <nuxt-img v-if="accountState.user.picture" class="rounded-xl w-12 h-12" :src="'https://mfouoyeneddsfujxfjci.supabase.co/storage/v1/object/public/user_pictures/' + accountState.user.picture "></nuxt-img>
+            <nuxt-img v-if="accountState.user?.picture" class="rounded-xl w-12 h-12" :src="'https://mfouoyeneddsfujxfjci.supabase.co/storage/v1/object/public/user_pictures/' + accountState.user.picture "></nuxt-img>
             <nuxt-img v-else class="rounded-xl w-12 h-12" :src="user?.userInfo?.picture"></nuxt-img>
             <div class="flex flex-col">
                 <p class="text-xs">{{accountState.brand?.name}}</p>

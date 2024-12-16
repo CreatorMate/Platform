@@ -6,7 +6,7 @@ export abstract class Endpoint {
     protected abstract readonly method: string;
     protected abstract handle(context: Context): any;
     private supportedMethods = ['get', 'post', 'put', 'delete', 'patch', 'options'];
-
+    protected API_KEY: string = <string>process.env.CREATOR_API_KEY;
     protected prismaClient = getPrismaClient();
 
     public register(app: Hono): void {

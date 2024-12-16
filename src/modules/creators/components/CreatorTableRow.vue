@@ -43,7 +43,7 @@
 </script>
 
 <template>
-    <tr class="h-16 border-b border-black border-opacity-10 text-text-dark">
+    <tr @click="" class="h-16 border-b border-black border-opacity-10 text-text-dark">
         <td class="w-12">
             <div class="w-4 h-4 border"></div>
         </td>
@@ -68,6 +68,7 @@
             <Dropdown @close="open = false" :open>
                 <div class="flex flex-col w-56 items-start rounded-xl shadow">
                     <button @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Resend invitation</button>
+                    <router-link :to="`/creators/${creator.id}`" v-if="creator.status === 'acquired'" @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">go to user</router-link>
                     <button @click="copy" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Copy invite</button>
                     <button @click="areYouSure = true" class="px-3 py-2 hover:bg-blue-100 w-full text-left text-red-600">Remove user</button>
                 </div>

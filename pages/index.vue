@@ -1,7 +1,14 @@
 <script setup lang='ts'>
     import PageTitle from "~/components/Core/PageTitle.vue";
     import {onMounted} from "vue";
+    import {appSettings} from "~/src/GlobalSettings";
     const {user} = useOidcAuth();
+
+    onMounted(async () => {
+        const result = await $fetch(`${appSettings.baseUrl}/API/creator_api/creator/profile/test`)
+
+        console.log(result);
+    })
 </script>
 
 <template>
