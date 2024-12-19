@@ -10,8 +10,7 @@ COPY package-lock.json ./
 COPY . ./
 
 RUN npm ci && \
-    npm run build && \
-    npm prune --production
+    npm run build
 
 ENV PORT 3000
 EXPOSE 3000
