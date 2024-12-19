@@ -16,7 +16,7 @@
     const expired = ref(false);
 
     onMounted(async () => {
-        const response: APIResponse = await $fetch(`${appSettings.baseUrl}/API/creators/${userId}`);
+        const response: APIResponse = await $fetch(`${appSettings.baseUrl}/hono/creators/${userId}`);
         if(!response.success) {
             error.value = true;
             return;

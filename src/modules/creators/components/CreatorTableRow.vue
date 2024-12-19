@@ -23,7 +23,7 @@
     }
 
     async function resend() {
-        const result = await $fetch('/api/emails/inviteCreators', {
+        const result = await $fetch('/hono/emails/inviteCreators', {
             method: 'POST',
             body: JSON.stringify({
                 emails: [creator.email]
@@ -33,7 +33,7 @@
     }
 
     async function deleteCreator() {
-        const deleteCreatorResult = await $fetch('/API/brands/creators/' + creator.id, {
+        const deleteCreatorResult = await $fetch('/hono/brands/creators/' + creator.id, {
             method: 'DELETE'
         })
         open.value = false;

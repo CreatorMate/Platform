@@ -2,7 +2,7 @@ import {SupabaseClient} from "@supabase/supabase-js";
 
 export async function getSupabaseClient(): Promise<SupabaseClient> {
     const {user, logout} = useOidcAuth();
-    const result = await $fetch('/API/supabase');
+    const result = await $fetch('/hono/supabase');
     const accessToken = result.data
     let supabase = new SupabaseClient(
         'https://mfouoyeneddsfujxfjci.supabase.co',

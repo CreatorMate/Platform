@@ -78,7 +78,7 @@ export default defineNuxtConfig({
   },
   serverHandlers: [
     {
-      route: '/API', handler: './api/hono.ts', middleware: true
+      route: '/hono', handler: './api/hono.ts', middleware: true
     }
   ]
 });

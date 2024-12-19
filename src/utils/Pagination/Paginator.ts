@@ -1,6 +1,6 @@
 import {appSettings} from "~/src/GlobalSettings";
 import type {Ref} from "vue";
-import type {APIResponse} from "~/server/utils/APIResponse";
+import type {APIResponse} from "~/API/utils/APIResponse";
 
 
 export class Paginator<T> {

@@ -18,7 +18,7 @@
     const accountStore = useAccountStore();
 
     const loading = ref(true);
-    const paginator = new Paginator<Creator>('/API/brands/creators', `&brand=${accountStore.brand?.id}`, loading);
+    const paginator = new Paginator<Creator>('/hono/brands/creators', `&brand=${accountStore.brand?.id}`, loading);
 
     onMounted(async () => {
         await paginator.getContent();

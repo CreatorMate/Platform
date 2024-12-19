@@ -8,11 +8,11 @@ export const useAccountStore = defineStore("account", () => {
     const brand = ref<Brand|null>(null);
     async function initialize() {
         try {
-            const result: APIResponse<User> = await $fetch(`${appSettings.baseUrl}/API/users/me`);
+            const result: APIResponse<User> = await $fetch(`${appSettings.baseUrl}/hono/users/me`);
             if(!result.success) return;
             if(result.data) {
                 user.value = result.data;
-                const brandResult: APIResponse<Brand> = await $fetch(`${appSettings.baseUrl}/API/brands/${result.data.brand_id}`);
+                const brandResult: APIResponse<Brand> = await $fetch(`${appSettings.baseUrl}/hono/brands/${result.data.brand_id}`);
                 if(!brandResult.success) return;
                 brand.value = brandResult.data;
             }
@@ -23,7 +23,7 @@ export const useAccountStore = defineStore("account", () => {
     }
 
     async function save() {
-        const result = await $fetch(`${appSettings.baseUrl}/API/users/me`, {
+        const result = await $fetch(`${appSettings.baseUrl}/hono/users/me`, {
             method: "PUT",
             body: JSON.stringify(user.value)
         });

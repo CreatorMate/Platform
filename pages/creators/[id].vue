@@ -13,13 +13,13 @@
 
     onMounted(async () => {
         try {
-            const creator: APIResponse<Creator> = await $fetch(`/API/creators/${id}`);
+            const creator: APIResponse<Creator> = await $fetch(`/hono/creators/${id}`);
             console.log(creator)
             if(!creator.success || creator.data.status != 'acquired' || creator.data.brand_id != accountStore.brand?.id) {
                 throw new Error('no creator with this id')
             }
 
-            const result = await $fetch(`/API/creator_api/creator/profile/${id}`);
+            const result = await $fetch(`/hono/creator_api/creator/profile/${id}`);
             data.value = result;
 
         } catch (error) {

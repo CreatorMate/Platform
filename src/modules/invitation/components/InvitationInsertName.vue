@@ -25,7 +25,7 @@
             return;
         }
 
-        const result: APIResponse = await $fetch(`/API/creators/${userId}`, {
+        const result: APIResponse = await $fetch(`/hono/creators/${userId}`, {
             method: 'PUT',
             body: JSON.stringify({
                 name: name.value,
