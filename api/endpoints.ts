@@ -13,6 +13,7 @@ import {UpdateUserEndpoint} from "~/api/modules/users/UpdateUser/UpdateUserEndpo
 import {GetBrandEndpoint} from "~/api/modules/brands/GetBrand/GetBrandEndpoint";
 import {GetCreatorProfileEndpoint} from "~/api/modules/creator_api/GetCreatorProfile/GetCreatorProfileEndpoint";
 import {GetBrandContentEndpoint} from "~/api/modules/creator_api/GetBrandContent/GetBrandContentEndpoint";
+import {GetBrandProfilesEndpoint} from "~/api/modules/creator_api/GetBrandProfiles/GetBrandProfilesEndpoint";
 
 export const endpoints: Endpoint[] = [
     new GetUserEndpoint(),
@@ -28,5 +29,6 @@ export const endpoints: Endpoint[] = [
     new UpdateUserEndpoint(),
     new GetBrandEndpoint(),
     new GetCreatorProfileEndpoint(),
-    new GetBrandContentEndpoint()
+    new GetBrandContentEndpoint(),
+    new GetBrandProfilesEndpoint()
 ];

@@ -3,7 +3,7 @@ import {logger} from "hono/logger";
 //@ts-ignore
 import {getUserSession} from 'nuxt-oidc-auth/runtime/server/utils/session.js'
 import dotenv from 'dotenv';
-import {endpoints} from "~/api/utils/router/Endpoints";
+import {endpoints} from "~/api/endpoints";
 
 let app: Hono = new Hono();
 dotenv.config();
@@ -20,7 +20,6 @@ app.use('*', async (ctx, next) => {
 for(const endpoint of endpoints) {
     endpoint.register(app);
 }
-
 export default defineEventHandler(async (event) => {
     event.node.req.originalUrl = '';
     const webReq = toWebRequest(event);

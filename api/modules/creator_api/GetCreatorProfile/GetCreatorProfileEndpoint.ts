@@ -9,7 +9,7 @@ export class GetCreatorProfileEndpoint extends Endpoint {
     protected async handle(context: Context) {
         const id = context.req.param('id');
         console.log(this.API_KEY)
-        const result = await fetch(`http://localhost:5000/creators/profile/${id}`, {
+        const result = await fetch(`${process.env.CREATOR_API_PATH}/creators/profile/${id}`, {
             method: 'GET',
             headers: {
                 'CONTENT_TYPE': 'application/json',
