@@ -14,6 +14,9 @@ import {GetBrandEndpoint} from "~/api/modules/brands/GetBrand/GetBrandEndpoint";
 import {GetCreatorProfileEndpoint} from "~/api/modules/creator_api/GetCreatorProfile/GetCreatorProfileEndpoint";
 import {GetBrandContentEndpoint} from "~/api/modules/creator_api/GetBrandContent/GetBrandContentEndpoint";
 import {GetBrandProfilesEndpoint} from "~/api/modules/creator_api/GetBrandProfiles/GetBrandProfilesEndpoint";
+import {
+    GetBrandCountryDistributionEndpoint
+} from "~/api/modules/creator_api/GetBrandCountryDistribution/GetBrandCountryDistributionEndpoint";
 
 export const endpoints: Endpoint[] = [
     new GetUserEndpoint(),
@@ -30,5 +33,6 @@ export const endpoints: Endpoint[] = [
     new GetBrandEndpoint(),
     new GetCreatorProfileEndpoint(),
     new GetBrandContentEndpoint(),
-    new GetBrandProfilesEndpoint()
+    new GetBrandProfilesEndpoint(),
+    new GetBrandCountryDistributionEndpoint(),
 ];

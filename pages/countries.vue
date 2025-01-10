@@ -3,6 +3,7 @@
     import {Icon} from "@iconify/vue";
     import type {APIResponse} from "~/api/utils/HonoResponses";
     import type {CreatorProfile, Post} from "~/src/utils/CreatorAPITypes";
+    import CountryCard from "~/components/Analytics/CountryCard.vue";
 
     const posts = ref<Post[]>([]);
     const creators = ref<CreatorProfile[]>([]);
@@ -12,9 +13,14 @@
 
     const selected = ref<CreatorProfile[]>([]);
 
+    let countryData = ref({
+    });
+
     onMounted(async () => {
         await getContent();
     });
+
+
 
     async function getContent() {
         const profiles: APIResponse<CreatorProfile[]> = await $fetch(`/hono/creator_api/brands/1/profiles`);
@@ -22,19 +28,16 @@
 
         creators.value = profiles.data;
 
-        if(selected.value.length === 0) return;
-
         let ids = "";
         for (const creator of selected.value) {
             console.log(creator);
             ids += `${creator.id},`;
         }
 
-        const postRequest: APIResponse<Post[]> = await $fetch(`/hono/creator_api/brands/1/content?key=${key.value}&ids=${ids}&limit=${limit.value}`);
-        console.log(postRequest);
-        if(!postRequest.success) return;
-
-        posts.value = postRequest.data;
+        const countryDataRequest: APIResponse = await $fetch(`/hono/creator_api/brands/1/countries?ids=${ids}`);
+        if(countryDataRequest.success) {
+            countryData.value = countryDataRequest.data;
+        }
     }
 
     async function selectOrRemove(creator: CreatorProfile) {
@@ -67,13 +70,6 @@
                 </div>
             </div>
         </div>
-        <select v-model="key" @change="getContent" class="border mb-2">
-            <option value="views">views</option>
-            <option value="comments">comments</option>
-            <option value="shares">shares</option>
-            <option value="likes">likes</option>
-        </select>
-        <input @focusout="getContent" v-model="limit" type="number" class="border">
         <div class="flex flex-wrap gap-2">
             <div class="flex flex-col" style="width: 20%" v-for="item of posts">
                 <img class="max-h-full object-cover" :src="item.thumbnail">
@@ -81,7 +77,7 @@
             </div>
         </div>
 
-
+        <CountryCard :country-data="countryData"></CountryCard>
     </section>
 
 </template>

@@ -1,131 +1,123 @@
 <template>
-  <div class="vue-world-map">
-    <Map
-      @hoverCountry="onHoverCountry"
-      @hoverLeaveCountry="onHoverLeaveCountry" />
+    <div class="vue-world-map">
+        <Map
+            @hoverCountry="onHoverCountry"
+            @hoverLeaveCountry="onHoverLeaveCountry" />
 
-    <div v-if="legend.name" class="vue-map-legend" :style="'left:' + position.left + 'px; top: ' + position.top + 'px'">
-      <div class="vue-map-legend-header">
-        <span>{{legend.name}}</span>
-      </div>
-      <div class="vue-map-legend-content">
-        <span>{{countryData[legend.code] || 0}}%</span>
-      </div>
+        <div v-if="legend.name" class="vue-map-legend" :style="`left: ${position.left}px; top: ${position.top}px`">
+            <div class="vue-map-legend-header">
+                <span>{{ legend.name }}</span>
+            </div>
+            <div class="vue-map-legend-content">
+                <span>{{ countryData[legend.code] || 0 }}%</span>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
-<script>
-import chroma from 'chroma-js';
-import Map from './Map';
-import {getBaseCss, getCombinedCssString, getDynamicMapCss} from "~/src/CountryMappper.ts";
+<script setup lang="ts">
+    import { reactive, watch, onMounted } from 'vue';
+    import chroma from 'chroma-js';
+    import { getBaseCss, getCombinedCssString, getDynamicMapCss } from "~/src/CountryMappper";
+    import Map from "~/components/Analytics/Map.vue";
 
-let legend = {
-  data: null,
-  code: null,
-  name: null
-}
+    // Props
+    const {lowColor, highColor, countryData, defaultCountryFillColor, countryStrokeColor} = defineProps({
+        lowColor: {
+            type: String,
+            default: '#fde2e2',
+        },
+        highColor: {
+            type: String,
+            default: '#d83737',
+        },
+        countryData: {
+            type: Object,
+            required: true,
+        },
+        defaultCountryFillColor: {
+            type: String,
+            default: '#dadada',
+        },
+        countryStrokeColor: {
+            type: String,
+            default: '#909090',
+        },
+    });
 
-let position = {
-  left: 0,
-  top: 0,
-}
-
-export default {
-  components: { Map },
-  watch: {
-    countryData() {
-      this.renderMapCSS();
-    },
-  },
-  props: {
-    lowColor: {
-      type: String,
-      default: '#fde2e2',
-    },
-    highColor: {
-      type: String,
-      default: '#d83737',
-    },
-    countryData: {
-      type: Object,
-      required: true,
-    },
-    defaultCountryFillColor: {
-      type: String,
-      default: '#dadada',
-    },
-    countryStrokeColor: {
-      type: String,
-      default: '#909090',
-    },
-  },
-  data() {
-    return {
-      legend: legend,
-      position: position,
-      node: document.createElement('style'),
-      chromaScale: chroma.scale(
-        [this.$props.lowColor, this.$props.highColor]
-      ),
-    };
-  },
-  methods: {
-    onHoverCountry(country) {
-      this.legend = country;
-      this.position = country.position
-      this.$emit('hoverCountry', country);
-    },
-    onHoverLeaveCountry(country) {
-      this.legend = {
+    // Reactive state
+    const legend = reactive({
         data: null,
         code: null,
-        name: null
-      }
-      this.$emit('hoverLeaveCountry', country);
-    },
-    renderMapCSS() {
-      const baseCss = getBaseCss(this.$props);
-      const dynamicMapCss = getDynamicMapCss(
-        this.$props.countryData, this.chromaScale
-      );
-      this.$data.node.innerHTML = getCombinedCssString(
-        baseCss, dynamicMapCss
-      );
-    },
-  },
-  mounted() {
-    document.body.appendChild(this.$data.node);
-    this.renderMapCSS();
-  },
-};
+        name: null,
+    });
+
+    const position = reactive({
+        left: 0,
+        top: 0,
+    });
+
+    const styleNode = document.createElement('style');
+
+    // Computed chroma scale
+    const chromaScale = chroma.scale([lowColor, highColor]);
+
+    // Methods
+    function onHoverCountry(country: { name: string; code: string; position: { left: number; top: number } }) {
+        legend.data = country;
+        legend.code = country.code;
+        legend.name = country.name;
+        position.left = country.position.left;
+        position.top = country.position.top;
+    }
+
+    function onHoverLeaveCountry() {
+        legend.data = null;
+        legend.code = null;
+        legend.name = null;
+    }
+
+    function renderMapCSS() {
+        const baseCss = getBaseCss({ lowColor, highColor, defaultCountryFillColor, countryStrokeColor });
+        const dynamicMapCss = getDynamicMapCss(countryData, chromaScale);
+        styleNode.innerHTML = getCombinedCssString(baseCss, dynamicMapCss);
+    }
+
+    // Watchers
+    watch(() => countryData, renderMapCSS, { deep: true });
+
+    // Lifecycle hooks
+    onMounted(() => {
+        document.body.appendChild(styleNode);
+        renderMapCSS();
+    });
 </script>
 
 <style scoped>
-  .vue-world-map,
-  #map-svg {
+.vue-world-map,
+#map-svg {
     height: 100%;
-  }
+}
 
-  .vue-world-map{
+.vue-world-map {
     position: relative;
-  }
+}
 
-  .vue-map-legend{
+.vue-map-legend {
     width: 185px;
     background: #fff;
     border: 1px solid;
     border-color: #acacad;
     position: absolute;
-  }
+}
 
-  .vue-map-legend-header{
+.vue-map-legend-header {
     padding: 10px 15px;
-  }
+}
 
-  .vue-map-legend-content{
+.vue-map-legend-content {
     padding: 10px 15px;
     background: #dadbda8f;
     border-top: 1px solid #acacad;
-  }
+}
 </style>
