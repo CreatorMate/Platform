@@ -11,6 +11,7 @@
     const {countryData} = toRefs(props);
 
     function getTop10Highest(): {rank: number, code: string, value: number}[] {
+        if(!countryData) return [];
         // Convert the object into an array of [key, value] pairs
         const entries = Object.entries(countryData.value);
 
@@ -32,7 +33,7 @@
 
 <template>
     <ClientOnly>
-        <AnalyticCard class="" title="countries">
+        <AnalyticCard v-if="countryData" class="" title="countries">
             <div class="h-full flex">
                 <div class="w-1/2">
                     <CountryMap class="pb-10" :countryData="countryData"
