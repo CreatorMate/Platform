@@ -11,9 +11,7 @@ export class GetBrandCountryDistributionEndpoint extends Endpoint {
         const {key, order, ids, limit} = context.req.query();
 
         const filter = ids ? `?ids=${ids}` : '';
-
-        console.log(`${process.env.CREATOR_API_PATH}/brands/${id}/countries?ids=${ids}`)
-        const result = await fetch(`${process.env.CREATOR_API_PATH}/brands/${id}/countries${filter}`, {
+        const result = await fetch(`${process.env.CREATOR_API_PATH}/brands/${id}/statistics/countries${filter}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${process.env.CREATOR_API_KEY}`

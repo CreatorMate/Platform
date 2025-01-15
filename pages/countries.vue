@@ -3,7 +3,7 @@
     import {Icon} from "@iconify/vue";
     import type {APIResponse} from "~/api/utils/HonoResponses";
     import type {CreatorProfile, Post} from "~/src/utils/CreatorAPITypes";
-    import CountryCard from "~/components/Analytics/CountryCard.vue";
+    import CountryCard from "~/src/modules/analytics/components/CountryCard.vue";
 
     const posts = ref<Post[]>([]);
     const creators = ref<CreatorProfile[]>([]);

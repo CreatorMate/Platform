@@ -17,22 +17,42 @@ import {GetBrandProfilesEndpoint} from "~/api/modules/creator_api/GetBrandProfil
 import {
     GetBrandCountryDistributionEndpoint
 } from "~/api/modules/creator_api/GetBrandCountryDistribution/GetBrandCountryDistributionEndpoint";
+import type {Controller} from "~/api/utils/Controller";
+import {StatisticsController} from "~/api/modules/creator_api/statistics/StatisticsController";
+import {initialize} from "esbuild";
+import type {Hono} from "hono";
 
-export const endpoints: Endpoint[] = [
-    new GetUserEndpoint(),
-    new GetBrandCreatorsEndpoint(),
-    new UpdateCreatorEndpoint(),
-    new DeleteBrandCreatorEndpoint(),
-    new AddAccountEndpoint(),
-    new DeleteAccountEndpoint(),
-    new GetConnectionEndpoint(),
-    new GetCreatorEndpoint(),
-    new GetSupabaseEndpoint(),
-    new InviteCreatorEndpoint(),
-    new UpdateUserEndpoint(),
-    new GetBrandEndpoint(),
-    new GetCreatorProfileEndpoint(),
-    new GetBrandContentEndpoint(),
-    new GetBrandProfilesEndpoint(),
-    new GetBrandCountryDistributionEndpoint(),
-];
+
+export function initializeHonoRouter(app: Hono) {
+    const controllers: Controller[] = [
+        new StatisticsController(app),
+    ];
+
+    const endpoints: Endpoint[] = [
+        new GetUserEndpoint(),
+        new GetBrandCreatorsEndpoint(),
+        new UpdateCreatorEndpoint(),
+        new DeleteBrandCreatorEndpoint(),
+        new AddAccountEndpoint(),
+        new DeleteAccountEndpoint(),
+        new GetConnectionEndpoint(),
+        new GetCreatorEndpoint(),
+        new GetSupabaseEndpoint(),
+        new InviteCreatorEndpoint(),
+        new UpdateUserEndpoint(),
+        new GetBrandEndpoint(),
+        new GetCreatorProfileEndpoint(),
+        new GetBrandContentEndpoint(),
+        new GetBrandProfilesEndpoint(),
+        new GetBrandCountryDistributionEndpoint(),
+    ];
+
+    for(const controller of controllers) {
+        controller.endpoints();
+    }
+
+    for(const endpoint of endpoints) {
+        endpoint.register(app);
+    }
+}
+

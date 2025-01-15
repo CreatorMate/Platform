@@ -1,11 +1,11 @@
 <script setup lang='ts'>
-    import AnalyticCard from "~/components/Analytics/AnalyticCard.vue";
+    import AnalyticCard from "~/src/modules/analytics/components/base/AnalyticCard.vue";
     import {onMounted} from "vue";
     import type {APIResponse} from "~/api/utils/HonoResponses";
-    import CountryMap from "~/components/Analytics/CountryMap.vue";
+    import CountryMap from "~/src/modules/analytics/components/base/CountryMap.vue";
 
     let props = defineProps<{
-        countryData: any
+        countryData: { [key: string]: number }
     }>();
 
     const {countryData} = toRefs(props);

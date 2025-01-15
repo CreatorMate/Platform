@@ -19,7 +19,7 @@
     import { reactive, watch, onMounted } from 'vue';
     import chroma from 'chroma-js';
     import { getBaseCss, getCombinedCssString, getDynamicMapCss } from "~/src/CountryMappper";
-    import Map from "~/components/Analytics/Map.vue";
+    import Map from "~/src/modules/analytics/components/base/Map.vue";
 
     // Props
     const {lowColor, highColor, countryData, defaultCountryFillColor, countryStrokeColor} = defineProps({
@@ -64,8 +64,11 @@
 
     // Methods
     function onHoverCountry(country: { name: string; code: string; position: { left: number; top: number } }) {
+        //@ts-ignore
         legend.data = country;
+        //@ts-ignore
         legend.code = country.code;
+        //@ts-ignore
         legend.name = country.name;
         position.left = country.position.left;
         position.top = country.position.top;
@@ -78,6 +81,7 @@
     }
 
     function renderMapCSS() {
+        //@ts-ignore
         const baseCss = getBaseCss({ lowColor, highColor, defaultCountryFillColor, countryStrokeColor });
         const dynamicMapCss = getDynamicMapCss(countryData, chromaScale);
         styleNode.innerHTML = getCombinedCssString(baseCss, dynamicMapCss);

@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 
     import { ref, onMounted, computed } from 'vue';
-    import AnalyticCard from "~/components/Analytics/AnalyticCard.vue";
+    import AnalyticCard from "~/src/modules/analytics/components/base/AnalyticCard.vue";
 
     // Props with TypeScript definitions
     const {stats, title} = defineProps<{
@@ -42,9 +42,9 @@
             <table class="table-auto w-full">
                 <tbody>
                 <tr v-for="(stat, index) in stats" :key="index">
-                    <td class="pr-4 text-nowrap">{{ stat.name }}</td>
+                    <td class="pr-4 text-nowrap lowercase">{{ stat.name }}</td>
                     <td class="w-full">
-                        <div class="h-2  rounded">
+                        <div class="h-4  rounded">
                             <div
                                 class="h-full bg-black rounded bar-animation"
                                 :style="{ width: animatedWidths[index] + '%' }"
