@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="w-full h-full border border-[#E2E2E2] rounded-xl p-6">
+    <div class="w-full h-full border border-[#E2E2E2] rounded-xl p-6 card-1">
         <p class="font-medium text-xl mb-6">{{title}}</p>
         <slot></slot>
     </div>

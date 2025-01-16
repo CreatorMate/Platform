@@ -7,16 +7,68 @@
     import {SupabaseClient} from "@supabase/supabase-js";
     import {getSupabaseClient} from "~/src/utils/Supabase/SupabaseClient";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import NavButton from "~/src/components/Sidebar/NavButton.vue";
+    import type {NavItem} from "~/src/components/Sidebar/NavItem";
 
-    const {user, logout, fetch} = useOidcAuth();
+    const navItems: NavItem[] = [{
+        linkTo: '/',
+        name: 'creators',
+        iconName: 'material-symbols:supervisor-account-outline-rounded',
+        children: [],
+        premium: false
+    },
+        // },{
+        //     linkTo: '/creators',
+        //     name: 'creators',
+        //     iconName: 'lineicons:user-4',
+        //     children: [
+        //         {
+        //             linkTo: '/creators',
+        //             name: 'all creators',
+        //             iconName: 'lineicons:user-4',
+        //             children: [],
+        //             premium: false
+        //         },
+        //         {
+        //             linkTo: '/creators/partnerships',
+        //             name: 'parrtnerships',
+        //             iconName: 'lineicons:user-4',
+        //             children: [],
+        //             premium: false
+        //         }
+        //     ],
+        //     premium: false
+        // },{
+        {
+            linkTo: '/analytics',
+            name: 'analytics',
+            iconName: 'material-symbols:bar-chart-4-bars',
+            children: [],
+            premium: false
+        },
+        {
+            linkTo: '/content',
+            name: 'content',
+            iconName: 'material-symbols:animated-images-outline',
+            children: [],
+            premium: false
+        }
+    ]
 
 </script>
 
 <template>
-    <aside class="h-full w-[290px] flex flex-col flex flex-col">
-        <SbUserSession/>
-        <SbSearch/>
-        <SbNavigation/>
-        <p @click="logout()">logout</p>
+    <aside class="h-full min-w-[290px] w-[290px] flex flex-col">
+        <NuxtImg class="mt-4" width="48" src="/logo-light.svg" />
+        <nav class="mt-7 flex flex-col flex-grow gap-2">
+            <NavButton v-for="navItem of navItems" :premium="navItem.premium" :link-to="navItem.linkTo"
+                       :name="navItem.name" :icon-name="navItem.iconName" :children="navItem.children"/>
+            <div class="mt-auto flex flex-col gap-3">
+                <div class="pt-3 border-t border-[#C6C6C6] w-full">
+                    <NavButton  :premium="false" link-to="/settings" name="settings" icon-name="uil:cog" :children="[]"/>
+                </div>
+                <SbUserSession/>
+            </div>
+        </nav>
     </aside>
 </template>
