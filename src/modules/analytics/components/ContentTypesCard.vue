@@ -26,5 +26,5 @@
 </script>
 
 <template>
-    <PieChartCard :segments title='content types'></PieChartCard>
+    <PieChartCard class="card-1" :segments title='content types'></PieChartCard>
 </template>

@@ -52,6 +52,13 @@
             iconName: 'material-symbols:animated-images-outline',
             children: [],
             premium: false
+        },
+        {
+            linkTo: '/countries',
+            name: 'countries',
+            iconName: 'material-symbols:graph-3',
+            children: [],
+            premium: false
         }
     ]
 

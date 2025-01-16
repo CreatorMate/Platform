@@ -29,7 +29,7 @@
 </script>
 
 <template>
-    <BarCard v-if="bars.length > 0" title="Ages" :stats="
+    <BarCard class="card-3" v-if="bars.length > 0" title="Ages" :stats="
         bars"
     ></BarCard>
 </template>

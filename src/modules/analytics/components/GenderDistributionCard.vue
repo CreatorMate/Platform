@@ -27,5 +27,5 @@
 </script>
 
 <template>
-    <PieChartCard :segments title='genders'></PieChartCard>
+    <PieChartCard class="card-2" :segments title='genders'></PieChartCard>
 </template>

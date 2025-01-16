@@ -31,7 +31,7 @@
 </script>
 
 <template>
-    <div @mouseenter="isHoveringParent = true" @mouseleave="isHoveringParent = false" :class="{
+    <nuxt-link :to="linkTo" @mouseenter="isHoveringParent = true" @mouseleave="isHoveringParent = false" :class="{
         'bg-[#E2E2E2] text-text-dark' : isActive(linkTo) && children.length === 0
     }" @click="show = !show" class="flex py-3 px-5 items-center justify-between cursor-pointer rounded-xl">
         <div :class="{'translate-x-4': isHoveringParent}" class="flex items-center gap-3 transition duration-100">
@@ -45,7 +45,7 @@
             <Icon :class="{'rotate-180': show}" icon="solar:alt-arrow-down-line-duotone" />
         </div>
 
-    </div>
+    </nuxt-link>
     <div class="text-sm ml-7 pl-4 border-l border-black border-opacity-20 flex flex-col" v-if="show">
         <nuxt-link :class="{
            'bg-background-foreground text-text-dark border border-black border-opacity-10': isActive(child.linkTo)
