@@ -12,7 +12,7 @@
         const request: APIResponse<{
             key: string,
             value: number
-        }[]> = await $fetch(`/hono/creator_api/statistics/${accountState.brand?.id}/cities`);
+        }[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/cities`);
         if (!request.success) return;
 
         for (const item of request.data) {

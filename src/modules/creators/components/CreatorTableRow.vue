@@ -1,8 +1,8 @@
 <script setup lang='ts'>
     import type {Creator} from "~/src/utils/SupabaseTypes";
     import {Icon} from "@iconify/vue";
-    import Dropdown from "~/components/Dropdown/Dropdown.vue";
-    import AreYouSure from "~/components/Modal/AreYouSure.vue";
+    import Dropdown from "~/src/components/Dropdown/Dropdown.vue";
+    import AreYouSure from "~/src/components/Modal/AreYouSure.vue";
 
     const {creator} = defineProps<{
         creator: Creator
@@ -23,7 +23,7 @@
     }
 
     async function resend() {
-        const result = await $fetch('/hono/emails/inviteCreators', {
+        const result = await $fetch('/API/emails/inviteCreators', {
             method: 'POST',
             body: JSON.stringify({
                 emails: [creator.email]
@@ -33,7 +33,7 @@
     }
 
     async function deleteCreator() {
-        const deleteCreatorResult = await $fetch('/hono/brands/creators/' + creator.id, {
+        const deleteCreatorResult = await $fetch('/API/brands/creators/' + creator.id, {
             method: 'DELETE'
         })
         open.value = false;

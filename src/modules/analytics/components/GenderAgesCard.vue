@@ -9,10 +9,8 @@
 
     onMounted(async () => {
         const accountState = useAccountStore();
-        const request: APIResponse = await $fetch(`/hono/creator_api/statistics/${accountState.brand?.id}/gender_ages`);
+        const request: APIResponse = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/gender_ages`);
         if (!request.success) return;
-
-        console.log(request.data)
 
         for (const [key, item] of Object.entries(request.data)) {
             bars.value.push(

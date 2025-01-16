@@ -11,7 +11,7 @@
 
     onMounted(async () => {
         const accountStore = useAccountStore();
-        const requestAverage: APIResponse<{average: number}> = await $fetch(`/hono/creator_api/statistics/${accountStore.brand?.id}/average?key=${field}&ids=${ids ?? ''}`)
+        const requestAverage: APIResponse<{average: number}> = await $fetch(`/API/creator_api/statistics/${accountStore.brand?.id}/average?key=${field}&ids=${ids ?? ''}`)
         if(!requestAverage.success) return;
 
         value.value = requestAverage.data.average;

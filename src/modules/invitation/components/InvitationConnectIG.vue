@@ -17,7 +17,7 @@
 
     onMounted(async () => {
         if(!creatorId || !brandId) return;
-        const response: APIResponse = await $fetch( `/hono/phyllo?creatorId=${creatorId}&brandId=${brandId}`);
+        const response: APIResponse = await $fetch( `/API/phyllo?creatorId=${creatorId}&brandId=${brandId}`);
 
         if(!response.success) return;
 
@@ -37,7 +37,7 @@
         const phylloConnect = PhylloConnect.initialize(config);
 
         phylloConnect.on("accountConnected", async (accountId: any, workplatformId: any, userId: any) => {  // gives the successfully connected account ID and work platform ID for the given user ID
-            const result: APIResponse = await $fetch(`${appSettings.baseUrl}/hono/creators/${userId}/accounts`, {
+            const result: APIResponse = await $fetch(`${appSettings.baseUrl}/API/creators/${userId}/accounts`, {
                 method: 'POST',
                 body: JSON.stringify({
                     accountId: accountId,
@@ -47,7 +47,7 @@
 
             if(!result.success) return;
 
-            const updateStats: APIResponse = await $fetch(`/hono/creators/${creatorId}`, {
+            const updateStats: APIResponse = await $fetch(`/API/creators/${creatorId}`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     status: 'acquired',
@@ -62,7 +62,7 @@
              */
         });
         phylloConnect.on("accountDisconnected", async (accountId: any, workplatformId: any, userId: any) => {  // gives the successfully disconnected account ID and work platform ID for the given user ID
-            const result: APIResponse = await $fetch(`${appSettings.baseUrl}/hono/creators/${userId}/accounts/${accountId}`, {
+            const result: APIResponse = await $fetch(`${appSettings.baseUrl}/API/creators/${userId}/accounts/${accountId}`, {
                 method: 'DELETE'
             });
             /* @todo

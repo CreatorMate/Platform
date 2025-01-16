@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-    import PageTitle from "~/components/Core/PageTitle.vue";
+    import PageTitle from "~/src/components/Core/PageTitle.vue";
     import {Icon} from "@iconify/vue";
     import InviteCreatorModal from "~/src/modules/creators/components/InviteCreatorModal.vue";
     import {onMounted, type Ref} from "vue";
@@ -8,7 +8,7 @@
     import CreatorsTable from "~/src/modules/creators/components/CreatorsTable.vue";
     import CreatorCountBlock from "~/src/modules/creators/components/CreatorCountBlock.vue";
     import CreatorOverviewFilters from "~/src/modules/creators/components/CreatorOverviewFilters.vue";
-    import TablePaginator from "~/components/Paginator/TablePaginator.vue";
+    import TablePaginator from "~/src/components/Paginator/TablePaginator.vue";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
 
     const {user} = useOidcAuth();
@@ -18,7 +18,7 @@
     const accountStore = useAccountStore();
 
     const loading = ref(true);
-    const paginator = new Paginator<Creator>('/hono/brands/creators', `&brand=${accountStore.brand?.id}`, loading);
+    const paginator = new Paginator<Creator>('/API/brands/creators', `&brand=${accountStore.brand?.id}`, loading);
 
     onMounted(async () => {
         await paginator.getContent();

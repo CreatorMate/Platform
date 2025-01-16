@@ -13,13 +13,11 @@
 
     onMounted(async () => {
         const accountState = useAccountStore();
-        const request: APIResponse<Gender[]> = await $fetch(`/hono/creator_api/statistics/${accountState.brand?.id}/genders`);
+        const request: APIResponse<Gender[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/genders`);
 
-        console.log(request)
         if (!request.success) return;
 
         for (const contentType of request.data) {
-            console.log(contentType)
             segments.value.push({
                 title: contentType.key,
                 percentage: contentType.value,

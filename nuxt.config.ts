@@ -1,8 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import {getModuleRoutes} from "./src/register-modules";
+import type {NuxtPage} from "@nuxt/schema";
+
+const moduleRoutes: NuxtPage[] = getModuleRoutes();
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
+  pages: true,
   devtools: { enabled: true },
   modules: ['nuxt-oidc-auth', '@nuxtjs/tailwindcss', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/color-mode', '@vueuse/nuxt'],
+  hooks: {
+    'pages:extend' (pages) {
+      pages.push(...moduleRoutes);
+    }
+  },
   oidc: {
     defaultProvider: "auth0",
     providers: {
@@ -54,6 +65,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    pages: [],
     STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_KEY: process.env.STRIPE_WEBHOOK_KEY,
@@ -75,10 +87,19 @@ export default defineNuxtConfig({
     layouts: './src/layouts',
     plugins: './src/plugins',
     middleware: './src/middleware',
+    pages: './src/pages',
+  },
+  components: {
+    dirs: [
+      {
+        path: './src/components',
+        global: true
+      }
+    ],
   },
   serverHandlers: [
     {
-      route: '/hono', handler: './api/hono.ts', middleware: true
+      route: '/API', handler: './src/api/hono.ts', middleware: true
     }
   ]
 });

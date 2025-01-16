@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 
-import PageTitle from "~/components/Core/PageTitle.vue";
+import PageTitle from "~/src/components/Core/PageTitle.vue";
 import SettingTabs from "~/src/modules/settings/components/SettingTabs.vue";
 import GeneralSettings from "~/src/modules/settings/components/GeneralSettings.vue";
 </script>

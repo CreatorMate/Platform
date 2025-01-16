@@ -31,7 +31,6 @@
         const normalizedContent = fileContent.replace(/\r/g, "\n ");
         const rows = normalizedContent.split("\n").map((row) => row.trim());
 
-        console.log(rows)
         for (const row of rows) {
             if (!row) continue; // Skip empty rows
             emails.value.push(row);
@@ -44,7 +43,7 @@
 
     async function sendInvite() {
         loading.value = true;
-        const result = await $fetch('/hono/creators/invite', {
+        const result = await $fetch('/API/creators/invite', {
             method: 'POST',
             body: JSON.stringify({
                 emails: emails.value,

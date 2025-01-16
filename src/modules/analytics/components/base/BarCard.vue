@@ -38,7 +38,7 @@
 
 <template>
     <AnalyticCard :title="title">
-        <div class="overflow-x-auto">
+        <div class="">
             <table class="table-auto w-full">
                 <tbody>
                 <tr v-for="(stat, index) in stats" :key="index">

@@ -2,7 +2,7 @@
     import InvitationInsertName from "~/src/modules/invitation/components/InvitationInsertName.vue";
     import InvitationConnectIG from "~/src/modules/invitation/components/InvitationConnectIG.vue";
     import {onMounted} from "vue";
-    import type {APIResponse} from "~/api/utils/HonoResponses";
+    import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import {appSettings} from "~/src/GlobalSettings";
     const invitationStep = ref(1);
 
@@ -16,7 +16,7 @@
     const expired = ref(false);
 
     onMounted(async () => {
-        const response: APIResponse = await $fetch(`${appSettings.baseUrl}/hono/creators/${userId}`);
+        const response: APIResponse = await $fetch(`${appSettings.baseUrl}/API/creators/${userId}`);
         if(!response.success) {
             error.value = true;
             return;

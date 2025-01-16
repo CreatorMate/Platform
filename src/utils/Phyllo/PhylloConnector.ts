@@ -17,7 +17,7 @@ export const usePhylloConnection = defineStore("phyllo", () => {
 
     async function get() {
         const accountStore = useAccountStore();
-        connection.value = await $fetch( `/hono/phyllo/${accountStore.user}`);
+        connection.value = await $fetch( `/API/phyllo/${accountStore.user}`);
     }
 
     return {connection, get}

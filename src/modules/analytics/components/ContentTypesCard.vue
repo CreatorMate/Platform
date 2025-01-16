@@ -13,7 +13,7 @@
 
     onMounted(async () => {
         const accountState = useAccountStore();
-        const request: APIResponse<ContentType[]> = await $fetch(`/hono/creator_api/statistics/${accountState.brand?.id}/content_types`);
+        const request: APIResponse<ContentType[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/content_types`);
         if (!request.success) return;
 
         for (const contentType of request.data) {
