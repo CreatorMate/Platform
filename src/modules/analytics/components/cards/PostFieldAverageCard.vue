@@ -1,7 +1,8 @@
 <script setup lang='ts'>
-    import StatCard from "~/src/modules/analytics/components/base/StatCard.vue";
+    import StatCard from "~/src/modules/analytics/components/cards/base/StatCard.vue";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import type {APIResponse} from "~/api/utils/HonoResponses";
+    import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
 
     const {ids, field} = defineProps<{
         ids: string, field: string, marker?: string
@@ -9,12 +10,24 @@
 
     const value = ref(0);
 
-    onMounted(async () => {
+
+
+    const analyticsFilterState = useAnalyticFilterState();
+    watch(() => useAnalyticFilterState().actions, async () => {
+            await getData();
+        }
+    );
+
+    async function getData() {
         const accountStore = useAccountStore();
         const requestAverage: APIResponse<{average: number}> = await $fetch(`/API/creator_api/statistics/${accountStore.brand?.id}/average?key=${field}&ids=${ids ?? ''}`)
         if(!requestAverage.success) return;
 
         value.value = requestAverage.data.average;
+    }
+
+    onMounted(async () => {
+        await getData();
     });
 
 

@@ -1,14 +1,15 @@
 <script setup lang='ts'>
-    import AnalyticCard from "~/src/modules/analytics/components/base/AnalyticCard.vue";
+    import AnalyticCard from "~/src/modules/analytics/components/cards/base/AnalyticCard.vue";
     import {onMounted} from "vue";
-    import type {APIResponse} from "~/api/utils/HonoResponses";
-    import CountryMap from "~/src/modules/analytics/components/base/CountryMap.vue";
+    import type {APIResponse} from "~/src/api/utils/HonoResponses";
+    import CountryMap from "~/src/modules/analytics/components/cards/base/CountryMap.vue";
 
     let props = defineProps<{
         countryData: { [key: string]: number }
     }>();
 
     const {countryData} = toRefs(props);
+
 
     function getTop10Highest(): {rank: number, code: string, value: number}[] {
         if(!countryData) return [];

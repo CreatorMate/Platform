@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-    import PieChart from "~/src/modules/analytics/components/base/PieChart.vue";
-    import AnalyticCard from "~/src/modules/analytics/components/base/AnalyticCard.vue";
+    import PieChart from "~/src/modules/analytics/components/cards/base/PieChart.vue";
+    import AnalyticCard from "~/src/modules/analytics/components/cards/base/AnalyticCard.vue";
     interface Segment {
         percentage: number;
         title: string;

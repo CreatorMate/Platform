@@ -1,13 +1,20 @@
 <script setup lang='ts'>
 
-    import BarCard from "~/src/modules/analytics/components/base/BarCard.vue";
+    import BarCard from "~/src/modules/analytics/components/cards/base/BarCard.vue";
     import {onMounted, type Ref} from "vue";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
-    import type {APIResponse} from "~/api/utils/HonoResponses";
+    import type {APIResponse} from "~/src/api/utils/HonoResponses";
+    import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
 
     const bars: Ref<{ name: string, percentage: number, value?: string }[]> = ref([]);
 
-    onMounted(async () => {
+    const analyticsFilterState = useAnalyticFilterState();
+    watch(() => useAnalyticFilterState().actions, async () => {
+            await getData();
+        }
+    );
+
+    async function getData() {
         const accountState = useAccountStore();
         const request: APIResponse<{
             key: string,
@@ -25,7 +32,11 @@
                 }
             );
         }
-    })
+    }
+
+    onMounted(async () => {
+        await getData();
+    });
 </script>
 
 <template>

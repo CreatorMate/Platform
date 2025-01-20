@@ -15,7 +15,7 @@ export type CreatorProfile = {
     country: string|null,
     is_verified: boolean,
     website: string
-    id?: string
+    id: string
 }
 
 export type Post = {

@@ -1,16 +1,19 @@
 <script setup lang='ts'>
-    import PostFieldAverageCard from "~/src/modules/analytics/components/PostFieldAverageCard.vue";
-    import TotalFollowersCard from "~/src/modules/analytics/components/TotalFollowersCard.vue";
-    import ContentTypesCard from "~/src/modules/analytics/components/ContentTypesCard.vue";
-    import GenderDistributionCard from "~/src/modules/analytics/components/GenderDistributionCard.vue";
-    import AgesCard from "~/src/modules/analytics/components/AgesCard.vue";
-    import CitiesCard from "~/src/modules/analytics/components/CitiesCard.vue";
-    import GenderAgesCard from "~/src/modules/analytics/components/GenderAgesCard.vue";
-    import CountryDistibutionCard from "~/src/modules/analytics/components/CountryDistibutionCard.vue";
+    import PostFieldAverageCard from "~/src/modules/analytics/components/cards/PostFieldAverageCard.vue";
+    import TotalFollowersCard from "~/src/modules/analytics/components/cards/TotalFollowersCard.vue";
+    import ContentTypesCard from "~/src/modules/analytics/components/cards/ContentTypesCard.vue";
+    import GenderDistributionCard from "~/src/modules/analytics/components/cards/GenderDistributionCard.vue";
+    import AgesCard from "~/src/modules/analytics/components/cards/AgesCard.vue";
+    import CitiesCard from "~/src/modules/analytics/components/cards/CitiesCard.vue";
+    import GenderAgesCard from "~/src/modules/analytics/components/cards/GenderAgesCard.vue";
+    import CountryDistibutionCard from "~/src/modules/analytics/components/cards/CountryDistibutionCard.vue";
+    import PageTitle from "~/src/components/Core/PageTitle.vue";
+    import AnalyticTopBar from "~/src/modules/analytics/components/AnalyticTopBar.vue";
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col overflow-y-scroll">
+    <div class="w-full h-full flex flex-col">
+        <AnalyticTopBar title="analytics" sub-title="clear overview on all the active creator analytics you have going on" :show-days="true" :show-sort="false"></AnalyticTopBar>
         <div class="w-full grid grid-cols-3 gap-5 text-black mb-6">
             <ContentTypesCard/>
             <GenderDistributionCard/>

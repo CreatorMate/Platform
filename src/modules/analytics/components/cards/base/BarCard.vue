@@ -1,16 +1,18 @@
 <script setup lang='ts'>
 
     import { ref, onMounted, computed } from 'vue';
-    import AnalyticCard from "~/src/modules/analytics/components/base/AnalyticCard.vue";
+    import AnalyticCard from "~/src/modules/analytics/components/cards/base/AnalyticCard.vue";
 
     // Props with TypeScript definitions
-    const {stats, title} = defineProps<{
+    const props = defineProps<{
         stats: { name: string, percentage: number, value?: string }[],
         title: string
     }>();
 
+    const {stats, title} = toRefs(props);
+
     // Compute the maximum percentage value to normalize the widths
-    const maxPercentage = computed(() => Math.max(...stats.map(stat => stat.percentage)));
+    const maxPercentage = computed(() => Math.max(...stats.value.map(stat => stat.percentage)));
 
     // Calculate the width based on the percentage relative to the maximum percentage
     function calculateWidth(percentage: number) {
@@ -25,13 +27,13 @@
     }
 
     // Reactive array to store the animated widths for each bar
-    const animatedWidths = ref(stats.map(() => 0));
+    const animatedWidths = ref(stats.value.map(() => 0));
 
     // Update the widths when the component is mounted
     onMounted(() => {
         // Delay the width update to trigger the animation
         setTimeout(() => {
-            animatedWidths.value = stats.map(stat => calculateWidth(stat.percentage));
+            animatedWidths.value = stats.value.map(stat => calculateWidth(stat.percentage));
         }, 100); // Delay of 100ms, adjust if needed
     });
 </script>

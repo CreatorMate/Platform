@@ -19,7 +19,7 @@
     import { reactive, watch, onMounted } from 'vue';
     import chroma from 'chroma-js';
     import { getBaseCss, getCombinedCssString, getDynamicMapCss } from "~/src/CountryMappper";
-    import Map from "~/src/modules/analytics/components/base/Map.vue";
+    import Map from "~/src/modules/analytics/components/cards/base/Map.vue";
 
     // Props
     const {lowColor, highColor, countryData, defaultCountryFillColor, countryStrokeColor} = defineProps({

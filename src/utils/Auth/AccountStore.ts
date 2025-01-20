@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import type {Brand, User} from "~/src/utils/SupabaseTypes";
-import type {APIResponse} from "~/api/utils/HonoResponses";
+import type {APIResponse} from "~/src/api/utils/HonoResponses";
 import {appSettings} from "~/src/GlobalSettings";
 
 export const useAccountStore = defineStore("account", () => {
