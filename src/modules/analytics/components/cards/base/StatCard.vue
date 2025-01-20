@@ -1,12 +1,14 @@
 <script setup lang='ts'>
     import {Icon} from "@iconify/vue";
 
-    const {icon, title, number, marker} = defineProps<{
+    const props = defineProps<{
         icon: string,
         title: string,
         number: number,
         marker?: string
     }>();
+
+    const {icon, title, number, marker} = toRefs(props);
 </script>
 
 <template>

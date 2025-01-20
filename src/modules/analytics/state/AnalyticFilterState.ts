@@ -9,6 +9,8 @@ export const useAnalyticFilterState = defineStore("analyticsFilter", () => {
     const selectedCreators = ref<CreatorProfile[]>([]);
     const ids = ref<string[]>([]);
     const actions = ref(0);
+    const days = ref(60);
+    const key = ref('likes');
 
     async function getCreators() {
         const profiles: APIResponse<CreatorProfile[]> = await $fetch(`/API/creator_api/brands/${accountState.brand?.id}/profiles`);
@@ -40,5 +42,5 @@ export const useAnalyticFilterState = defineStore("analyticsFilter", () => {
     }
 
 
-    return {creators, getCreators, filterCreator, selectedCreators, getIds, actions}
+    return {creators, getCreators, filterCreator, selectedCreators, getIds, actions, days, key}
 });

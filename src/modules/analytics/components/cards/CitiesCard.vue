@@ -5,8 +5,10 @@
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
+    import {sortByKey} from "~/src/utils/utils";
 
     const bars: Ref<{ name: string, percentage: number, value?: string }[]> = ref([]);
+    const loading = ref(false);
 
     const analyticsFilterState = useAnalyticFilterState();
     watch(() => useAnalyticFilterState().actions, async () => {
@@ -16,13 +18,17 @@
 
     async function getData() {
         const accountState = useAccountStore();
+        loading.value = true;
         const request: APIResponse<{
             key: string,
             value: number
-        }[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/cities`);
+        }[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/cities?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
         if (!request.success) return;
 
-        for (const item of request.data) {
+        bars.value = [];
+        const items = sortByKey<{key: string, value: string}>(request.data, 'value', true, 10);
+
+        for (const item of items) {
             const cityParts = item.key.split(',');
             bars.value.push(
                 {
@@ -32,6 +38,8 @@
                 }
             );
         }
+
+        loading.value = false;
     }
 
     onMounted(async () => {
@@ -40,7 +48,7 @@
 </script>
 
 <template>
-    <BarCard v-if="bars.length > 0" title="Cities" :stats="
+    <BarCard v-if="bars.length > 0 && !loading" title="Cities" :stats="
         bars"
     ></BarCard>
 </template>

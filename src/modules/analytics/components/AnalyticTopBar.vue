@@ -21,7 +21,15 @@
         if(analyticFilterState.creators.length === 0) {
             await analyticFilterState.getCreators();
         }
-    })
+    });
+
+    watch(() => analyticFilterState.days, () => {
+        analyticFilterState.actions++;
+    });
+
+    watch(() => analyticFilterState.key, () => {
+        analyticFilterState.actions++;
+    });
 
     function lastRefreshed() {
         const today = new Date();
@@ -67,22 +75,22 @@
         <div class="flex items-center gap-6">
             <div v-if="showSort" class="flex gap-3 items-center">
                 <Icon width="20" icon="material-symbols:swap-vert"></Icon>
-                <select class="py-1 px-3 bg-white border border-[#F5F5F5]">
-                    <option>none</option>
-                    <option>likes</option>
-                    <option>comments</option>
-                    <option>engagement</option>
-                    <option>reach</option>
-                    <option>saves</option>
-                    <option>shares</option>
+                <select v-model="analyticFilterState.key" class="py-1 px-3 bg-white border border-[#F5F5F5]">
+                    <option value="">none</option>
+                    <option value="likes">likes</option>
+                    <option value="comments">comments</option>
+                    <option value="engagement">engagement</option>
+                    <option value="reach">reach</option>
+                    <option value="saves">saves</option>
+                    <option value="shares">shares</option>
                 </select>
             </div>
             <div v-if="showDays" class="flex gap-3 items-center">
                 <p class="text-black">last</p>
-                <select class="py-1 px-3 bg-white border border-[#F5F5F5]">
-                    <option>90 days</option>
-                    <option>60 days</option>
-                    <option>30 days</option>
+                <select v-model="analyticFilterState.days" class="py-1 px-3 bg-white border border-[#F5F5F5]">
+                    <option :value="90">90 days</option>
+                    <option :value="60">60 days</option>
+                    <option :value="30">30 days</option>
                 </select>
             </div>
         </div>

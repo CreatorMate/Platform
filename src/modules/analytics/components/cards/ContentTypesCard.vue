@@ -21,7 +21,8 @@
 
     async function getData() {
         const accountState = useAccountStore();
-        const request: APIResponse<ContentType[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/content_types`);
+        segments.value = [];
+        const request: APIResponse<ContentType[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/content_types?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
         if (!request.success) return;
 
         for (const contentType of request.data) {

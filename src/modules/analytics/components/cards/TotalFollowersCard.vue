@@ -18,7 +18,7 @@
 
     async function getData() {
         const accountStore = useAccountStore();
-        const requestAverage: APIResponse<number> = await $fetch(`/API/creator_api/statistics/${accountStore.brand?.id}/followers?ids=${ids ?? ''}`)
+        const requestAverage: APIResponse<number> = await $fetch(`/API/creator_api/statistics/${accountStore.brand?.id}/followers?ids=${analyticsFilterState.getIds() ?? ''}&days=${analyticsFilterState.days}`)
         if(!requestAverage.success) return;
 
         value.value = requestAverage.data;

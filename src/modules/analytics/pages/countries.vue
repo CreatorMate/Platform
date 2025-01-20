@@ -5,14 +5,9 @@
     import type {CreatorProfile, Post} from "~/src/utils/CreatorAPITypes";
     import CountryCard from "~/src/modules/analytics/components/cards/CountryCard.vue";
     import AnalyticTopBar from "~/src/modules/analytics/components/AnalyticTopBar.vue";
+    import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
 
     const posts = ref<Post[]>([]);
-    const creators = ref<CreatorProfile[]>([]);
-    const key = ref('views');
-    const open = ref(false);
-    const limit = ref(10);
-
-    const selected = ref<CreatorProfile[]>([]);
 
     let countryData = ref({
     });
@@ -20,38 +15,24 @@
     onMounted(async () => {
         await getContent();
     });
-    async function getContent() {
-        const profiles: APIResponse<CreatorProfile[]> = await $fetch(`/API/creator_api/brands/1/profiles`);
-        if(!profiles.success) return;
 
-        creators.value = profiles.data;
+    const analyticFilterState = useAnalyticFilterState();
 
-        let ids = "";
-        for (const creator of selected.value) {
-            console.log(creator);
-            ids += `${creator.id},`;
+    watch(() => analyticFilterState.actions, async () => {
+            await getContent();
         }
-
-        const countryDataRequest: APIResponse = await $fetch(`/API/creator_api/brands/1/countries?ids=${ids}`);
+    );
+    async function getContent() {
+        const countryDataRequest: APIResponse = await $fetch(`/API/creator_api/brands/1/countries?ids=${analyticFilterState.getIds()}`);
         if(countryDataRequest.success) {
             countryData.value = countryDataRequest.data;
         }
     }
-
-    async function selectOrRemove(creator: CreatorProfile) {
-        if(selected.value.includes(creator)) {
-            selected.value = selected.value.filter((currentCreator) => currentCreator != creator);
-        } else {
-            selected.value.push(creator);
-        }
-
-        await getContent();
-    }
 </script>
 
 <template>
-    <section class="flex flex-col w-full gap-4">
-        <AnalyticTopBar title="analytics" sub-title="clear overview on all the active creator analytics you have going on" :show-days="true" :show-sort="true"></AnalyticTopBar>
+    <section class="flex flex-col w-full gap-2">
+        <AnalyticTopBar title="countries" sub-title="clear overview of your viewership across the globe" :show-days="false" :show-sort="false"></AnalyticTopBar>
         <div class="flex flex-wrap gap-2">
             <div class="flex flex-col" style="width: 20%" v-for="item of posts">
                 <img class="max-h-full object-cover" :src="item.thumbnail">

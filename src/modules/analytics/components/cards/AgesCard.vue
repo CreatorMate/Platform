@@ -22,7 +22,7 @@
             key: string,
             value: number,
 
-        }[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/age?ids=${analyticsFilterState.getIds()}`);
+        }[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/age?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
         if (!request.success) return;
 
         bars.value = [];
@@ -31,7 +31,7 @@
                 {
                     name: item.key,
                     percentage: Math.round(item.value),
-                    value: item.value
+                    value: item.value + '%'
                 }
             );
         }

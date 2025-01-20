@@ -1,7 +1,7 @@
 <script setup lang='ts'>
     import PieChartCard from "~/src/modules/analytics/components/cards/base/PieChartCard.vue";
     import {onMounted} from "vue";
-    import type {APIResponse} from "~/api/utils/HonoResponses";
+    import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
 
@@ -21,7 +21,8 @@
 
     async function getData() {
         const accountState = useAccountStore();
-        const request: APIResponse<Gender[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/genders`);
+        segments.value = [];
+        const request: APIResponse<Gender[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/genders?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
 
         if (!request.success) return;
 

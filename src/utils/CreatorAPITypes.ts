@@ -29,13 +29,19 @@ export type Post = {
     description: string,
     visibility: string,
     thumbnail: string | null,
+    persistent_thumbnail: string,
     published_at: string,
     mentions: string[] | null
     likes: number,
     comments: number,
-    reach_organic_count: number,
+    reach: number,
+    impressions: number,
     saves: number,
     views: number | null,
     replays: number | null,
-    shares: number
+    shares: number,
+    additional_info: { profile_visits: number, bio_link_clicked: number | null, followers_gained: number } | null,
+    engagement: number,
+    user_picture: string,
+    posted_by: string,
 }

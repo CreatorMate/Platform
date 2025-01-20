@@ -8,9 +8,9 @@ export class GetBrandContentEndpoint extends Endpoint {
 
     protected async handle(context: Context) {
         const id = context.req.param('id') as string;
-        const {key, order, ids, limit} = context.req.query();
+        const {key, order, ids, limit, days} = context.req.query();
 
-        const result = await fetch(`${process.env.CREATOR_API_PATH}/brands/${id}/content?key=${key}&ids=${ids}&limit=${limit}`, {
+        const result = await fetch(`${process.env.CREATOR_API_PATH}/brands/${id}/content?key=${key}&ids=${ids}&limit=${limit}&days=${days}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${process.env.CREATOR_API_KEY}`
@@ -20,7 +20,5 @@ export class GetBrandContentEndpoint extends Endpoint {
         const data = await result.json();
 
         return successResponse(context, data.data);
-
     }
-
 }
