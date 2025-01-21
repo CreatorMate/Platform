@@ -23,6 +23,7 @@ export function sortKeyValueObject<T>(obj: Record<string, T>, limit?: number, de
 }
 
 export function shorten(text: string, amount: number, devider: string = ' ') {
+    if(!text) return text;
     const words = text.split(devider);
     let newText = '';
     for(const word of words.splice(0, amount)) {
@@ -30,4 +31,8 @@ export function shorten(text: string, amount: number, devider: string = ' ') {
     }
 
     return `${newText}...`
+}
+
+export function sendTo(url: string) {
+    window.open(url, '_blank')
 }

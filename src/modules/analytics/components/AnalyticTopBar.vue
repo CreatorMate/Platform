@@ -80,7 +80,9 @@
                     <option value="likes">likes</option>
                     <option value="comments">comments</option>
                     <option value="engagement">engagement</option>
+                    <option value="active_engagement">active engagement</option>
                     <option value="reach">reach</option>
+                    <option value="reach_rate">reach rate</option>
                     <option value="saves">saves</option>
                     <option value="shares">shares</option>
                 </select>
@@ -88,6 +90,7 @@
             <div v-if="showDays" class="flex gap-3 items-center">
                 <p class="text-black">last</p>
                 <select v-model="analyticFilterState.days" class="py-1 px-3 bg-white border border-[#F5F5F5]">
+                    <option :value="365">365 days</option>
                     <option :value="90">90 days</option>
                     <option :value="60">60 days</option>
                     <option :value="30">30 days</option>

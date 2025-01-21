@@ -23,10 +23,13 @@
             <GenderAgesCard></GenderAgesCard>
             <PostFieldAverageCard field="likes" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="engagement" ids="" marker="%"></PostFieldAverageCard>
+            <PostFieldAverageCard field="active_engagement" ids="" marker="%"></PostFieldAverageCard>
             <PostFieldAverageCard field="comments" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="reach" ids=""></PostFieldAverageCard>
+            <PostFieldAverageCard field="reach_rate" ids="" marker="%"></PostFieldAverageCard>
             <PostFieldAverageCard field="saves" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="shares" ids=""></PostFieldAverageCard>
+
             <TotalFollowersCard ids=""></TotalFollowersCard>
         </div>
     </div>
