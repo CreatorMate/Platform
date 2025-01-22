@@ -21,6 +21,8 @@ import type {Controller} from "~/src/api/utils/Controller";
 import {StatisticsController} from "~/src/api/modules/creator_api/statistics/StatisticsController";
 import {initialize} from "esbuild";
 import type {Hono} from "hono";
+import {GetCreatorBrandsEndpoint} from "~/src/api/modules/creators/GetCreatorBrands/GetCreatorBrandsEndpoint";
+import {UpdateCreatorBrandsEndpoint} from "~/src/api/modules/creators/UpdateCreatorBrands/UpdateCreatorBrandsEndpoint";
 
 
 export function initializeHonoRouter(app: Hono) {
@@ -45,6 +47,8 @@ export function initializeHonoRouter(app: Hono) {
         new GetBrandContentEndpoint(),
         new GetBrandProfilesEndpoint(),
         new GetBrandCountryDistributionEndpoint(),
+        new GetCreatorBrandsEndpoint(),
+        new UpdateCreatorBrandsEndpoint()
     ];
 
     for(const controller of controllers) {

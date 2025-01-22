@@ -3,7 +3,6 @@ import type {EmailTemplate} from "../types/EmailTypes";
 const verifyEmailTemplate = function (
     brandName: string,
     creatorId: string,
-    brandId: number
 ): EmailTemplate {
     const html = `
     <!DOCTYPE html>
@@ -76,7 +75,7 @@ const verifyEmailTemplate = function (
                                                 ${brandName} has invited you to work with them, click the link underneath to go to accept this invite profile information
                                             </p>
 
-                                            <a href="https://app.creatormate.com/invitation/${brandId}/${creatorId}" style="display: block; font-size: 16px; line-height: 100%; --text-opacity: 1; color: #000000; text-decoration: none;">Click here to accept</a>
+                                            <a href="https://app.creatormate.com/creators" style="display: block; font-size: 16px; line-height: 100%; --text-opacity: 1; color: #000000; text-decoration: none;">Click here to accept</a>
                                             <table style="font-family: 'Montserrat',Arial,sans-serif;" cellpadding="0" cellspacing="0"
                                                    role="presentation">
                                                 <tr>

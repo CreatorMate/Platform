@@ -24,7 +24,7 @@ export class InviteCreatorEndpoint extends Endpoint {
 
         for(const email of emails) {
             let creator = await this.prismaClient.creators.findFirst({
-                where: { email: email, brand_id: brandId},
+                where: { email: email},
             });
             if (!creator) {
                 creator = await this.prismaClient.creators.create({
@@ -32,15 +32,26 @@ export class InviteCreatorEndpoint extends Endpoint {
                         email: email,
                         status: 'pending',
                         type: 'commision',
-                        brand_id: brandId,
                         country: 'netherlands'
                     },
                 });
             }
 
-            if(creator.status !== 'pending') continue;
+            let brandCreator = await this.prismaClient.creator_brand.findFirst({
+                where: {brand_id: brand.id, creator_id: creator.id}
+            });
 
-            const template = InviteUserTemplate(brand.name, creator.id, brand.id);
+            if(brandCreator) return;
+
+            await this.prismaClient.creator_brand.create({
+                data: {
+                    brand_id: brand.id,
+                    creator_id: creator.id,
+                    accepted: false,
+                }
+            });
+
+            const template = InviteUserTemplate(brand.name, creator.id);
             await sendEmail(email, `You are invited to work with ${brand.name}`, template);
         }
 

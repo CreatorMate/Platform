@@ -1,4 +1,5 @@
 import type {Context} from "hono";
+import type {StatusCode} from "h3";
 
 export type APIResponse<T = any> = {
     success: true,
@@ -17,7 +18,8 @@ export function successResponse<T>(context: Context, data: any, meta: any = null
     }
 }
 
-export function errorResponse(context: Context, error: string) {
+export function errorResponse(context: Context, error: string, status: number = 500) {
+    context.status(404);
     return context.json({
         success: false,
         error: error

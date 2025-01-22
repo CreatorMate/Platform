@@ -10,21 +10,26 @@ export class GetConnectionEndpoint extends Endpoint {
     protected readonly route: string = '/phyllo'
 
     protected async handle(context: Context) {
-        const {brandId, creatorId} = context.req.query();
-        let type = creatorId ? 'CREATOR' : 'BRAND';
-        let id = creatorId ? creatorId : brandId;
-        id = type + id;
+        const { creatorId, creatorEmail} = context.req.query();
+
+        let creator = await this.prismaClient.creators.findFirst({
+            where: {email: creatorEmail}
+        });
+
+        if(!creator) {
+            return errorResponse(context, `this creator is not invited ${creatorEmail}`);
+        }
 
         let connection = await this.prismaClient.phyllo_connections.findUnique({
-            where: {id: id}
+            where: {id: creatorId}
         });
 
         if(!connection) {
-            const json = await this.createPhylloConnection(id);
+            const json = await this.createPhylloConnection(creatorId);
             if(!json) return errorResponse(context, 'could not setup a new connection');
             connection = await this.prismaClient.phyllo_connections.create({
                 data: {
-                    id: id,
+                    id: creatorId,
                     user_id: json.id,
                     token: '',
                     expires_on: new Date(json.created_at).toISOString()
@@ -37,15 +42,14 @@ export class GetConnectionEndpoint extends Endpoint {
 
 
         if (!connection.token || !connection.expires_on || currentDate > connection.expires_on) {
-            const newTokenRequest = await this.getNewAccessToken(id, connection);
-            console.log(newTokenRequest);
+            const newTokenRequest = await this.getNewAccessToken(creatorId, connection);
 
             if(!newTokenRequest) return errorResponse(context, 'could not create a new token');
 
             const token = encrypt(newTokenRequest.sdk_token)
 
             connection = await this.prismaClient.phyllo_connections.update({
-                where: {id: id},
+                where: {id: creatorId},
                 data: {
                     token: token,
                     expires_on: new Date(newTokenRequest.expires_at).toISOString()
@@ -104,5 +108,4 @@ export class GetConnectionEndpoint extends Endpoint {
 
         return await response.json();
     }
-
 }

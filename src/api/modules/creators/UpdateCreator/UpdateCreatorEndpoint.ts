@@ -8,21 +8,22 @@ export class UpdateCreatorEndpoint extends Endpoint {
 
     protected async handle(context: Context) {
         const id = context.req.param('id');
-        const {name, status} = await context.req.json();
+        const {name, status, external_id, email} = await context.req.json();
 
         const user = await this.prismaClient.creators.findFirst({
-            where: {id: id, status: 'pending'}
+            where: {email: email, status: 'pending'}
         });
 
         if(!user) {
             return errorResponse(context,'no user with this id');
         }
 
-        const result = await this.prismaClient.creators.update({
-            where: {id: id},
+        const result = await this.prismaClient.creators.updateMany({
+            where: {email: email},
             data: {
                 username: name ?? user.username,
                 status: status ?? user.status,
+                waitlist_id: external_id
             }
         });
 
