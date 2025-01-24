@@ -21,7 +21,7 @@
     const paginator = new Paginator<Creator>('/API/brands/creators', `&brand=${accountStore.brand?.id}`, loading);
 
     onMounted(async () => {
-        // await paginator.getContent();
+        await paginator.getContent();
     });
 
     async function closeModal() {

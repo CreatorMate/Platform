@@ -11,7 +11,7 @@ export class UpdateCreatorEndpoint extends Endpoint {
         const {name, status, external_id, email} = await context.req.json();
 
         const user = await this.prismaClient.creators.findFirst({
-            where: {email: email, status: 'pending'}
+            where: {email: email}
         });
 
         if(!user) {

@@ -54,7 +54,6 @@
 
     async function getContent() {
         const postRequest: APIResponse<Post[]> = await $fetch(`/API/creator_api/brands/1/content?key=${analyticsFilterState.key}&ids=${analyticsFilterState.getIds()}&limit=${limit.value}&days=${analyticsFilterState.days}&page=${page.value}`);
-        console.log(postRequest);
         if(!postRequest.success || postRequest.data.length === 0) {
             moreContent = false;
             return;

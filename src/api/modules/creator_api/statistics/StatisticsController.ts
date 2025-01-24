@@ -2,6 +2,7 @@ import {Controller} from "~/src/api/utils/Controller";
 import type {Context} from "hono";
 import {errorResponse, successResponse} from "~/src/api/utils/HonoResponses";
 import {CreatorAPI} from "~/src/api/utils/CreatorAPI/CreatorAPI";
+import {context} from "esbuild";
 
 export class StatisticsController extends Controller {
     async endpoints() {
@@ -79,6 +80,13 @@ export class StatisticsController extends Controller {
             const id = context.req.param('id') as string;
             const {ids, key, days} = context.req.query();
             const response = await CreatorAPI.ask(`/brands/${id}/content_types?ids=${ids ?? ''}&days=${days ?? ''}`, 'GET')
+            if (!response.success) {
+                return errorResponse(context, response.error);
+            }
+            return successResponse(context, response.data);
+        });
+        this.app.get('/creator_api/sync/instagram', async (context: Context): Promise<any> => {
+            const response = await CreatorAPI.ask(`/sync/instagram`, 'GET')
             if (!response.success) {
                 return errorResponse(context, response.error);
             }

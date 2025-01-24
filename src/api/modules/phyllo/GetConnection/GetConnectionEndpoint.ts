@@ -63,7 +63,7 @@ export class GetConnectionEndpoint extends Endpoint {
     }
 
     private async createPhylloConnection(id: string): Promise<null|{name: string, external_id: string, id: string, created_at: string}> {
-        const response = await fetch('https://api.staging.getphyllo.com/v1/users', {
+        let response = await fetch('https://api.staging.getphyllo.com/v1/users', {
             method: 'POST',
             body: JSON.stringify({
                 name: id,
@@ -76,6 +76,16 @@ export class GetConnectionEndpoint extends Endpoint {
             }
         });
 
+        if(!response.ok) {
+            response = await fetch(`https://api.staging.getphyllo.com/v1/users/external_id/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${phyllokey}`
+                }
+            });
+        }
         if(!response.ok) return null;
         const json: {
             name: string,
