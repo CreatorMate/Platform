@@ -11,7 +11,8 @@ export class GetUserEndpoint extends Endpoint {
         const honoUser = this.getHonoUser(context);
         let user = await this.getUser(honoUser.sub);
         if(!user) {
-            user = await this.createUser(honoUser);
+            await this.createUser(honoUser);
+            user = await this.getUser(honoUser.sub);
         }
 
         if(!user) return errorResponse(context, "Something went wrong while creating the new user");
@@ -20,7 +21,7 @@ export class GetUserEndpoint extends Endpoint {
     }
 
     private async createUser(honoUser: HonoUser) {
-        return await this.prismaClient.users.create({
+         await this.prismaClient.users.create({
             data: {
                 id: honoUser.sub,
                 email: honoUser.email,
