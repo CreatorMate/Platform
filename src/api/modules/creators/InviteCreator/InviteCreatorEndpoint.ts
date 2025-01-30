@@ -3,6 +3,7 @@ import type {Context} from "hono";
 import InviteUserTemplate from "~/src/api/utils/Emails/templates/InviteUserTemplate";
 import {sendEmail} from "~/src/api/utils/Emails/emailSender";
 import {errorResponse} from "~/src/api/utils/HonoResponses";
+import {AccountStatus} from "~/src/utils/SupabaseTypes";
 
 export type inviteUsers = {
     emails: string[],
@@ -30,9 +31,7 @@ export class InviteCreatorEndpoint extends Endpoint {
                 creator = await this.prismaClient.creators.create({
                     data: {
                         email: email,
-                        status: 'pending',
-                        type: 'commision',
-                        country: 'netherlands'
+                        status: AccountStatus.INVITED
                     },
                 });
             }
