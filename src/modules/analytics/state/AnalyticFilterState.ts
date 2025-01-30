@@ -9,7 +9,7 @@ export const useAnalyticFilterState = defineStore("analyticsFilter", () => {
     const selectedCreators = ref<CreatorProfile[]>([]);
     const ids = ref<string[]>([]);
     const actions = ref(0);
-    const days = ref(60);
+    const days = ref(90);
     const key = ref('likes');
 
     async function getCreators() {
