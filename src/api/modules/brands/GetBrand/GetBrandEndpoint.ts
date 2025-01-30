@@ -13,8 +13,6 @@ export class GetBrandEndpoint extends Endpoint {
         })
 
         if(!brand) return errorResponse(context, 'No brand with this id');
-
         return successResponse(context, brand);
     }
-
 }
