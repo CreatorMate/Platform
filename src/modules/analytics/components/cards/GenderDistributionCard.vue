@@ -32,6 +32,18 @@
                 percentage: contentType.value,
             })
         }
+
+        let total = 0;
+        for(const segment of segments.value) {
+            total += segment.percentage
+        }
+
+        if(total < 99) {
+            segments.value.push({
+                percentage: 100 - total,
+                title: 'not enough data'
+            })
+        }
     }
 
     onMounted(async () => {
