@@ -10,9 +10,9 @@ export class GetBrandEndpoint extends Endpoint {
         const id = context.req.param('id');
         const brand = await this.prismaClient.brands.findUnique({
             where: {id: Number(id)}
-        })
+        });
 
-        if(!brand) return errorResponse(context, 'No brand with this id');
+        if(!brand) return errorResponse(context, 'No brand with this id', 404);
         return successResponse(context, brand);
     }
 }

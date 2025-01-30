@@ -31,7 +31,10 @@ export class GetUserEndpoint extends Endpoint {
 
     private async getUser(userId: string) {
         return await this.prismaClient.users.findUnique({
-            where: {id: userId}
+            where: {id: userId},
+            include: {
+                brands: true,
+            }
         });
     }
 

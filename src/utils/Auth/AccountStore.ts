@@ -11,10 +11,9 @@ export const useAccountStore = defineStore("account", () => {
             const result: APIResponse<User> = await $fetch(`${appSettings.baseUrl}/API/users/me`);
             if(!result.success) return;
             if(result.data) {
+                console.log(result)
                 user.value = result.data;
-                const brandResult: APIResponse<Brand> = await $fetch(`${appSettings.baseUrl}/API/brands/${result.data.brand_id}`);
-                if(!brandResult.success) return;
-                brand.value = brandResult.data;
+                brand.value = result.data.brands;
             }
         } catch (error) {
             console.error('Failed to fetch session data:', error);

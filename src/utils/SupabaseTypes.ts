@@ -3,7 +3,8 @@ export type User = {
     email: string,
     brand_id: number,
     picture: string,
-    full_name: string
+    full_name: string,
+    brands: Brand
 }
 
 export type Creator = {
