@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-    import type {Creator} from "~/src/utils/SupabaseTypes";
+    import {AccountStatus, type Creator} from "~/src/utils/SupabaseTypes";
     import {Icon} from "@iconify/vue";
     import Dropdown from "~/src/components/Dropdown/Dropdown.vue";
     import AreYouSure from "~/src/components/Modal/AreYouSure.vue";
@@ -8,17 +8,19 @@
         creator: Creator
     }>();
 
+    console.log(creator)
+
     const emits = defineEmits(['refresh']);
     const open = ref(false);
     const areYouSure = ref(false);
 
     function getDate(creator: Creator): string {
-        const date = new Date(creator.created);
+        const date = new Date(creator.created_at);
         return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`;
     }
 
     function copy() {
-        navigator.clipboard.writeText(`https://app.creatormate.com/invitation/${creator.brand_id}/${creator.id}`);
+        navigator.clipboard.writeText(`https://work.creatormate.com`);
         open.value = false;
     }
 
@@ -47,13 +49,12 @@
         <td class="w-12">
             <div class="w-4 h-4 border"></div>
         </td>
-        <td>{{ creator.username }}</td>
+        <td>{{ creator.handle }}</td>
         <td>
             <p class="px-2.5 py-1 rounded w-fit" :class="{
-                    'bg-green-100 text-green-600': creator.status == 'retained',
-                    'bg-red-100 text-red-600': creator.status == 'churned',
-                    'bg-blue-100 text-blue-600': creator.status == 'acquired',
-                    'bg-yellow-100 text-yellow-600': creator.status == 'pending',
+                    'bg-green-100 text-green-600': creator.status == AccountStatus.INVITED,
+                    'bg-blue-100 text-blue-600': creator.status == AccountStatus.IN_REVIEW,
+                    'bg-yellow-100 text-yellow-600': creator.status == AccountStatus.ACCEPTED,
                 }">{{ creator.status }}</p></td>
         <td>{{ creator.email }}</td>
         <td>

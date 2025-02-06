@@ -2,7 +2,7 @@ import {Endpoint} from "~/src/api/utils/Endpoint";
 import type {Context} from "hono";
 import InviteUserTemplate from "~/src/api/utils/Emails/templates/InviteUserTemplate";
 import {sendEmail} from "~/src/api/utils/Emails/emailSender";
-import {errorResponse} from "~/src/api/utils/HonoResponses";
+import {errorResponse, successResponse} from "~/src/api/utils/HonoResponses";
 import {AccountStatus} from "~/src/utils/SupabaseTypes";
 
 export type inviteUsers = {
@@ -40,7 +40,7 @@ export class InviteCreatorEndpoint extends Endpoint {
                 where: {brand_id: brand.id, creator_id: creator.id}
             });
 
-            if(brandCreator) return;
+            if(brandCreator) continue;
 
             await this.prismaClient.creator_brand.create({
                 data: {
@@ -54,9 +54,7 @@ export class InviteCreatorEndpoint extends Endpoint {
             await sendEmail(email, `You are invited to work with ${brand.name}`, template);
         }
 
-        return {
-            data: emails
-        }
+        return successResponse(context, emails, null, 'Users invited');
     }
 
 }

@@ -23,11 +23,13 @@ import {initialize} from "esbuild";
 import type {Hono} from "hono";
 import {GetCreatorBrandsEndpoint} from "~/src/api/modules/creators/GetCreatorBrands/GetCreatorBrandsEndpoint";
 import {UpdateCreatorBrandsEndpoint} from "~/src/api/modules/creators/UpdateCreatorBrands/UpdateCreatorBrandsEndpoint";
+import {CoreController} from "~/src/api/modules/creator_api/Core/CoreController";
 
 
 export function initializeHonoRouter(app: Hono) {
     const controllers: Controller[] = [
         new StatisticsController(app),
+        new CoreController(app)
     ];
 
     const endpoints: Endpoint[] = [

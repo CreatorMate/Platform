@@ -29,7 +29,6 @@
             <PostFieldAverageCard field="reach_rate" ids="" marker="%"></PostFieldAverageCard>
             <PostFieldAverageCard field="saves" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="shares" ids=""></PostFieldAverageCard>
-
             <TotalFollowersCard ids=""></TotalFollowersCard>
         </div>
     </div>

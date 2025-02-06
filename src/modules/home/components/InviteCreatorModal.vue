@@ -2,6 +2,7 @@
     import {Icon} from "@iconify/vue";
     import type {Ref} from "vue";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {API} from "~/src/utils/API/API";
 
     const emits = defineEmits(['close', 'submitted']);
     const emails: Ref<string[]> = ref([]);
@@ -43,12 +44,9 @@
 
     async function sendInvite() {
         loading.value = true;
-        const result = await $fetch('/API/creators/invite', {
-            method: 'POST',
-            body: JSON.stringify({
-                emails: emails.value,
-                brandId: accountStore.brand?.id
-            })
+        const result = await API.ask("/creators/invite", "POST", {
+            emails: emails.value,
+            brandId: accountStore.brand?.id
         });
         loading.value = false;
         emits('submitted');

@@ -1,6 +1,7 @@
 import {Endpoint} from "~/src/api/utils/Endpoint";
 import type {Context} from "hono";
-import {successResponse} from "~/src/api/utils/HonoResponses";
+import {type APIResponse, errorResponse, successResponse} from "~/src/api/utils/HonoResponses";
+import {CreatorAPI} from "~/src/api/utils/CreatorAPI/CreatorAPI";
 
 export class GetBrandContentEndpoint extends Endpoint {
     protected readonly method: string = 'get'
@@ -10,15 +11,12 @@ export class GetBrandContentEndpoint extends Endpoint {
         const id = context.req.param('id') as string;
         const {key, order, ids, limit, days, page} = context.req.query();
 
-        const result = await fetch(`${process.env.CREATOR_API_PATH}/brands/${id}/content?key=${key}&ids=${ids}&limit=${limit}&days=${days}&page=${page}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${process.env.CREATOR_API_KEY}`
-            }
-        });
+        const result: APIResponse = await CreatorAPI.ask(`/brands/${id}/content?key=${key}&ids=${ids}&limit=${limit}&days=${days}&page=${page}`, 'GET')
 
-        const data = await result.json();
+        if(!result.success) {
+            return errorResponse(context, result.error, result.message);
+        }
 
-        return successResponse(context, data.data);
+        return successResponse(context, result.data);
     }
 }

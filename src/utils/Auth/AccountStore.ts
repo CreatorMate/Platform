@@ -11,7 +11,6 @@ export const useAccountStore = defineStore("account", () => {
             const result: APIResponse<User> = await $fetch(`${appSettings.baseUrl}/API/users/me`);
             if(!result.success) return;
             if(result.data) {
-                console.log(result)
                 user.value = result.data;
                 brand.value = result.data.brands;
             }

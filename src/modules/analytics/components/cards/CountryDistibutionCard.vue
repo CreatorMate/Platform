@@ -19,7 +19,7 @@
     async function getData() {
         const accountState = useAccountStore();
         loading.value = true;
-        const request: APIResponse = await $fetch(`/API/creator_api/brands/${accountState.brand?.id}/countries?ids${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
+        const request: APIResponse = await $fetch(`/API/creator_api/brands/${accountState.brand?.id}/countries?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
         if (!request.success) return;
 
         const items = sortKeyValueObject<number>(request.data, 10, true);

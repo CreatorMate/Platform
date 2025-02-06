@@ -1,14 +1,8 @@
 <script setup lang='ts'>
-    import {Icon} from "@iconify/vue";
-    import {onMounted} from "vue";
-    import SbUserSession from "~/src/components/Sidebar/SbUserSession.vue";
-    import SbSearch from "~/src/components/Sidebar/SbSearch.vue";
-    import SbNavigation from "~/src/components/Sidebar/SbNavigation.vue";
-    import {SupabaseClient} from "@supabase/supabase-js";
-    import {getSupabaseClient} from "~/src/utils/Supabase/SupabaseClient";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import NavButton from "~/src/components/Sidebar/NavButton.vue";
     import type {NavItem} from "~/src/components/Sidebar/NavItem";
+
+    const {user} = useOidcAuth();
 
     const navItems: NavItem[] = [
         {
@@ -53,7 +47,7 @@
                 <div class="pt-3 border-t border-[#C6C6C6] w-full">
                     <NavButton :premium="false" link-to="/settings" name="settings" icon-name="uil:cog" :children="[]"/>
                 </div>
-                <SbUserSession/>
+                <LazySidebarSbUserSession/>
             </div>
         </nav>
     </aside>

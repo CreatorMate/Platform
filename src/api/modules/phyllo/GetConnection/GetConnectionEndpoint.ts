@@ -104,7 +104,7 @@ export class GetConnectionEndpoint extends Endpoint {
                 name: id,
                 user_id: connection.user_id,
                 products: [
-                    "IDENTITY", "IDENTITY.AUDIENCE", "ENGAGEMENT", "ENGAGEMENT.AUDIENCE", "INCOME", "ACTIVITY"
+                    "IDENTITY", "IDENTITY.AUDIENCE", "ENGAGEMENT", "ENGAGEMENT.AUDIENCE", "ACTIVITY"
                 ]
             }),
             headers: {
