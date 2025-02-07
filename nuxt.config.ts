@@ -85,7 +85,7 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    domains: ['https://mfouoyeneddsfujxfjci.supabase.co', 'https://s.gravatar.com'],
+    domains: ['https://mfouoyeneddsfujxfjci.supabase.co', 'https://s.gravatar.com', 'https://lh3.googleusercontent.com'],
   },
   dir: {
     assets: './src/assets',

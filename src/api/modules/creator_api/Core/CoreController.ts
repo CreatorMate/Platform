@@ -10,5 +10,15 @@ export class CoreController extends Controller {
             const response = await CreatorAPI.ask(`/check`);
             return inheritResponse(context, response);
         });
+
+        this.app.get('/creator_api/sync/instagram', async (context: Context): Promise<any> => {
+            const {brandId, creatorId} = context.req.query();
+            console.log(`/sync/instagram${brandId ? `?brandId=${brandId}` : ''}${creatorId ? `?creatorId=${creatorId}` : ''}`);
+            const response = await CreatorAPI.ask(`/sync/instagram${brandId ? `?brandId=${brandId}` : ''}${creatorId ? `?creatorId=${creatorId}` : ''}`, 'GET');
+            if (!response.success) {
+                return errorResponse(context, response.error);
+            }
+            return successResponse(context, response.data, null, 'data sync started, come back after a few minutes');
+        });
     }
 }

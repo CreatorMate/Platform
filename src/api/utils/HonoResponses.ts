@@ -1,5 +1,4 @@
 import type {Context} from "hono";
-import type {StatusCode} from "h3";
 
 export type APIResponse<T = any> = {
     success: true,
@@ -30,7 +29,7 @@ export function errorResponse(context: Context, error: string, message: string =
     });
 }
 
-export function inheritResponse(context: Context, response: APIResponse) {
-    context.status(404);
+export function inheritResponse(context: Context, response: APIResponse, code: any = 200) {
+    context.status(code);
     return context.json(response);
 }

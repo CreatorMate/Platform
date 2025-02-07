@@ -6,6 +6,7 @@
 
     onMounted(async () => {
         const check = await API.ask('/creator_api/check');
+        console.log(check);
         asked.value = true;
         success.value = check.success
     })

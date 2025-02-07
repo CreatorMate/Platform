@@ -3,12 +3,11 @@
     import {Icon} from "@iconify/vue";
     import Dropdown from "~/src/components/Dropdown/Dropdown.vue";
     import AreYouSure from "~/src/components/Modal/AreYouSure.vue";
+    import {API} from "~/src/utils/API/API";
 
     const {creator} = defineProps<{
         creator: Creator
     }>();
-
-    console.log(creator)
 
     const emits = defineEmits(['refresh']);
     const open = ref(false);
@@ -42,6 +41,10 @@
         areYouSure.value = false;
         emits('refresh');
     }
+
+    async function syncCreator() {
+        await API.ask(`/creator_api/sync/instagram?creatorId=${creator.id}`);
+    }
 </script>
 
 <template>
@@ -69,8 +72,9 @@
             <Dropdown @close="open = false" :open>
                 <div class="flex flex-col w-56 items-start rounded-xl shadow">
                     <button @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Resend invitation</button>
-                    <router-link :to="`/creators/${creator.id}`" v-if="creator.status === 'acquired'" @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">go to user</router-link>
+<!--                    <router-link :to="`/creators/${creator.id}`" v-if="creator.status === 'acquired'" @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">go to user</router-link>-->
                     <button @click="copy" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Copy invite</button>
+                    <button @click="syncCreator()" class="px-3 py-2 hover:bg-blue-100 w-full text-left">sync creator</button>
                     <button @click="areYouSure = true" class="px-3 py-2 hover:bg-blue-100 w-full text-left text-red-600">Remove user</button>
                 </div>
             </Dropdown>

@@ -85,12 +85,5 @@ export class StatisticsController extends Controller {
             }
             return successResponse(context, response.data);
         });
-        this.app.get('/creator_api/sync/instagram', async (context: Context): Promise<any> => {
-            const response = await CreatorAPI.ask(`/sync/instagram`, 'GET')
-            if (!response.success) {
-                return errorResponse(context, response.error);
-            }
-            return successResponse(context, response.data);
-        });
     }
 }
