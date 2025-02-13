@@ -32,6 +32,13 @@
             iconName: 'material-symbols:graph-3',
             children: [],
             premium: false
+        },
+        {
+            linkTo: '/projects/1/tutorial-project',
+            name: 'projects',
+            iconName: 'material-symbols:folder-open-outline',
+            children: [],
+            premium: false
         }
     ]
 
