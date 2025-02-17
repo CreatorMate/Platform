@@ -1,15 +1,16 @@
 <script setup lang='ts'>
-    import PageTitle from "~/src/components/Core/PageTitle.vue";
     import {Icon} from "@iconify/vue";
-    import InviteCreatorModal from "~/src/modules/home/components/InviteCreatorModal.vue";
     import {onMounted, type Ref} from "vue";
-    import type {Creator} from "~/src/utils/SupabaseTypes";
-    import {Paginator} from "~/src/utils/Pagination/Paginator";
-    import CreatorsTable from "~/src/modules/home/components/CreatorsTable.vue";
-    import CreatorCountBlock from "~/src/modules/home/components/CreatorCountBlock.vue";
-    import CreatorOverviewFilters from "~/src/modules/home/components/CreatorOverviewFilters.vue";
-    import TablePaginator from "~/src/components/Paginator/TablePaginator.vue";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {Paginator} from "~/src/utils/Pagination/Paginator";
+    import type {Creator} from "~/src/utils/SupabaseTypes";
+    import PageTitle from "~/src/components/Core/PageTitle.vue";
+    import CreatorCountBlock from "~/src/modules/creators/components/CreatorCountBlock.vue";
+    import CreatorOverviewFilters from "~/src/modules/creators/components/CreatorOverviewFilters.vue";
+    import CreatorsTable from "~/src/modules/creators/components/CreatorsTable.vue";
+    import TablePaginator from "~/src/components/Paginator/TablePaginator.vue";
+    import InviteCreatorModal from "~/src/modules/creators/components/InviteCreatorModal.vue";
+
 
     const {user} = useOidcAuth();
     const open = ref(false);

@@ -1,6 +1,6 @@
 import type {Hono} from "hono";
 
-export abstract class Controller {
+export abstract class BaseController {
     protected app: Hono;
     constructor(app: Hono) {
         this.app = app;

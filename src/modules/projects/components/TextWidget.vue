@@ -1,13 +1,13 @@
 <template>
-    <div class="markdown-editor">
+    <div class="markdown-editor border mt-8">
         <textarea
             v-model="markdownText"
             @change="updateText"
-            class="editor flex"
+            class="editor flex  rounded-lg"
             contenteditable="true">
             <p>this has some great content</p>
         </textarea>
-        <div class="prose prose-lg mt-4 border p-4 rounded-lg shadow-md bg-white">
+        <div class="prose prose-lg  p-4 rounded-lg shadow-md bg-white">
             <vue-markdown-it :source="markdownText" />
         </div>
     </div>
@@ -40,7 +40,7 @@
 }
 
 .prose h3 {
-    font-size: 32px;
+    font-size: 24px;
 }
 
 .prose ol {

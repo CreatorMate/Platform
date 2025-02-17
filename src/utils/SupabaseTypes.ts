@@ -22,6 +22,17 @@ export type Creator = {
     linked: boolean
 }
 
+export type Project = {
+    id: number,
+    name: string,
+    creators: string,
+    days: number,
+    slug: string,
+    description: string,
+    brand_id: number,
+    color: string
+}
+
 export enum AccountStatus {
     NEW = "NEW",
     INVITED = "INVITED",

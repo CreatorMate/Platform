@@ -17,21 +17,21 @@ import {GetBrandProfilesEndpoint} from "~/src/api/modules/creator_api/GetBrandPr
 import {
     GetBrandCountryDistributionEndpoint
 } from "~/src/api/modules/creator_api/GetBrandCountryDistribution/GetBrandCountryDistributionEndpoint";
-import type {Controller} from "~/src/api/utils/Controller";
+import type {BaseController} from "~/src/api/utils/BaseController";
 import {StatisticsController} from "~/src/api/modules/creator_api/statistics/StatisticsController";
-import {initialize} from "esbuild";
 import type {Hono} from "hono";
 import {GetCreatorBrandsEndpoint} from "~/src/api/modules/creators/GetCreatorBrands/GetCreatorBrandsEndpoint";
 import {UpdateCreatorBrandsEndpoint} from "~/src/api/modules/creators/UpdateCreatorBrands/UpdateCreatorBrandsEndpoint";
 import {CoreController} from "~/src/api/modules/creator_api/Core/CoreController";
-import {InstagramController} from "~/src/api/modules/instagram/InstagramController";
-
+import {ProjectsController} from "~/src/api/modules/projects/ProjectsController";
+import {MetricController} from "~/src/api/modules/projects/MetricController";
 
 export function initializeHonoRouter(app: Hono) {
-    const controllers: Controller[] = [
+    const controllers: BaseController[] = [
         new StatisticsController(app),
         new CoreController(app),
-        new InstagramController(app)
+        new ProjectsController(app),
+        new MetricController(app),
     ];
 
     const endpoints: Endpoint[] = [

@@ -33,7 +33,7 @@
 }
 
 .modal-inner-enter-active {
-    transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.1s;
+    transition: all 150ms cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.1s;
 }
 
 .modal-inner-leave-active {

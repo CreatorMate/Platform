@@ -1,6 +1,6 @@
 <script setup lang='ts'>
     import type {Creator} from "~/src/utils/SupabaseTypes";
-    import CreatorTableRow from "~/src/modules/home/components/CreatorTableRow.vue";
+    import CreatorTableRow from "~/src/modules/creators/components/CreatorTableRow.vue";
 
     const props = defineProps<{
         creators: Creator[]

@@ -1,17 +1,30 @@
 <script setup lang='ts'>
     import {getWidgets, projects, type Widget} from "~/src/modules/projects/projectdata";
     import {createSwapy, type Swapy} from 'swapy'
-    import InstagramConnect from "~/src/components/InstagramConnect.vue";
+    import type {Project} from "~/src/utils/SupabaseTypes"
+    import {API} from "~/src/utils/API/API";
+    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import type {APIResponse} from "~/src/api/utils/HonoResponses";
 
     const {id, name} = defineProps<{
         id: number,
         name: string
     }>();
 
+    const project = ref<null|Project>(null)
     const swapy = ref<Swapy | null>(null)
     const container = ref<HTMLDivElement | null>(null);
+    const accountState = useAccountStore();
 
-    onMounted(() => {
+    onMounted(async () => {
+        if(id != accountState.brand?.id) return;
+
+        const getProject: APIResponse<Project> = await API.ask(`/projects/${id}/${name}`);
+
+        if(!getProject.success) return;
+
+        project.value = getProject.data;
+        console.log(getProject)
         if (container.value) {
             swapy.value = createSwapy(container.value, {
                 // manualSwap: true
@@ -27,10 +40,10 @@
         swapy.value?.destroy();
     });
 
-    const project = projects.get(name);
+
     const widgets = ref<Widget[]>([]);
     if (project) {
-        widgets.value = getWidgets(project.id);
+        // widgets.value = getWidgets(project.value.id);
     }
 
     const getComponent = (widget: Widget) => {
@@ -70,8 +83,8 @@
     <section v-if="project" class="flex flex-col flex-grow lowercase">
         <div class="w-full">
             <div class="flex gap-4">
-                <div class="flex justify-center items-center w-20 h-20 bg-[#F1F1F1] rounded-lg">
-                    <p class="font-semibold text-xl">{{ project.icon }}</p>
+                <div :style="`background-color: ${project.color}`" class="flex justify-center items-center w-20 h-20 rounded-lg">
+                    <p class="font-semibold text-xl">{{ project.name.charAt(0) }}</p>
                 </div>
                 <div class="flex flex-col justify-center gap-1">
                     <h1 class="text-black font-semibold text-2xl">{{ project.name }}</h1>
@@ -88,7 +101,6 @@
             </div>
         </div>
         <div class="mt-auto flex justify-end">
-            <InstagramConnect/>
             <button @click="addWidget" class="rounded flex justify-center items-center h-8 w-8 bg-black text-white">+</button>
         </div>
     </section>

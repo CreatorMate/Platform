@@ -8,6 +8,11 @@ export default class ProjectModule extends BaseModule {
             file: '@/src/modules/projects/pages/ProjectView.vue',
             path: '/projects/:id/:name',
             props: true
+        },
+        {
+            name: 'metrics',
+            file: '@/src/modules/projects/pages/MetricsView.vue',
+            path: '/metrics',
         }
     ]
 }

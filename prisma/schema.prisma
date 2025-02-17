@@ -14,6 +14,7 @@ model brands {
   is_premium    String?         @db.VarChar
   customer_id   String?         @db.VarChar
   creator_brand creator_brand[]
+  projects      projects[]
   users         users[]
 }
 
@@ -68,6 +69,19 @@ model users {
   full_name String? @db.VarChar
   picture   String? @db.VarChar
   brands    brands? @relation(fields: [brand_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model projects {
+  id          Int     @id @default(autoincrement())
+  name        String? @db.VarChar
+  creators    String?
+  days        Int?    @default(90)
+  slug        String?
+  description String?
+  brand_id    Int?
+  color       String  @default("#F1F1F1")
+  brands      brands? @relation(fields: [brand_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 enum account_status {
