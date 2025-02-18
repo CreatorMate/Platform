@@ -13,6 +13,11 @@ export default class ProjectModule extends BaseModule {
             name: 'metrics',
             file: '@/src/modules/projects/pages/MetricsView.vue',
             path: '/metrics',
+        },
+        {
+            name: 'widgets',
+            file: '@/src/modules/projects/pages/WidgetsView.vue',
+            path: '/widgets',
         }
     ]
 }

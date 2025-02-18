@@ -22,6 +22,8 @@
             <ProjectButton />
             <NavButton :premium="false" link-to="/metrics"
                        name="metric catalog" icon-name="material-symbols:folder-outline"/>
+            <NavButton :premium="false" link-to="/widgets"
+                       name="widgets" icon-name="material-symbols:folder-outline"/>
             <div class="mt-auto flex flex-col gap-3">
                 <div class="pt-3 border-t border-[#C6C6C6] w-full">
                     <NavButton :premium="false" link-to="/settings" name="settings" icon-name="uil:cog" :children="[]"/>

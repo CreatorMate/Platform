@@ -4,7 +4,6 @@
     import {API} from "~/src/utils/API/API";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
-    import InviteCreatorModal from "~/src/modules/creators/components/InviteCreatorModal.vue";
     import AddProjectModal from "~/src/modules/projects/components/AddProjectModal.vue";
 
     const route = useRoute();
@@ -40,7 +39,7 @@
 </script>
 
 <template>
-    <div class="flex w-full justify-between items-center mt-20">
+    <div class="flex w-full justify-between items-center mt-12">
         <p class=" text-sm pl-2">projects</p>
         <Icon @click="open = true" class="cursor-pointer" icon="material-symbols:add"/>
     </div>

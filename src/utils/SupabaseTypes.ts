@@ -47,3 +47,16 @@ export type Brand = {
     is_premium: string,
     customer_id: string
 }
+
+export type Widget = {
+    id: number,
+    name: string,
+    description: string,
+    brand_id: number,
+    action: string,
+    endpoint: string,
+    metric_name: string,
+    grouped: boolean,
+    top: number,
+    component: string
+}

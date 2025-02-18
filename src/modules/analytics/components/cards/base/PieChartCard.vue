@@ -1,5 +1,5 @@
 <template>
-    <AnalyticCard :title="title">
+    <AnalyticCard :title="title" :description>
         <div class="w-full flex justify-center">
             <div class="h-[170px] w-[170px]">
                 <pie-chart :segments="segments"></pie-chart>
@@ -24,10 +24,11 @@
         title: string;
     }
 
-    const colors: string[] = ['#85ACC4', '#EB9CD0', '#7BEC88', '#F3C486', '#3493ce', '#73268d']
+    const colors: string[] = ['#85ACC4', '#EB9CD0', '#7BEC88', '#F3C486', '#3493ce', '#73268d','#85ACC4', '#EB9CD0', '#7BEC88', '#F3C486', '#3493ce', '#73268d']
 
     const {segments, title} = defineProps<{
         segments: Segment[],
-        title: string
+        title: string,
+        description: string
     }>();
 </script>
