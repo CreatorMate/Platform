@@ -1,20 +1,34 @@
 <script setup lang='ts'>
+    import hotkeys from "hotkeys-js";
+
     defineProps({
         modelActive: {
             type: Boolean,
             default: false,
+        },
+        center: {
+            type: Boolean,
+            default: true
         }
     })
     const emit = defineEmits(["close"]);
+
+    onMounted(() => {
+        hotkeys('esc', function(event) {
+            event.preventDefault();
+            emit('close');
+        });
+    });
+
 </script>
 
 <template>
     <Teleport to="body">
         <Transition name="modal-outer">
-            <div @click="emit('close')" v-show="modelActive"
-                 class="absolute top-0 screen-size flex justify-center items-center z-40 bg-black bg-opacity-10 backdrop-blur-[2px]">
+            <div :class="{'items-center': center}" v-show="modelActive"
+                 class="absolute top-0 screen-size flex justify-center  z-40 bg-black bg-opacity-10 backdrop-blur-[2px]">
                 <Transition name="modal-inner">
-                    <div v-if="modelActive" @click.stop>
+                    <div :class="{'mt-20': !center}" autofocus @keydown.esc="emit('close')" v-if="modelActive" @click.stop>
                         <slot  ></slot>
                     </div>
                 </Transition>

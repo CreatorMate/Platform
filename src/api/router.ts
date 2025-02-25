@@ -25,6 +25,7 @@ import {UpdateCreatorBrandsEndpoint} from "~/src/api/modules/creators/UpdateCrea
 import {CoreController} from "~/src/api/modules/creator_api/Core/CoreController";
 import {ProjectsController} from "~/src/api/modules/projects/ProjectsController";
 import {MetricController} from "~/src/api/modules/projects/MetricController";
+import {WidgetsController} from "~/src/api/modules/projects/WidgetsController";
 
 export function initializeHonoRouter(app: Hono) {
     const controllers: BaseController[] = [
@@ -32,6 +33,7 @@ export function initializeHonoRouter(app: Hono) {
         new CoreController(app),
         new ProjectsController(app),
         new MetricController(app),
+        new WidgetsController(app),
     ];
 
     const endpoints: Endpoint[] = [

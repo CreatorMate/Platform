@@ -9,9 +9,6 @@
         marker?: string
     }>();
 
-    onMounted(() => {
-    });
-
     const {icon, title, number, marker} = toRefs(props);
 </script>
 

@@ -7,7 +7,8 @@
     import AddProjectModal from "~/src/modules/projects/components/AddProjectModal.vue";
 
     const route = useRoute();
-    const show = ref(false)
+    const show = ref(false);
+
     function isActive(path: string) {
         return route.fullPath === path;
     }

@@ -1,10 +1,10 @@
 <script setup lang='ts'>
 
     import PageTitle from "~/src/components/Core/PageTitle.vue";
-    import AddWidgetModal from "~/src/modules/projects/components/CreateWidget/AddWidgetModal.vue";
+    import CreateWidgetModal from "~/src/modules/projects/components/CreateWidget/CreateWidgetModal.vue";
     import type {Widget} from "~/src/modules/projects/projectdata";
 
-    const open = ref(true);
+    const open = ref(false);
     const widget = ref<Widget|null>(null);
 
     function closeModal() {
@@ -12,7 +12,7 @@
     }
 
     function getWidgets() {
-
+        open.value = false;
     }
 </script>
 
@@ -29,6 +29,6 @@
         </div>
     </section>
     <modal-popup @close="closeModal" :model-active="open">
-        <AddWidgetModal @update="getWidgets()" @close="closeModal" :widget/>
+        <CreateWidgetModal @update="getWidgets()" @close="closeModal" :widget/>
     </modal-popup>
 </template>

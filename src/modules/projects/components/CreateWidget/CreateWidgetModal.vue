@@ -6,6 +6,7 @@
     import CustomizeMetric from "~/src/modules/projects/components/CreateWidget/CustomizeMetric.vue";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import FinalizeWidget from "~/src/modules/projects/components/CreateWidget/FinalizeWidget.vue";
+    import {API} from "~/src/utils/API/API";
 
     const metric = ref<Metric | null>(null);
     const emits = defineEmits(['close', 'update']);
@@ -55,7 +56,13 @@
     }
 
     async function finish() {
-        console.log(widget.value);
+        const response = await API.ask('/widgets', 'POST', {
+            ...widget.value
+        });
+
+        if(!response.success) return;
+
+        emits("update");
     }
 </script>
 

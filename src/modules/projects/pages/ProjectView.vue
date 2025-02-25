@@ -1,82 +1,49 @@
 <script setup lang='ts'>
-    import {getWidgets, projects, type Widget} from "~/src/modules/projects/projectdata";
-    import {createSwapy, type Swapy} from 'swapy'
     import type {Project} from "~/src/utils/SupabaseTypes"
     import {API} from "~/src/utils/API/API";
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
+    import EditorComponent from "~/src/modules/projects/components/EditorComponent.vue";
+    import hotkeys from 'hotkeys-js';
+    import AddWidgetModal from "~/src/modules/projects/components/AddWidget/AddWidgetModal.vue";
 
     const {id, name} = defineProps<{
         id: number,
         name: string
     }>();
 
+    const open = ref(false);
+
     const project = ref<null|Project>(null)
-    const swapy = ref<Swapy | null>(null)
     const container = ref<HTMLDivElement | null>(null);
     const accountState = useAccountStore();
 
     onMounted(async () => {
         if(id != accountState.brand?.id) return;
 
-        const getProject: APIResponse<Project> = await API.ask(`/projects/${id}/${name}`);
+        hotkeys('ctrl+a', function(event) {
+            event.preventDefault();
+            open.value = true
+        });
 
+        await getProject();
+
+
+    });
+
+    async function getProject() {
+        project.value = null;
+        const getProject: APIResponse<Project> = await API.ask(`/projects/${id}/${name}`);
         if(!getProject.success) return;
 
         project.value = getProject.data;
-        console.log(getProject)
-        if (container.value) {
-            swapy.value = createSwapy(container.value, {
-                // manualSwap: true
-            });
-
-            swapy.value.onSwap(event => {
-                console.log('swap', event)
-            });
-        }
-    })
-
-    onUnmounted(() => {
-        swapy.value?.destroy();
-    });
-
-
-    const widgets = ref<Widget[]>([]);
-    if (project) {
-        // widgets.value = getWidgets(project.value.id);
     }
 
-    const getComponent = (widget: Widget) => {
-        let component = '';
-        if (widget.type == 'single-stat-card') {
-            component = 'AverageField';
-        } else if (widget.type === 'text') {
-            component = 'TextBlock';
-        }
-        const componentMap: Record<string, any> = {
-            TextBlock: defineAsyncComponent(() => import("../components/TextWidget.vue")),
-            AverageField: defineAsyncComponent(() => import("../../analytics/components/cards/PostFieldAverageCard.vue")),
-        };
-        return componentMap[component] || null;
+    async function closeModal() {
+        open.value = false;
+        await getProject();
     }
 
-    function getObject(props: string): Object {
-        console.log(props)
-        if (!props) return {};
-        return JSON.parse(props);
-    }
-
-    function addWidget() {
-        widgets.value.push({
-            project_id: 1,
-            name: 'text widget second',
-            type: 'text',
-            field: '',
-            action: '',
-            props: '{"color": "blue"}',
-            value: 'this is text',
-        },)
-    }
 </script>
 
 <template>
@@ -92,20 +59,23 @@
                 </div>
             </div>
         </div>
-        <div class="mt-12" ref="container">
-            <div v-for="widget of widgets" :data-swapy-slot="widget.name">
-                <div :data-swapy-item="widget.name">
-                    <component :key="widget.name" :is="getComponent(widget)" :widget="widget"
-                               v-bind="getObject(widget.props)" :field="widget.field"/>
-                </div>
-            </div>
+        <div  ref="container" v-if="project.project_widgets?.length > 0">
+            <ClientOnly>
+                <EditorComponent @reload="getProject" :project/>
+            </ClientOnly>
+        </div>
+        <div class="mt-12" v-else>
+            empty project, <span @click="open = true" class="underline cursor-pointer">start adding some widgets</span>
         </div>
         <div class="mt-auto flex justify-end">
-            <button @click="addWidget" class="rounded flex justify-center items-center h-8 w-8 bg-black text-white">+</button>
+<!--            <button @click="addWidget" class="rounded flex justify-center items-center h-8 w-8 bg-black text-white">+</button>-->
         </div>
     </section>
     <section v-else>
         project does not exist
     </section>
 
+    <modal-popup :center="false" @close="closeModal" :model-active="open">
+        <AddWidgetModal :project_id="project?.id" @close="closeModal"/>
+    </modal-popup>
 </template>

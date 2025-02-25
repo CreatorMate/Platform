@@ -30,7 +30,26 @@ export type Project = {
     slug: string,
     description: string,
     brand_id: number,
-    color: string
+    color: string,
+    project_widgets?: ProjectWidget[]
+}
+
+export type ProjectWidget = {
+    id: number,
+    widget_id: number,
+    project_id: number,
+    component: string,
+    value: string,
+    order: string,
+    column_id: number,
+    columns: Column,
+    widgets: Widget
+}
+
+export type Column = {
+    id: number,
+    project_id: number,
+    position: number
 }
 
 export enum AccountStatus {

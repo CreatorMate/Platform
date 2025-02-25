@@ -21,9 +21,7 @@ export class UpdateCreatorEndpoint extends Endpoint {
         const result = await this.prismaClient.creators.updateMany({
             where: {email: email},
             data: {
-                username: name ?? user.username,
                 status: status ?? user.status,
-                waitlist_id: external_id
             }
         });
 
