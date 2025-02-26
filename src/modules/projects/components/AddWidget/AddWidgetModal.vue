@@ -158,7 +158,7 @@
             <p v-if="resultDefaultWidgets.length > 0" class="text-sm px-3 text-gray-500 font-medium mb-2">Default</p>
             <AddWidgetRowItem v-for="widget of resultDefaultWidgets" @click="addDefaultWidget(widget)" :title="widget.title" :metric="widget.metric" :icon="widget.icon" :selected @hover="hoverItem(widget.title, true)"></AddWidgetRowItem>
             <p v-if="resultCustomWidgets.length > 0" class="text-sm px-3 text-gray-500 font-medium mb-2 mt-3">Custom</p>
-            <AddWidgetRowItem v-for="widget of resultCustomWidgets" @click="addCustomWidget(widget)" :title="widget.name" :metric="widget.metric_name" :icon="null" :selected @hover="hoverItem(widget.name, false)"></AddWidgetRowItem>
+            <AddWidgetRowItem v-for="widget of resultCustomWidgets" @click="addCustomWidget(widget)" :title="widget.name" :metric="widget.metric_name" :icon="widget.icon" :selected @hover="hoverItem(widget.name, false)"></AddWidgetRowItem>
         </div>
         <div class="flex min-h-6 border-t rounded-b-2xl"></div>
     </div>

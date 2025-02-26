@@ -49,7 +49,7 @@ export class WidgetProvider {
             component: defineAsyncComponent(() => import("~/src/modules/projects/components/widgets/SingleStatCard.vue")),
             types: [MetricKind.SINGLE],
             grouped: true,
-            icon: null,
+            icon: 'material-symbols:title',
         },
         {
             name: 'pie chart',
