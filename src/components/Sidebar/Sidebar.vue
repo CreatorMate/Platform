@@ -9,7 +9,7 @@
 </script>
 
 <template>
-    <aside class="h-full min-w-[290px] w-[290px] flex flex-col">
+    <aside class="h-full min-w-[290px] w-[290px] max-h-screen min-h-screen flex flex-col overflow-auto">
         <NuxtImg class="mt-4 ml-4" width="48" src="/logo-light.svg"/>
         <nav class="mt-7 flex flex-col flex-grow gap-2">
             <p class="text-sm pl-2">general</p>

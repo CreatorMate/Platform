@@ -21,7 +21,7 @@
     onMounted(async () => {
         if(id != accountState.brand?.id) return;
 
-        hotkeys('ctrl+a', function(event) {
+        hotkeys('ctrl+a', function(event: Event) {
             event.preventDefault();
             open.value = true
         });
@@ -75,7 +75,7 @@
         project does not exist
     </section>
 
-    <modal-popup :center="false" @close="closeModal" :model-active="open">
-        <AddWidgetModal :project_id="project?.id" @close="closeModal"/>
+    <modal-popup v-if="project" :center="false" @close="closeModal" :model-active="open">
+        <AddWidgetModal :project_id="project.id" @close="closeModal"/>
     </modal-popup>
 </template>

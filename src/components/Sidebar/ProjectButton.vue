@@ -47,7 +47,7 @@
     <div v-if="loading" class="w-full flex justify-center">
         <Icon width="16" icon="line-md:loading-loop"></Icon>
     </div>
-    <div v-else class="flex flex-col gap-2">
+    <div v-else class="flex flex-col gap-2 max-h-[150px] overflow-auto">
         <NuxtLink v-for="project of projects" :to="`/projects/${project.brand_id}/${project.slug}`" :class="{
         'bg-[#E2E2E2] text-text-dark' : isActive(`/projects/${project.brand_id}/${project.slug}` )
     }" @click="show = !show" class="flex py-2 px-4 items-center justify-between cursor-pointer rounded-xl">

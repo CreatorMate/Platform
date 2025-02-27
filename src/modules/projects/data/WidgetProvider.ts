@@ -67,7 +67,7 @@ export class WidgetProvider {
         },
         {
             name: 'bar-graph',
-            component: defineAsyncComponent(() => import("~/src/modules/analytics/components/cards/PostFieldAverageCard.vue")),
+            component: defineAsyncComponent(() => import("~/src/modules/projects/components/widgets/VerticalBarChartCard.vue")),
             types: [MetricKind.PERCENTAGE_LIST, MetricKind.COUNTRIES, MetricKind.SINGLE, MetricKind.ARRAY],
             grouped: false,
             icon: null,

@@ -4,7 +4,7 @@
         percentage: number;
     }
 
-    const colors: string[] = ['#85ACC4', '#EB9CD0', '#7BEC88', '#F3C486', '#3493ce', '#73268d']
+    const colors: string[] = ['#7EC3BE', '#8CC2A9', '#BAB798', '#CAB19E', '#D2ACB0', '#BCB2CE','#9EBACE', '#EB9CD0', '#7BEC88', '#F3C486', '#3493ce', '#73268d']
 
     const {segments} = defineProps({
         segments: {

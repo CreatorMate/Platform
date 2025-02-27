@@ -4,7 +4,6 @@
     import type {Column, Project, ProjectWidget, Widget} from "~/src/utils/SupabaseTypes";
     import {API} from "~/src/utils/API/API";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
-    import {WidgetProvider} from "~/src/modules/projects/data/WidgetProvider";
     import ProjectBaseWidget from "~/src/modules/projects/components/widgets/ProjectBaseWidget.vue";
     import {Icon} from "@iconify/vue";
 

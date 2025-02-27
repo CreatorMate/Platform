@@ -16,6 +16,7 @@
     const selectedComponent = ref<ComponentType | null>(null);
 
     const segments = ref<{ percentage: number, title: string }[]>([]);
+    const bars = ref< { name: string, percentage: number, value?: string }[]>([]);
 
     onMounted(() => {
         if (!widget.value) return;
@@ -26,6 +27,7 @@
 
         for(let i = 0; i < widget.value.top; i++) {
             segments.value.push({percentage: 100 / widget.value.top, title: `item ${i}`});
+            bars.value.push({percentage: 100 / widget.value.top, name: `item ${i}`});
         }
     });
 
@@ -43,7 +45,7 @@
             preview
         </div>
         <div v-else class="w-full mt-6">
-            <component :segments :description="widget.description" :title="widget.name" :is="selectedComponent.component"/>
+            <component :bars :segments :description="widget.description" :title="widget.name" :is="selectedComponent.component"/>
         </div>
         <div class="flex flex-col gap-2 mt-6">
             <label class="text-lg">display as</label>
