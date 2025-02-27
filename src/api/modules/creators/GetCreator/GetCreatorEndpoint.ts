@@ -13,7 +13,7 @@ export class GetCreatorEndpoint extends Endpoint {
             where: {email: email}
         })
 
-        if(!creator) return errorResponse(context, 'no creator with this email', 404);
+        if(!creator) return errorResponse(context, 'no creator with this email', '');
 
         return successResponse(context, creator);
     }

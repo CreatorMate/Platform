@@ -12,13 +12,11 @@
 </script>
 
 <template>
-    <div class="relative">
-        <Transition>
-            <div ref="menu" class="absolute bg-white top-0 right-0 " v-if="open">
-                <slot></slot>
-            </div>
-        </Transition>
-    </div>
+    <Transition>
+        <div ref="menu" class="absolute bg-white top-0 right-0 " v-if="open">
+            <slot></slot>
+        </div>
+    </Transition>
 </template>
 
 <style scoped>

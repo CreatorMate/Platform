@@ -1,17 +1,17 @@
 import type BaseModule from "./utils/Modules/BaseModule";
 import type {NuxtPage} from "@nuxt/schema";
 import AnalyticsModule from "./modules/analytics/AnalyticsModule";
-import HomeModule from "./modules/home/HomeModule";
 import SettingsModule from "./modules/settings/SettingsModule";
 import {ContentModule} from "./modules/content/ContentModule";
-import {CreatorModule} from "./modules/creators/CreatorModule";
+import CreatorModule from "./modules/creators/CreatorModule";
+import ProjectModule from "./modules/projects/ProjectModule";
 
 const modules: BaseModule[] = [
     new AnalyticsModule(),
-    new HomeModule(),
+    new CreatorModule(),
     new SettingsModule(),
     new ContentModule(),
-    new CreatorModule()
+    new ProjectModule()
 ];
 export function getModuleRoutes() {
     const routes: NuxtPage[] = [];

@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+const config: Config =  {
     darkMode: ["class"],
     safelist: ["dark"],
     prefix: "",
@@ -35,4 +36,6 @@ module.exports = {
         }
     }
 }
+
+export default config
 

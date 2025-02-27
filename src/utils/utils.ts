@@ -36,3 +36,12 @@ export function shorten(text: string, amount: number, devider: string = ' ') {
 export function sendTo(url: string) {
     window.open(url, '_blank')
 }
+
+export function stringToSlug(str: string) {
+    return str
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}

@@ -69,16 +69,25 @@
         <td>{{ creator.country }}</td>
         <td>
             <Icon @click="open = !open" class="cursor-pointer" icon="charm:menu-meatball"></Icon>
-            <Dropdown @close="open = false" :open>
-                <div class="flex flex-col w-56 items-start rounded-xl shadow">
-                    <button @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Resend invitation</button>
-<!--                    <router-link :to="`/creators/${creator.id}`" v-if="creator.status === 'acquired'" @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">go to user</router-link>-->
-                    <button @click="copy" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Copy invite</button>
-                    <button @click="syncCreator()" class="px-3 py-2 hover:bg-blue-100 w-full text-left">sync creator</button>
-                    <button @click="areYouSure = true" class="px-3 py-2 hover:bg-blue-100 w-full text-left text-red-600">Remove user</button>
-                </div>
-            </Dropdown>
+            <div class="relative">
+                <Dropdown class="dropdown" @close="open = false" :open>
+                    <div class="flex flex-col w-56 items-start rounded-xl shadow">
+                        <button @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Resend invitation</button>
+                        <!--                    <router-link :to="`/creators/${creator.id}`" v-if="creator.status === 'acquired'" @click="resend" class="px-3 py-2 hover:bg-blue-100 w-full text-left">go to user</router-link>-->
+                        <button @click="copy" class="px-3 py-2 hover:bg-blue-100 w-full text-left">Copy invite</button>
+                        <button @click="syncCreator()" class="px-3 py-2 hover:bg-blue-100 w-full text-left">sync creator</button>
+                        <button @click="areYouSure = true" class="px-3 py-2 hover:bg-blue-100 w-full text-left text-red-600">Remove user</button>
+                    </div>
+                </Dropdown>
+            </div>
         </td>
     </tr>
     <AreYouSure @cancel="areYouSure = false" @delete="deleteCreator" title="Are you sure?" :subtitle="`You'll lose all data that is bound to this creator, we can't recover it once you deleted it. \n \n are you sure you want to delete this creator?`" :open="areYouSure"/>
 </template>
+
+<style scoped>
+    .dropdown {
+        top: 10px;
+        right: 20px;
+    }
+</style>

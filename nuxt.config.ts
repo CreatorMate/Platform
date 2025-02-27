@@ -4,6 +4,7 @@ import type {NuxtPage} from "@nuxt/schema";
 
 const moduleRoutes: NuxtPage[] = getModuleRoutes();
 
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   pages: true,
@@ -82,6 +83,9 @@ export default defineNuxtConfig({
     mailerPort: '',
     public: {
       BASE_URL: process.env.BASE_URL,
+      META_CLIENT_ID: process.env.META_CLIENT_ID,
+      META_REDIRECT_URL: process.env.META_REDIRECT_URL,
+      META_CONFIG_ID: process.env.META_CONFIG_ID,
     },
   },
   image: {

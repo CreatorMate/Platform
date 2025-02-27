@@ -1,10 +1,10 @@
-import {Controller} from "~/src/api/utils/Controller";
+import {BaseController} from "~/src/api/utils/BaseController";
 import type {Context} from "hono";
 import {errorResponse, successResponse} from "~/src/api/utils/HonoResponses";
 import {CreatorAPI} from "~/src/api/utils/CreatorAPI/CreatorAPI";
 import {context} from "esbuild";
 
-export class StatisticsController extends Controller {
+export class StatisticsController extends BaseController {
     async endpoints() {
         this.app.get('/creator_api/statistics/:id/average', async (context: Context): Promise<any> => {
             const id = context.req.param('id') as string;

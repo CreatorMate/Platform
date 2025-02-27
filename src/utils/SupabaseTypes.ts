@@ -22,6 +22,36 @@ export type Creator = {
     linked: boolean
 }
 
+export type Project = {
+    id: number,
+    name: string,
+    creators: string,
+    days: number,
+    slug: string,
+    description: string,
+    brand_id: number,
+    color: string,
+    project_widgets?: ProjectWidget[]
+}
+
+export type ProjectWidget = {
+    id: number,
+    widget_id: number,
+    project_id: number,
+    component: string,
+    value: string,
+    order: string,
+    column_id: number,
+    columns: Column,
+    widgets: Widget
+}
+
+export type Column = {
+    id: number,
+    project_id: number,
+    position: number
+}
+
 export enum AccountStatus {
     NEW = "NEW",
     INVITED = "INVITED",
@@ -35,4 +65,17 @@ export type Brand = {
     name: string,
     is_premium: string,
     customer_id: string
+}
+
+export type Widget = {
+    id: number,
+    name: string,
+    description: string,
+    brand_id: number,
+    action: string,
+    endpoint: string,
+    metric_name: string,
+    grouped: boolean,
+    top: number,
+    component: string
 }
