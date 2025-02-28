@@ -11,8 +11,10 @@ export class ProjectsController extends BaseController {
             const id = context.req.param('id');
 
             const projects = await usePrisma().projects.findMany({
-                where: {brand_id: Number(id)}
+                where: {brand_id: Number(id)},
+                orderBy: { id: 'asc' }
             });
+
             return successResponse(context, projects);
         });
 
@@ -177,6 +179,20 @@ export class ProjectsController extends BaseController {
             return successResponse(context, 'widget added', null,'successfully added widget to project');
         });
 
+        this.app.delete('/projects/:id', async (context: Context): Promise<any> => {
+            const id = context.req.param('id');
+
+            const deletedProject = await usePrisma().projects.delete({
+                where: {id: Number(id)}
+            });
+
+            if(!deletedProject) {
+                return errorResponse(context, 'no project with this id');
+            }
+
+            return successResponse(context, 'project deleted');
+        });
+
         this.app.post('/projects/:id', async (context: Context): Promise<any> => {
             const {name, description, creators, days, color} = await context.req.json()
             const id = context.req.param('id');
@@ -204,6 +220,39 @@ export class ProjectsController extends BaseController {
             });
 
             if(!newProject) {
+                return errorResponse(context, 'something went wrong while creating project');
+            }
+
+            return successResponse(context, 'project');
+        });
+
+        this.app.put('/projects/:id', async (context: Context): Promise<any> => {
+            const {name, description, creators, days, color, brand_id} = await context.req.json()
+            const id = context.req.param('id');
+
+            const slug = stringToSlug(name);
+
+            const project = await usePrisma().projects.findFirst({
+                where: {brand_id: brand_id, slug: slug}
+            });
+
+            if(project && project.id != Number(id)) {
+                return errorResponse(context, 'NAME_ALREADY EXISTS', 'project with this name already exists');
+            }
+
+            const updated = await usePrisma().projects.update({
+                where: {id: Number(id)},
+                data: {
+                    name: name,
+                    creators: creators,
+                    days: days,
+                    slug: slug,
+                    description: description,
+                    color: color,
+                }
+            });
+
+            if(!updated) {
                 return errorResponse(context, 'something went wrong while creating project');
             }
 

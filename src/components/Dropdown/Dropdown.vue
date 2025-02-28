@@ -13,7 +13,7 @@
 
 <template>
     <Transition>
-        <div ref="menu" class="absolute bg-white top-0 right-0 " v-if="open">
+        <div ref="menu" class="absolute bg-white top-0 right-0 z-50" v-if="open">
             <slot></slot>
         </div>
     </Transition>
