@@ -5,6 +5,9 @@
     import {useAccountStore} from "~/src/utils/Auth/AccountStore";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import AddProjectModal from "~/src/modules/projects/components/AddProjectModal.vue";
+    import Dropdown from "~/src/components/Dropdown/Dropdown.vue";
+    import ProjectSidebarButton from "~/src/modules/projects/components/Sidebar/ProjectSidebarButton.vue";
+    import draggable from "vuedraggable";
 
     const route = useRoute();
     const show = ref(false);
@@ -24,9 +27,10 @@
     });
 
     async function getProjects() {
+        projects.value = [];
         loading.value = true;
         const projectsRequest: APIResponse<Project[]> = await API.ask(`/projects/${accountState.brand?.id}`);
-        if(!projectsRequest.success) return;
+        if (!projectsRequest.success) return;
 
         projects.value = projectsRequest.data;
         loading.value = false;
@@ -47,15 +51,23 @@
     <div v-if="loading" class="w-full flex justify-center">
         <Icon width="16" icon="line-md:loading-loop"></Icon>
     </div>
-    <div v-else class="flex flex-col gap-2 max-h-[150px] overflow-auto">
-        <NuxtLink v-for="project of projects" :to="`/projects/${project.brand_id}/${project.slug}`" :class="{
-        'bg-[#E2E2E2] text-text-dark' : isActive(`/projects/${project.brand_id}/${project.slug}` )
-    }" @click="show = !show" class="flex py-2 px-4 items-center justify-between cursor-pointer rounded-xl">
-            <div class="flex items-center gap-2 transition duration-100 hover:translate-x-4">
-                <div :style="`background-color: ${project.color}`" class="rounded h-8 w-8 flex justify-center items-center">{{project.name.charAt(0)}}</div>
-                <p class="text-sm">{{project.name}}</p>
-            </div>
-        </NuxtLink>
+    <div v-else-if="!loading && projects.length === 0">
+        <p @click="open = true" class="text-sm underline pl-4 mt-2 cursor-pointer">No projects yet, add one</p>
+    </div>
+        <div v-else class="flex flex-col gap-2 max-h-[150px] overflow-auto relative">
+        <draggable
+            v-model="projects"
+            item-key="id"
+            tag="div"
+            ghost-class="dragging"
+            :force-fallback="true"
+        >
+            <template #item="{ element }">
+                <div class="cursor-grab active:cursor-grabbing">
+                    <ProjectSidebarButton :project="element" @update="getProjects" />
+                </div>
+            </template>
+        </draggable>
     </div>
     <modal-popup @close="closeModal" :model-active="open">
         <AddProjectModal @update="getProjects()" @close="closeModal"/>
