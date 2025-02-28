@@ -51,19 +51,10 @@
     <div v-if="loading" class="w-full flex justify-center">
         <Icon width="16" icon="line-md:loading-loop"></Icon>
     </div>
-    <div v-else class="flex flex-col gap-2 max-h-[150px] overflow-auto">
-        <NuxtLink v-for="project of projects" :to="`/projects/${project.brand_id}/${project.slug}`" :class="{
-        'bg-[#E2E2E2] text-text-dark' : isActive(`/projects/${project.brand_id}/${project.slug}` )
-    }" @click="show = !show" class="flex py-2 px-4 items-center justify-between cursor-pointer rounded-xl">
-            <div class="flex items-center gap-2 transition duration-100 hover:translate-x-4">
-                <div :style="`background-color: ${project.color}`" class="rounded h-8 w-8 flex justify-center items-center">{{project.name.charAt(0)}}</div>
-                <p class="text-sm">{{project.name}}</p>
-            </div>
-        </NuxtLink>
     <div v-else-if="!loading && projects.length === 0">
         <p @click="open = true" class="text-sm underline pl-4 mt-2 cursor-pointer">No projects yet, add one</p>
     </div>
-    <div v-else class="flex flex-col gap-2 relative">
+        <div v-else class="flex flex-col gap-2 max-h-[150px] overflow-auto relative">
         <draggable
             v-model="projects"
             item-key="id"
