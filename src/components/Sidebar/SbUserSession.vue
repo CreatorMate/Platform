@@ -1,8 +1,8 @@
 <script setup lang='ts'>
     import {Icon} from "@iconify/vue";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     const {user, logout, fetch} = useOidcAuth();
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
 </script>
 
 <template>

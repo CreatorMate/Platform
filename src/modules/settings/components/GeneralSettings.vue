@@ -1,11 +1,11 @@
 <script setup lang='ts'>
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {getSupabaseClient} from "~/src/utils/Supabase/SupabaseClient";
     import {onMounted} from "vue";
     import {API} from "~/src/utils/API/API";
 
     const {user} = useOidcAuth();
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
     const files = ref();
     const imageLink = ref("");
     const image = ref("");

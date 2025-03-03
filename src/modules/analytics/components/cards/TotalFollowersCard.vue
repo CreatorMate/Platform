@@ -1,6 +1,6 @@
 <script setup lang='ts'>
     import StatCard from "~/src/modules/analytics/components/cards/base/StatCard.vue";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import type {APIResponse} from "~/api/utils/HonoResponses";
     import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
 
@@ -17,7 +17,7 @@
     );
 
     async function getData() {
-        const accountStore = useAccountStore();
+        const accountStore = useAccountState();
         const requestAverage: APIResponse<number> = await $fetch(`/API/creator_api/statistics/${accountStore.brand?.id}/followers?ids=${analyticsFilterState.getIds() ?? ''}&days=${analyticsFilterState.days}`)
         if(!requestAverage.success) return;
 

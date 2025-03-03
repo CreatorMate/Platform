@@ -2,7 +2,7 @@
     import type {Ref} from "vue";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import type {CreatorProfile} from "~/src/utils/CreatorAPITypes";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {Icon} from "@iconify/vue";
     import {API} from "~/src/utils/API/API";
 
@@ -14,7 +14,7 @@
     let creatorResults: Ref<CreatorProfile[]> = ref([]);
     let selectedCreators: Ref<CreatorProfile[]> = ref([]);
     const ids = ref<string[]>([]);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
 
     onMounted(async () => {
         await getCreators()

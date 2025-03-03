@@ -1,14 +1,14 @@
 <script setup lang='ts'>
     import Sidebar from "~/src/components/Sidebar/Sidebar.vue";
     import {useFrameState} from "~/src/utils/FrameState";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {Icon} from "@iconify/vue";
 
     const frameRef = ref<HTMLDivElement | null>(null);
 
     const frameState = useFrameState();
 
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
 
     onMounted(() => {
         frameState.setFrameRef(frameRef);
@@ -16,7 +16,7 @@
 </script>
 
 <template>
-    <main class="text-background-text flex screen-size p-3 gap-5">
+    <main class="text-background-text flex screen-size max-screen-size p-3 gap-5">
         <Sidebar></Sidebar>
         <div v-if="accountState.user" ref="frameRef" class="p-6 flex flex-grow bg-background-foreground rounded-3xl overflow-y-scroll">
             <slot v-if="accountState.user.brands" :frameRef="frameRef"></slot>

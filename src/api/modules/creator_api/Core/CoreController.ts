@@ -1,24 +1,39 @@
-import {BaseController} from "~/src/api/utils/BaseController";
-import type {Context} from "hono";
+import type {Context, Hono} from "hono";
 import {errorResponse, inheritResponse, successResponse} from "~/src/api/utils/HonoResponses";
 import {CreatorAPI} from "~/src/api/utils/CreatorAPI/CreatorAPI";
 import {context} from "esbuild";
+import {BaseController} from "~/src/api/utils/BaseController";
+import type {HonoUser} from "~/src/api/utils/HonoComposables";
 
 export class CoreController extends BaseController {
     async endpoints() {
-        this.app.get('/creator_api/check', async (context: Context): Promise<any> => {
-            const response = await CreatorAPI.ask(`/check`);
-            return inheritResponse(context, response);
-        });
+        this.app.all('/creator_api/*', async (context: Context): Promise<any> => {
+            let path = context.req.path.replace('/creator_api', '');
+            const url = new URL(context.req.url);
+            const queryParams = url.search;
+            path = path + queryParams;
 
-        this.app.get('/creator_api/sync/instagram', async (context: Context): Promise<any> => {
-            const {brandId, creatorId} = context.req.query();
-            console.log(`/sync/instagram${brandId ? `?brandId=${brandId}` : ''}${creatorId ? `?creatorId=${creatorId}` : ''}`);
-            const response = await CreatorAPI.ask(`/sync/instagram${brandId ? `?brandId=${brandId}` : ''}${creatorId ? `?creatorId=${creatorId}` : ''}`, 'GET');
-            if (!response.success) {
-                return errorResponse(context, response.error);
+            let body = {};
+            const method = context.req.method as 'GET' | 'POST' | 'PUT' | 'DELETE';
+
+            if (method == 'POST' || method == 'PUT') {
+                body = await context.req.json();
             }
-            return successResponse(context, response.data, null, 'data sync started, come back after a few minutes');
+
+            const localUser: HonoUser = this.getHonoUser(context);
+            const user = await this.getPrisma().users.findFirst({
+                where: {external_id: localUser.sub, email: localUser.email},
+                include: {brands: true}
+            });
+
+            if (user && user.brands) {
+                path = path.replace('brand_id', user.brands.id.toString())
+                path = path.replace('user_id', user.id)
+            }
+
+            const request = await CreatorAPI.ask(path, method, body);
+
+            return inheritResponse(context, request.response, request.code);
         });
     }
 }

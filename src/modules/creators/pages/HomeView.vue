@@ -1,7 +1,7 @@
 <script setup lang='ts'>
     import {Icon} from "@iconify/vue";
     import {onMounted, type Ref} from "vue";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {Paginator} from "~/src/utils/Pagination/Paginator";
     import type {Creator} from "~/src/utils/SupabaseTypes";
     import PageTitle from "~/src/components/Core/PageTitle.vue";
@@ -16,7 +16,7 @@
     const open = ref(false);
 
     const newCreators = ref(0);
-    const accountStore = useAccountStore();
+    const accountStore = useAccountState();
 
     const loading = ref(true);
     const paginator = new Paginator<Creator>('/API/brands/creators', `&brand=${accountStore.brand?.id}`, loading);

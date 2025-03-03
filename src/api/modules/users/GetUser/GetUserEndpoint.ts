@@ -10,12 +10,11 @@ export class GetUserEndpoint extends Endpoint {
 
     protected async handle(context: Context) {
         try {
-            await this.connectWithRetry(this.prismaClient)
             const honoUser = this.getHonoUser(context);
-            let user = await this.getUser(honoUser.sub);
+            let user = await this.getUser(honoUser);
             if(!user) {
                 await this.createUser(honoUser);
-                user = await this.getUser(honoUser.sub);
+                user = await this.getUser(honoUser);
             }
 
             if(!user) return errorResponse(context, "Something went wrong while creating the new user");
@@ -27,37 +26,26 @@ export class GetUserEndpoint extends Endpoint {
         }
     }
 
-    async connectWithRetry(prisma: PrismaClient, retries = 5, delay = 3000) {
-        for (let i = 0; i < retries; i++) {
-            try {
-                await prisma.$connect();
-                console.log("Connected to database!");
-                return;
-            } catch (error) {
-                console.error(`Database connection failed. Retrying in ${delay}ms...`);
-                await new Promise((resolve) => setTimeout(resolve, delay));
-            }
-        }
-        throw new Error("Failed to connect to database after multiple attempts.");
-    }
-
     private async createUser(honoUser: HonoUser) {
          await this.prismaClient.users.create({
             data: {
-                id: honoUser.sub,
+                external_id: honoUser.sub,
                 email: honoUser.email,
                 full_name: honoUser.nickname,
             }
         });
     }
 
-    private async getUser(userId: string) {
-        return await this.prismaClient.users.findUnique({
-            where: {id: userId},
+    private async getUser(user: HonoUser) {
+        return this.prismaClient.users.findFirst({
+            where: {external_id: user.sub, email: user.email},
             include: {
-                brands: true,
+                brands: {
+                    include: {
+                        instagram_accounts: true
+                    }
+                }
             }
         });
     }
-
 }

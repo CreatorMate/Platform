@@ -1,9 +1,9 @@
 import type {RouteLocationNormalized} from "#vue-router";
-import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+import {useAccountState} from "~/src/utils/Auth/AccountState";
 import {appSettings} from "~/src/GlobalSettings";
 
 export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
-    const accountStore = useAccountStore();
+    const accountStore = useAccountState();
     const runtimeConfig = useRuntimeConfig();
     appSettings.baseUrl = runtimeConfig.public.BASE_URL;
     try {

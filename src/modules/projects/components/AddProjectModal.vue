@@ -5,7 +5,7 @@
     import CreatorSelector from "~/src/components/Core/CreatorSelector.vue";
     import ToggleButton from "~/src/components/ToggleButton.vue";
     import {API} from "~/src/utils/API/API";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {load} from "yaml-ast-parser";
 
     const title = ref('');
@@ -14,7 +14,7 @@
     const days = ref('');
     const allCreators = ref(true);
     const loading = ref(false);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
 
     const emits = defineEmits(['close', 'update']);
 

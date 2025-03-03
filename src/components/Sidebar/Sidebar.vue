@@ -3,15 +3,17 @@
     import type {NavItem} from "~/src/components/Sidebar/NavItem";
     import ProjectButton from "~/src/components/Sidebar/ProjectButton.vue";
     import {Icon} from "@iconify/vue";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
 
     const {user} = useOidcAuth();
+    const accountState = useAccountState();
 
 </script>
 
 <template>
-    <aside class="h-full min-w-[290px] w-[290px] max-h-screen min-h-screen flex flex-col overflow-auto">
+    <aside class="h-full min-w-[290px] w-[290px] max-h-screen flex flex-col overflow-auto">
         <NuxtImg class="mt-4 ml-4" width="48" src="/logo-light.svg"/>
-        <nav class="mt-7 flex flex-col flex-grow gap-2">
+        <nav v-if="accountState.brand" class="mt-7 flex flex-col flex-grow gap-2">
             <p class="text-sm pl-2">general</p>
             <NavButton :premium="false" link-to="/"
                        name="creators" icon-name="material-symbols:supervisor-account-outline-rounded"/>

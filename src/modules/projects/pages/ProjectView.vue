@@ -1,7 +1,7 @@
 <script setup lang='ts'>
     import type {Project} from "~/src/utils/SupabaseTypes"
     import {API} from "~/src/utils/API/API";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import EditorComponent from "~/src/modules/projects/components/EditorComponent.vue";
     import hotkeys from 'hotkeys-js';
@@ -16,19 +16,17 @@
 
     const project = ref<null|Project>(null)
     const container = ref<HTMLDivElement | null>(null);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
 
     onMounted(async () => {
         if(id != accountState.brand?.id) return;
 
-        hotkeys('ctrl+a', function(event: Event) {
+        hotkeys('ctrl+a,command+a', function(event) {
             event.preventDefault();
-            open.value = true
+            open.value = true;
         });
 
         await getProject();
-
-
     });
 
     async function getProject() {

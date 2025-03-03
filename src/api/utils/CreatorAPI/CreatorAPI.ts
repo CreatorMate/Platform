@@ -1,11 +1,14 @@
 import type {APIResponse} from "~/src/api/utils/HonoResponses";
 
 export class CreatorAPI {
-    public static async ask<T>(path: string, method: 'GET'|'POST'|'PUT'|'DELETE' = 'GET', data: object = {}): Promise<APIResponse<T>>  {
+    public static async ask<T>(path: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', data: object = {}): Promise<{
+        response: APIResponse<T>,
+        code: number
+    }> {
         try {
             const requestObject: RequestInit = {}
             requestObject.method = method;
-            if(method !== 'GET') {
+            if (method !== 'GET') {
                 requestObject.body = JSON.stringify(data);
             }
             requestObject.headers = {
@@ -15,13 +18,19 @@ export class CreatorAPI {
             }
             const request = await fetch(`${process.env.CREATOR_API_PATH}${path}`, requestObject);
 
-            return await request.json() as APIResponse;
+            return {
+                response: await request.json() as APIResponse<T>,
+                code: request.status
+            };
         } catch (error) {
             return {
-                success: false,
-                error: "NOT_AVAILABLE",
-                message: "creator server under maintenance"
-            } as APIResponse
+                response: {
+                    success: false,
+                    error: "NOT_AVAILABLE",
+                    message: "creator server under maintenance"
+                } as APIResponse,
+                code: 404,
+            }
         }
     }
 }

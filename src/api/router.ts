@@ -11,14 +11,14 @@ import {GetSupabaseEndpoint} from "~/src/api/modules/misc/GetSupabase/GetSupabas
 import {InviteCreatorEndpoint} from "~/src/api/modules/creators/InviteCreator/InviteCreatorEndpoint";
 import {UpdateUserEndpoint} from "~/src/api/modules/users/UpdateUser/UpdateUserEndpoint";
 import {GetBrandEndpoint} from "~/src/api/modules/brands/GetBrand/GetBrandEndpoint";
-import {GetCreatorProfileEndpoint} from "~/src/api/modules/creator_api/GetCreatorProfile/GetCreatorProfileEndpoint";
-import {GetBrandContentEndpoint} from "~/src/api/modules/creator_api/GetBrandContent/GetBrandContentEndpoint";
-import {GetBrandProfilesEndpoint} from "~/src/api/modules/creator_api/GetBrandProfiles/GetBrandProfilesEndpoint";
-import {
-    GetBrandCountryDistributionEndpoint
-} from "~/src/api/modules/creator_api/GetBrandCountryDistribution/GetBrandCountryDistributionEndpoint";
+// import {GetCreatorProfileEndpoint} from "~/src/api/modules/creator_api/GetCreatorProfile/GetCreatorProfileEndpoint";
+// import {GetBrandContentEndpoint} from "~/src/api/modules/creator_api/GetBrandContent/GetBrandContentEndpoint";
+// import {GetBrandProfilesEndpoint} from "~/src/api/modules/creator_api/GetBrandProfiles/GetBrandProfilesEndpoint";
+// import {
+//     GetBrandCountryDistributionEndpoint
+// } from "~/src/api/modules/creator_api/GetBrandCountryDistribution/GetBrandCountryDistributionEndpoint";
 import type {BaseController} from "~/src/api/utils/BaseController";
-import {StatisticsController} from "~/src/api/modules/creator_api/statistics/StatisticsController";
+// import {StatisticsController} from "~/src/api/modules/creator_api/statistics/StatisticsController";
 import type {Hono} from "hono";
 import {GetCreatorBrandsEndpoint} from "~/src/api/modules/creators/GetCreatorBrands/GetCreatorBrandsEndpoint";
 import {UpdateCreatorBrandsEndpoint} from "~/src/api/modules/creators/UpdateCreatorBrands/UpdateCreatorBrandsEndpoint";
@@ -29,7 +29,7 @@ import {WidgetsController} from "~/src/api/modules/projects/WidgetsController";
 
 export function initializeHonoRouter(app: Hono) {
     const controllers: BaseController[] = [
-        new StatisticsController(app),
+        // new StatisticsController(app),
         new CoreController(app),
         new ProjectsController(app),
         new MetricController(app),
@@ -49,10 +49,10 @@ export function initializeHonoRouter(app: Hono) {
         new InviteCreatorEndpoint(),
         new UpdateUserEndpoint(),
         new GetBrandEndpoint(),
-        new GetCreatorProfileEndpoint(),
-        new GetBrandContentEndpoint(),
-        new GetBrandProfilesEndpoint(),
-        new GetBrandCountryDistributionEndpoint(),
+        // new GetCreatorProfileEndpoint(),
+        // new GetBrandContentEndpoint(),
+        // new GetBrandProfilesEndpoint(),
+        // new GetBrandCountryDistributionEndpoint(),
         new GetCreatorBrandsEndpoint(),
         new UpdateCreatorBrandsEndpoint()
     ];

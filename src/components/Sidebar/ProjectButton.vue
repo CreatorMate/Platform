@@ -2,10 +2,9 @@
     import {Icon} from "@iconify/vue";
     import type {Project} from "~/src/utils/SupabaseTypes"
     import {API} from "~/src/utils/API/API";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import AddProjectModal from "~/src/modules/projects/components/AddProjectModal.vue";
-    import Dropdown from "~/src/components/Dropdown/Dropdown.vue";
     import ProjectSidebarButton from "~/src/modules/projects/components/Sidebar/ProjectSidebarButton.vue";
     import draggable from "vuedraggable";
 
@@ -20,7 +19,7 @@
     const open = ref(false);
 
     const projects = ref<Project[]>([]);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
 
     onMounted(async () => {
         await getProjects();

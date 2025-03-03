@@ -44,7 +44,7 @@ export class ProjectsController extends BaseController {
             const {value} = await context.req.json();
 
             const updated = await usePrisma().project_widgets.update({
-                where: {id: Number(widgetId)},
+                where: {id: widgetId},
                 data: {value: value}
             })
 
@@ -121,7 +121,7 @@ export class ProjectsController extends BaseController {
 
         this.app.delete('/projects/:id/widgets/:widget_id', async (context: Context): Promise<any> => {
             const project_id = Number(context.req.param('id'));
-            const widget_id = Number(context.req.param('widget_id'));
+            const widget_id = context.req.param('widget_id');
 
             const deleted = await this.getPrisma().project_widgets.delete({
                 where: {id: widget_id}

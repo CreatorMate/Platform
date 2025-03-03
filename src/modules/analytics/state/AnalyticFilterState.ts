@@ -1,11 +1,11 @@
 import {defineStore} from "pinia";
 import type {CreatorProfile} from "~/src/utils/CreatorAPITypes";
 import type {APIResponse} from "~/src/api/utils/HonoResponses";
-import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+import {useAccountState} from "~/src/utils/Auth/AccountState";
 
 export const useAnalyticFilterState = defineStore("analyticsFilter", () => {
     const creators = ref<CreatorProfile[]>([]);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
     const selectedCreators = ref<CreatorProfile[]>([]);
     const ids = ref<string[]>([]);
     const actions = ref(0);

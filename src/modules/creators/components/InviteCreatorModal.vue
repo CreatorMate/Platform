@@ -1,7 +1,7 @@
 <script setup lang='ts'>
     import {Icon} from "@iconify/vue";
     import type {Ref} from "vue";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {API} from "~/src/utils/API/API";
 
     const emits = defineEmits(['close', 'submitted']);
@@ -11,7 +11,7 @@
     const fileInput = ref(null);
     const invalidCsvFormat = ref(false);
     const loading = ref(false);
-    const accountStore = useAccountStore();
+    const accountStore = useAccountState();
 
     function addToList() {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

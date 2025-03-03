@@ -3,7 +3,7 @@
     import {Icon} from "@iconify/vue";
     import AddWidgetRowItem from "~/src/modules/projects/components/AddWidget/AddWidgetRowItem.vue";
     import {API} from "~/src/utils/API/API";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import type {Widget} from "~/src/utils/SupabaseTypes";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import hotkeys from "hotkeys-js";
@@ -12,7 +12,7 @@
         project_id: number
     }>()
     const emits = defineEmits(['close']);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
     let saved = false;
 
     const searchValue = ref('');

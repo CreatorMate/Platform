@@ -64,7 +64,15 @@ export type Brand = {
     id: number,
     name: string,
     is_premium: string,
-    customer_id: string
+    customer_id: string,
+    instagram_accounts: InstagramAccount|null
+}
+
+export type InstagramAccount = {
+    id: number,
+    expires_at: string,
+    token: string,
+    instagram_id: string
 }
 
 export type Widget = {

@@ -4,14 +4,14 @@
     import SelectMetric from "~/src/modules/projects/components/CreateWidget/SelectMetric.vue";
     import type {Widget} from "~/src/utils/SupabaseTypes";
     import CustomizeMetric from "~/src/modules/projects/components/CreateWidget/CustomizeMetric.vue";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import FinalizeWidget from "~/src/modules/projects/components/CreateWidget/FinalizeWidget.vue";
     import {API} from "~/src/utils/API/API";
 
     const metric = ref<Metric | null>(null);
     const emits = defineEmits(['close', 'update']);
     const step = ref(1);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
     const widget = ref<Widget>({
         id: 0,
         name: '',

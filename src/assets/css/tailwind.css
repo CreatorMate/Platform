@@ -45,8 +45,8 @@ html, body {
         height: 100dvh;
     }
     .max-screen-size {
-        width: 100dvw;
-        height: 100dvh;
+        max-width: 100dvw;
+        max-height: 100dvh;
     }
 }
 

@@ -2,7 +2,7 @@
     import PieChartCard from "~/src/modules/analytics/components/cards/base/PieChartCard.vue";
     import {onMounted} from "vue";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
 
     type Gender = {
@@ -20,7 +20,7 @@
     );
 
     async function getData() {
-        const accountState = useAccountStore();
+        const accountState = useAccountState();
         segments.value = [];
         const request: APIResponse<Gender[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/genders?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
 

@@ -5,7 +5,7 @@
     import CreatorSelector from "~/src/components/Core/CreatorSelector.vue";
     import ToggleButton from "~/src/components/ToggleButton.vue";
     import {API} from "~/src/utils/API/API";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import type {Project} from "~/src/utils/SupabaseTypes"
     import {useRoute, useRouter} from "#app";
     import {stringToSlug} from "~/src/utils/utils";
@@ -20,7 +20,7 @@
     const creators = ref(project.creators);
     const allCreators = ref(true);
     const loading = ref(false);
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
     const route = useRoute();
     const router = useRouter();
 

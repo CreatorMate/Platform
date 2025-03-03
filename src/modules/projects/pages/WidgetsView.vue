@@ -5,14 +5,14 @@
     import type {Widget} from "~/src/utils/SupabaseTypes";
     import {API} from "~/src/utils/API/API";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
-    import {useAccountStore} from "~/src/utils/Auth/AccountStore";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {WidgetProvider} from "~/src/modules/projects/data/WidgetProvider";
     import PreviewWidget from "~/src/modules/projects/components/widgets/PreviewWidget.vue";
 
     const open = ref(false);
     const widget = ref<Widget|null>(null);
 
-    const accountState = useAccountStore();
+    const accountState = useAccountState();
 
     function closeModal() {
         open.value = false;
