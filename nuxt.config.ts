@@ -77,6 +77,8 @@ export default defineNuxtConfig({
     SUPABASE_AUTH_URL: process.env.SUPABASE_AUTH_URL,
     SUPABASE_AUTH_KEY: process.env.SUPABASE_AUTH_KEY,
     PHYLLO_KEY: process.env.PHYLLO_KEY,
+    META_CLIENT_ID: process.env.META_CLIENT_ID,
+    META_REDIRECT_URL: process.env.META_REDIRECT_URL,
     mailerUser: '',
     mailerPass: '',
     mailerHost: '',
@@ -85,7 +87,6 @@ export default defineNuxtConfig({
       BASE_URL: process.env.BASE_URL,
       META_CLIENT_ID: process.env.META_CLIENT_ID,
       META_REDIRECT_URL: process.env.META_REDIRECT_URL,
-      META_CONFIG_ID: process.env.META_CONFIG_ID,
     },
   },
   image: {

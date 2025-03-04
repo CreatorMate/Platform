@@ -8,6 +8,7 @@
     const {user} = useOidcAuth();
     const accountState = useAccountState();
 
+
 </script>
 
 <template>
@@ -21,6 +22,8 @@
                        name="analytics" icon-name="material-symbols:bar-chart-4-bars"/>
             <NavButton :premium="false" link-to="/content"
                        name="content" icon-name="material-symbols:animated-images-outline"/>
+            <NavButton v-if="accountState.user?.email == user?.userInfo?.email" :premium="false" link-to="/chat"
+                       name="chat" icon-name="material-symbols:chat-bubble-outline"/>
             <ProjectButton />
             <NavButton :premium="false" link-to="/metrics"
                        name="metric catalog" icon-name="material-symbols:folder-outline"/>

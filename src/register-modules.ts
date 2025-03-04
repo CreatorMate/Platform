@@ -5,13 +5,15 @@ import SettingsModule from "./modules/settings/SettingsModule";
 import {ContentModule} from "./modules/content/ContentModule";
 import CreatorModule from "./modules/creators/CreatorModule";
 import ProjectModule from "./modules/projects/ProjectModule";
+import ChatModule from "./modules/chat/ChatModule";
 
 const modules: BaseModule[] = [
     new AnalyticsModule(),
     new CreatorModule(),
     new SettingsModule(),
     new ContentModule(),
-    new ProjectModule()
+    new ProjectModule(),
+    new ChatModule(),
 ];
 export function getModuleRoutes() {
     const routes: NuxtPage[] = [];

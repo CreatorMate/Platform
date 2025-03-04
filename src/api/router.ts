@@ -26,6 +26,7 @@ import {CoreController} from "~/src/api/modules/creator_api/Core/CoreController"
 import {ProjectsController} from "~/src/api/modules/projects/ProjectsController";
 import {MetricController} from "~/src/api/modules/projects/MetricController";
 import {WidgetsController} from "~/src/api/modules/projects/WidgetsController";
+import {BrandController} from "~/src/api/modules/brands/BrandController";
 
 export function initializeHonoRouter(app: Hono) {
     const controllers: BaseController[] = [
@@ -34,6 +35,7 @@ export function initializeHonoRouter(app: Hono) {
         new ProjectsController(app),
         new MetricController(app),
         new WidgetsController(app),
+        new BrandController(app),
     ];
 
     const endpoints: Endpoint[] = [

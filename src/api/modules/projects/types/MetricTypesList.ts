@@ -30,14 +30,14 @@ export const metricTypesList: Metric[] = [
             'average': '/brands/${brand_id}/statistics/average?key=likes',
         }
     },
-    {
-        name: 'country data',
-        category: MetricCategory.ENGAGEMENT,
-        description: 'active viewership per country',
-        kind: MetricKind.PERCENTAGE_LIST,
-        actions: {
-            'percentage': '/brands/${brand_id}/statistics/sum?key=likes&grouped=true',
-            'total': '/brands/${brand_id}/statistics/average?key=likes&grouped=true',
-        }
-    }
+    // {
+    //     name: 'country data',
+    //     category: MetricCategory.ENGAGEMENT,
+    //     description: 'active viewership per country',
+    //     kind: MetricKind.PERCENTAGE_LIST,
+    //     actions: {
+    //         'percentage': '/brands/${brand_id}/statistics/sum?key=likes&grouped=true',
+    //         'total': '/brands/${brand_id}/statistics/average?key=likes&grouped=true',
+    //     }
+    // }
 ];
