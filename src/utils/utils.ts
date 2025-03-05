@@ -1,3 +1,5 @@
+import {validateExample} from "@redocly/openapi-core/lib/rules/utils";
+
 export function sortByKey<T>(list: T[], key: keyof T, desc: boolean = false, limit?: number) {
     const sortedList = list.slice().sort((a, b) => {
         const valueA = a[key];
@@ -31,6 +33,25 @@ export function shorten(text: string, amount: number, devider: string = ' ') {
     }
 
     return `${newText}...`
+}
+
+export function shortenString(value: any, maxLength: number): any {
+    if(typeof value === "string") {
+        if (value.length > maxLength) {
+            return value.slice(0, maxLength) + "...";
+        }
+        return value;
+    }
+
+    return value;
+}
+
+export function isUrl(value: any) {
+    if(typeof value === "string") {
+        return value.includes('https://');
+    }
+
+    return false;
 }
 
 export function sendTo(url: string) {

@@ -40,7 +40,7 @@
     function reset() {
         chats.value = [];
         chats.value.push({
-            message: "welcome, what would you like to know about creator mate?",
+            message: "welcome, what would you like to know today?",
             sender: Sender.CREATORMATE,
             type: 'start'
         });

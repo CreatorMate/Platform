@@ -5,6 +5,7 @@
     import AnimatedText from "~/src/modules/chat/components/AnimatedText.vue";
     import {API} from "~/src/utils/API/API";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
+    import ChatTable from "~/src/modules/chat/components/ChatTable.vue";
 
     const loading = ref(true)
     const error = ref(false)
@@ -12,6 +13,7 @@
     const speed = 5;
     let observer: ResizeObserver;
     const elementRef = ref<HTMLElement | null>(null);
+    let isTable = ref(false);
 
     const emit = defineEmits(['done', 'resize']);
 
@@ -40,6 +42,8 @@
             text = cleanUp(JSON.stringify(response.data.response));
         } else {
             text = cleanUp(JSON.stringify(response.data.using));
+            isTable.value = true;
+            done();
         }
 
         loading.value = false;
@@ -80,7 +84,9 @@
 <template>
     <div ref="elementRef" class="w-full">
         <Icon class="text-gray-400" size="30px" v-if="loading" name="eos-icons:three-dots-loading"></Icon>
-        <AnimatedText v-else-if="!error" @done="done" :text="text" :speed="speed"></AnimatedText>
+        <AnimatedText v-else-if="!error && !isTable" @done="done" :text="text" :speed="speed"></AnimatedText>
+        <ChatTable v-else-if="!error && isTable" :text="text"></ChatTable>
+        <p v-else>something went wrong</p>
     </div>
 </template>
 
