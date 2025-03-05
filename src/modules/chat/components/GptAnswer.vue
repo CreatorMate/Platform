@@ -6,6 +6,7 @@
     import {API} from "~/src/utils/API/API";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import ChatTable from "~/src/modules/chat/components/ChatTable.vue";
+    import type {Ref} from "vue";
 
     const loading = ref(true)
     const error = ref(false)
@@ -14,6 +15,7 @@
     let observer: ResizeObserver;
     const elementRef = ref<HTMLElement | null>(null);
     let isTable = ref(false);
+    let sections: Ref<{type: string, data: any}[]> = ref([]);
 
     const emit = defineEmits(['done', 'resize']);
 
@@ -27,8 +29,7 @@
             loading.value = false;
             return;
         }
-        ;
-        const response: APIResponse<{response: string, using: any}> = await API.ask('/creator_api/ask', 'POST', {
+        const response: APIResponse<{response: string, using: any}|{sections: {type: string, data: any}[]}> = await API.ask('/creator_api/ask', 'POST', {
             question: question.message
         });
 
@@ -37,15 +38,21 @@
             loading.value = false;
             return;
         }
-
-        if(response.data.response) {
-            text = cleanUp(JSON.stringify(response.data.response));
-        } else {
-            text = cleanUp(JSON.stringify(response.data.using));
-            isTable.value = true;
+        if ('sections' in response.data) {
+            sections.value.push(...response.data.sections);
+            console.log(sections.value)
+            loading.value = false;
             done();
+        } else if ('response' in response.data) {
+            if(response.data.response) {
+                text = cleanUp(JSON.stringify(response.data.response));
+                done();
+            } else {
+                text = cleanUp(JSON.stringify(response.data.using));
+                isTable.value = true;
+                done();
+            }
         }
-
         loading.value = false;
     });
 
@@ -84,8 +91,8 @@
 <template>
     <div ref="elementRef" class="w-full">
         <Icon class="text-gray-400" size="30px" v-if="loading" name="eos-icons:three-dots-loading"></Icon>
-        <AnimatedText v-else-if="!error && !isTable" @done="done" :text="text" :speed="speed"></AnimatedText>
-        <ChatTable v-else-if="!error && isTable" :text="text"></ChatTable>
+        <AnimatedText v-else-if="!error && !isTable && text" @done="done" :text="text" :speed="speed"></AnimatedText>
+        <ChatTable v-else-if="!error && sections.length > 0" :sections></ChatTable>
         <p v-else>something went wrong</p>
     </div>
 </template>
