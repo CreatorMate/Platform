@@ -42,14 +42,14 @@
     <div class="flex w-full min-w-full border border-[#E2E2E2] p-3 rounded-xl relative max-h-[200px]"
          style="width: 20%">
         <div style="background-image: url('/placeholder.jpg')" class="blur-load thumbnail mr-3 rounded">
-            <NuxtImg v-if="post.format === 'IMAGE'" @error="onError($event, post)"
-                     :alt="post.posted_by + ' - ' + post.title" class="object-cover rounded h-full w-full " :src="post.media_url" loading="lazy"/>
-            <NuxtImg v-else @error="onError($event, post)" :alt="post.posted_by + ' - ' + post.title"
-                     class="object-cover rounded h-full w-full" :src="post.persistent_thumbnail" loading="lazy"/>
+            <NuxtImg v-if="post.media_type === 'IMAGE'" @error="onError($event, post)"
+                     :alt="post.posted_by + ' - ' + post.caption" class="object-cover rounded h-full w-full " :src="post.media_url" loading="lazy"/>
+            <NuxtImg v-else @error="onError($event, post)" :alt="post.posted_by + ' - ' + post.caption"
+                     class="object-cover rounded h-full w-full" :src="post.thumbnail_url" loading="lazy"/>
         </div>
         <div class="h-full w-full flex justify-between">
             <div class="h-full flex flex-col justify-between ">
-                <p class="text-xl w-[200px]">{{post.title ? shorten(post.title, 5) : 'No title available' }}</p>
+                <p class="text-xl w-[200px]">{{post.caption ? shorten(post.caption, 5) : 'No title available' }}</p>
                 <div class="flex flex-col gap-1">
                     <img :alt="`${post.posted_by}'s profile picture`" :src="post.user_picture"
                          class="w-11 h-11 rounded-full"/>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <Icon @click="sendTo(post.post_url)" class="absolute top-3 right-3 z-50 cursor-pointer hover:text-gray-800"
+        <Icon @click="sendTo(post.media_url)" class="absolute top-3 right-3 z-50 cursor-pointer hover:text-gray-800"
               icon="material-symbols:arrow-outward-rounded"></Icon>
     </div>
 </template>
