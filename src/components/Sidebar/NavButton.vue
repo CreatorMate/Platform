@@ -2,6 +2,7 @@
     import {Icon} from "@iconify/vue";
     import type {NavItem} from "./NavItem";
     import {onMounted} from "vue";
+    import {useAccountState} from "~/src/utils/Auth/AccountState";
 
     const {name, iconName, linkTo, premium, status} = defineProps<{
         name: string,
@@ -12,10 +13,12 @@
     }>();
     const route = useRoute();
 
+    const accountState = useAccountState();
+
     const isHoveringParent = ref(false)
     const show = ref(false)
     function isActive(path: string) {
-        return route.fullPath === path;
+        return route.fullPath === path || !accountState.brand?.is_premium;
     }
 
 </script>

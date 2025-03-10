@@ -14,7 +14,7 @@
 <template>
     <aside class="h-full min-w-[290px] w-[290px] max-h-screen flex flex-col overflow-auto">
         <NuxtImg class="mt-4 ml-4" width="48" src="/logo-light.svg"/>
-        <nav v-if="accountState.brand" class="mt-7 flex flex-col flex-grow gap-2">
+        <nav v-if="accountState.brand && accountState.brand.is_premium" class="mt-7 flex flex-col flex-grow gap-2">
             <p class="text-sm pl-2">general</p>
             <NavButton :premium="false" link-to="/"
                        name="creators" icon-name="material-symbols:supervisor-account-outline-rounded"/>
@@ -33,6 +33,13 @@
                 <div class="pt-3 border-t border-[#C6C6C6] w-full">
                     <NavButton :premium="false" link-to="/settings" name="settings" icon-name="uil:cog" :children="[]"/>
                 </div>
+                <LazySidebarSbUserSession/>
+            </div>
+        </nav>
+        <nav v-else-if="accountState.brand && !accountState.brand.is_premium" class="mt-7 flex flex-col flex-grow gap-2">
+            <p class="text-sm pl-2">general</p>
+            <NavButton :premium="false" link-to="/settings" name="settings" icon-name="uil:cog" :children="[]"/>
+            <div class="mt-auto flex flex-col gap-3">
                 <LazySidebarSbUserSession/>
             </div>
         </nav>

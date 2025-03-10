@@ -63,9 +63,10 @@ export enum AccountStatus {
 export type Brand = {
     id: number,
     name: string,
-    is_premium: string,
+    is_premium: boolean,
     customer_id: string,
-    instagram_accounts: InstagramAccount|null
+    instagram_accounts: InstagramAccount|null,
+    picture: string
 }
 
 export type InstagramAccount = {

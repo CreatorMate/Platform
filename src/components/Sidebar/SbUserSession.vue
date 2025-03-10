@@ -8,7 +8,8 @@
 <template>
     <div class="bg-background-foreground rounded-xl p-2 flex justify-between items-center text-text-light border border-[#E2E2E2]">
         <div class="flex gap-4 items-center">
-            <nuxt-img v-if="accountState.user?.picture" class="rounded-xl w-12 h-12" :src="'https://mfouoyeneddsfujxfjci.supabase.co/storage/v1/object/public/user_pictures/' + accountState.user.picture "></nuxt-img>
+            <nuxt-img v-if="accountState.brand?.picture" class="rounded-xl w-12 h-12" :src="accountState.brand?.picture"></nuxt-img>
+            <nuxt-img v-else-if="accountState.user?.picture" class="rounded-xl w-12 h-12" :src="'https://mfouoyeneddsfujxfjci.supabase.co/storage/v1/object/public/user_pictures/' + accountState.user.picture "></nuxt-img>
             <nuxt-img v-else class="rounded-xl w-12 h-12" :src="user?.userInfo?.picture"></nuxt-img>
             <div class="flex flex-col">
                 <p class="text-sm text-text-dark lowercase">{{accountState.user?.full_name ?? user?.userInfo?.nickname }}</p>
