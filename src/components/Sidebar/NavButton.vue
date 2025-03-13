@@ -25,9 +25,9 @@
 
 <template>
     <NuxtLink :to="linkTo" @mouseenter="isHoveringParent = true" @mouseleave="isHoveringParent = false" :class="{
-        'bg-[#E2E2E2] text-text-dark' : isActive(linkTo)
-    }" @click="show = !show" class="flex py-3 px-5 items-center cursor-pointer rounded-xl">
-        <div :class="{'translate-x-4': isHoveringParent}" class="flex items-center gap-3 transition duration-100">
+        'bg-[#E9E9E9] text-text-dark' : isActive(linkTo)
+    }" @click="show = !show" class="flex items-center cursor-pointer p-3 hover:bg-[#E9E9E9]">
+        <div class="flex items-center gap-3 transition duration-100">
             <Icon width="20" :icon="iconName"/>
             <p class="text-sm">{{name}}</p>
         </div>

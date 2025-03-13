@@ -39,7 +39,7 @@
 </script>
 
 <template>
-    <div class="flex w-full min-w-full border border-[#E2E2E2] p-3 rounded-xl relative max-h-[200px]"
+    <div class="flex w-full min-w-full border-[#E2E2E2] p-3 rounded-xl relative max-h-[200px]"
          style="width: 20%">
         <div style="background-image: url('/placeholder.jpg')" class="blur-load thumbnail mr-3 rounded">
             <NuxtImg v-if="post.media_type === 'IMAGE'" @error="onError($event, post)"

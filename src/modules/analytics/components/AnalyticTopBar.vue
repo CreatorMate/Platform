@@ -67,7 +67,7 @@
             <div v-if="open" class="absolute top-10 border shadow w-full z-50 bg-white">
                 <div @click="analyticFilterState.filterCreator(creator, true)" class="w-full pl-3 py-1 hover:bg-blue-600 hover:text-white" v-for="creator of analyticFilterState.creators">
                     <p v-if="!analyticFilterState.selectedCreators.includes(creator)">
-                        {{creator.username}}
+                        {{creator.creator.username}}
                     </p>
                 </div>
             </div>
@@ -100,7 +100,7 @@
     </div>
     <div class="flex flex-wrap mb-14 gap-3 mt-3">
         <div @click="analyticFilterState.filterCreator(creator)" class="bg-gray-300 flex gap-1 items-center px-3 py-1 cursor-pointer" v-for="creator of analyticFilterState.selectedCreators">
-            <p>{{creator.username}}</p>
+            <p>{{creator.creator.username}}</p>
             <Icon width="20" icon="material-symbols:close-small"></Icon>
         </div>
     </div>

@@ -39,9 +39,9 @@
 </script>
 
 <template>
-    <main class="text-background-text flex screen-size max-screen-size p-3 gap-5">
+    <main class="text-background-text flex screen-size max-screen-size">
         <Sidebar></Sidebar>
-        <div v-if="accountState.user && ready" ref="frameRef" class="p-6 flex flex-grow bg-background-foreground rounded-3xl overflow-y-scroll">
+        <div v-if="accountState.user && ready" ref="frameRef" class="p-6 flex flex-grow bg-background-foreground overflow-y-scroll">
             <slot v-if="accountState.brand" :frameRef="frameRef"></slot>
             <div v-else class="w-full h-full flex justify-center items-center flex-col">
                 this account is not linked to a brand, if this is a mistake

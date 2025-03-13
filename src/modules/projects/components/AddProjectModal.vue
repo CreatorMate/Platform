@@ -18,7 +18,7 @@
 
     const emits = defineEmits(['close', 'update']);
 
-    const color = ref('#F1F1F1');
+    const color = ref('#f6f6f6');
     const alreadyExist = ref(false);
 
     const colors: {primary: string, secondary: string}[] = [

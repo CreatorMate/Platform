@@ -15,8 +15,8 @@
     <div class="w-full h-full flex flex-col">
         <AnalyticTopBar title="analytics" sub-title="clear overview on all the active creator analytics you have going on" :show-days="true" :show-sort="false"></AnalyticTopBar>
         <div class="w-full grid grid-cols-3 gap-5 text-black mb-6">
-<!--            <ContentTypesCard/>-->
-<!--            <GenderDistributionCard/>-->
+            <ContentTypesCard/>
+            <GenderDistributionCard/>
 <!--            <AgesCard></AgesCard>-->
 <!--            <CitiesCard></CitiesCard>-->
 <!--            <CountryDistibutionCard/>-->

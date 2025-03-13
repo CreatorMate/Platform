@@ -4,9 +4,9 @@ import type {APIResponse} from "~/src/api/utils/HonoResponses";
 import {useAccountState} from "~/src/utils/Auth/AccountState";
 
 export const useAnalyticFilterState = defineStore("analyticsFilter", () => {
-    const creators = ref<CreatorProfile[]>([]);
+    const creators = ref<{id: string, creator: CreatorProfile}[]>([]);
     const accountState = useAccountState();
-    const selectedCreators = ref<CreatorProfile[]>([]);
+    const selectedCreators = ref<{id: string, creator: CreatorProfile}[]>([]);
     const ids = ref<string[]>([]);
     const actions = ref(0);
     const days = ref(90);
@@ -16,10 +16,15 @@ export const useAnalyticFilterState = defineStore("analyticsFilter", () => {
         const profiles: APIResponse<CreatorProfile[]> = await $fetch(`/API/creator_api/brands/${accountState.brand?.id}/profiles`);
         if(!profiles.success) return;
 
-        creators.value = profiles.data;
+        const keyValueArray =
+
+        creators.value = Object.entries(profiles.data).map(([key, value]) => ({
+            id: key,
+            creator: value
+        }));
     }
 
-    function filterCreator(creator: CreatorProfile, add: boolean = false) {
+    function filterCreator(creator: {id: string, creator: CreatorProfile}, add: boolean = false) {
         if(add) {
             if(selectedCreators.value.includes(creator)) return;
             selectedCreators.value.push(creator);

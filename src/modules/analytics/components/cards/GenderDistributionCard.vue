@@ -4,6 +4,7 @@
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
+    import {API} from "~/src/utils/API/API";
 
     type Gender = {
         key: string,
@@ -22,7 +23,7 @@
     async function getData() {
         const accountState = useAccountState();
         segments.value = [];
-        const request: APIResponse<Gender[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/genders?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
+        const request: APIResponse<{key: string, value: number}[]> = await API.ask(`/creator_api/brands/${accountState.brand?.id}/statistics/genders?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
 
         if (!request.success) return;
 
@@ -53,5 +54,5 @@
 </script>
 
 <template>
-    <PieChartCard class="card-2" :segments title='genders'></PieChartCard>
+    <PieChartCard class="card-2" :segments title='genders' description=""></PieChartCard>
 </template>

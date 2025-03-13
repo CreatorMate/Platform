@@ -40,12 +40,16 @@
         open.value = false
     }
 
+
 </script>
 
 <template>
-    <div class="flex w-full justify-between items-center mt-12">
-        <p class=" text-sm pl-2">projects</p>
-        <Icon @click="open = true" class="cursor-pointer" icon="material-symbols:add"/>
+    <div class="flex w-full justify-between items-center mt-8 pr-6 mb-3 cursor-pointer">
+        <div class="flex items-center gap-3 transition duration-100 pl-3">
+            <Icon width="20" icon="material-symbols:chevron-left" class="rotate-90"/>
+            <p class="text-sm">projects</p>
+        </div>
+        <Icon @click="open = true" @click.stop class="cursor-pointer" icon="material-symbols:add"/>
     </div>
     <div v-if="loading" class="w-full flex justify-center">
         <Icon width="16" icon="line-md:loading-loop"></Icon>

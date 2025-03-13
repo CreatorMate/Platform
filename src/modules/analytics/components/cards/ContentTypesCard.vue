@@ -1,9 +1,10 @@
 <script setup lang='ts'>
     import PieChartCard from "~/src/modules/analytics/components/cards/base/PieChartCard.vue";
     import {onMounted} from "vue";
-    import type {APIResponse} from "~/api/utils/HonoResponses";
     import {useAccountState} from "~/src/utils/Auth/AccountState";
     import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
+    import type {APIResponse} from "~/src/api/utils/HonoResponses";
+    import {API} from "~/src/utils/API/API";
 
     type ContentType = {
         type: string,
@@ -22,7 +23,7 @@
     async function getData() {
         const accountState = useAccountState();
         segments.value = [];
-        const request: APIResponse<ContentType[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/content_types?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
+    const request: APIResponse<ContentType[]> = await API.ask(`/creator_api/brands/${accountState.brand?.id}/content_types?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
         if (!request.success) return;
 
         for (const contentType of request.data) {

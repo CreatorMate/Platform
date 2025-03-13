@@ -54,12 +54,6 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'creatormate portal',
-      script: [
-        {
-          async: false,
-          src: "https://cdn.getphyllo.com/connect/v2/phyllo-connect.js"
-        }
-      ],
       link: [
         {
           rel: 'stylesheet',
