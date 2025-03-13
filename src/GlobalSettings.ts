@@ -4,7 +4,8 @@ export const appSettings = {
         "/invitation",
         /^\/invitation\/[^/]+\/[^/]+$/,
         /^\/creators\/.*$/,
-        "/creators"
+        "/creators",
+        "/login"
     ],
     defaultLimit: 10,
     baseUrl: ''

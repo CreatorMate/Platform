@@ -34,7 +34,7 @@
                 img.addEventListener("load", loaded);
             }
         })
-    })
+    });
 
 </script>
 
@@ -49,7 +49,7 @@
         </div>
         <div class="h-full w-full flex justify-between">
             <div class="h-full flex flex-col justify-between ">
-                <p class="text-xl w-[200px]">{{post.caption ? shorten(post.caption, 5) : 'No title available' }}</p>
+                <NuxtLink :to="`/comments?postId=${post.id}&igId=${post.posted_by_id}`" class="text-xl w-[200px]">{{post.caption ? shorten(post.caption, 5) : 'No title available' }}</NuxtLink>
                 <div class="flex flex-col gap-1">
                     <img :alt="`${post.posted_by}'s profile picture`" :src="post.user_picture"
                          class="w-11 h-11 rounded-full"/>

@@ -45,4 +45,6 @@ export type Post = {
     active_engagement: number,
     user_picture: string,
     posted_by: string,
+    posted_by_id: string,
+    id: string
 }

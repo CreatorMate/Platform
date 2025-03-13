@@ -15,21 +15,21 @@
     <div class="w-full h-full flex flex-col">
         <AnalyticTopBar title="analytics" sub-title="clear overview on all the active creator analytics you have going on" :show-days="true" :show-sort="false"></AnalyticTopBar>
         <div class="w-full grid grid-cols-3 gap-5 text-black mb-6">
-            <ContentTypesCard/>
-            <GenderDistributionCard/>
-            <AgesCard></AgesCard>
-            <CitiesCard></CitiesCard>
-            <CountryDistibutionCard/>
-            <GenderAgesCard></GenderAgesCard>
+<!--            <ContentTypesCard/>-->
+<!--            <GenderDistributionCard/>-->
+<!--            <AgesCard></AgesCard>-->
+<!--            <CitiesCard></CitiesCard>-->
+<!--            <CountryDistibutionCard/>-->
+<!--            <GenderAgesCard></GenderAgesCard>-->
             <PostFieldAverageCard field="likes" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="engagement" ids="" marker="%"></PostFieldAverageCard>
             <PostFieldAverageCard field="active_engagement" ids="" marker="%"></PostFieldAverageCard>
             <PostFieldAverageCard field="comments" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="reach" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="reach_rate" ids="" marker="%"></PostFieldAverageCard>
-            <PostFieldAverageCard field="saves" ids=""></PostFieldAverageCard>
+            <PostFieldAverageCard field="saved" ids=""></PostFieldAverageCard>
             <PostFieldAverageCard field="shares" ids=""></PostFieldAverageCard>
-            <TotalFollowersCard ids=""></TotalFollowersCard>
+<!--            <TotalFollowersCard ids=""></TotalFollowersCard>-->
         </div>
     </div>
 </template>

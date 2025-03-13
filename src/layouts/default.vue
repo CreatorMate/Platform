@@ -14,6 +14,19 @@
     const route = useRoute();
     const ready = ref(false);
 
+    function isExpirationWithinDays(expirationDate: string, days: number): boolean {
+        const today = new Date();
+        const targetDate = new Date(expirationDate);
+
+        // Calculate the difference in days
+        const diffInTime = targetDate.getTime() - today.getTime();
+        const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
+
+        // Check if the expiration date is within the next 'days' range
+        return diffInDays >= 0 && diffInDays <= days;
+    }
+
+
     onMounted(() => {
         frameState.setFrameRef(frameRef);
 

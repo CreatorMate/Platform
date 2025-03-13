@@ -3,6 +3,7 @@
     import {useAccountState} from "~/src/utils/Auth/AccountState";
     import type {APIResponse} from "~/src/api/utils/HonoResponses";
     import {useAnalyticFilterState} from "~/src/modules/analytics/state/AnalyticFilterState";
+    import {API} from "~/src/utils/API/API";
 
     const {ids, field} = defineProps<{
         ids: string, field: string, marker?: string
@@ -20,7 +21,7 @@
 
     async function getData() {
         const accountStore = useAccountState();
-        const requestAverage: APIResponse<{average: number}> = await $fetch(`/API/creator_api/statistics/${accountStore.brand?.id}/average?key=${field}&ids=${analyticsFilterState.getIds() ?? ''}&days=${analyticsFilterState.days}`)
+        const requestAverage: APIResponse<{average: number}> = await API.ask(`/creator_api/brands/${accountStore.brand?.id}/statistics/average?key=${field}&ids=${analyticsFilterState.getIds() ?? ''}&days=${analyticsFilterState.days}`)
         if(!requestAverage.success) return;
         value.value = requestAverage.data.average;
     }
