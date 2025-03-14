@@ -22,7 +22,7 @@
             key: string,
             value: number,
 
-        }[]> = await $fetch(`/API/creator_api/statistics/${accountState.brand?.id}/age?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
+        }[]> = await $fetch(`/API/creator_api/brands/${accountState.brand?.id}/statistics/ages?ids=${analyticsFilterState.getIds()}&days=${analyticsFilterState.days}`);
         if (!request.success) return;
 
         bars.value = [];

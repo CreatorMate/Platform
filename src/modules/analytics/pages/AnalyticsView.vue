@@ -17,7 +17,7 @@
         <div class="w-full grid grid-cols-3 gap-5 text-black mb-6">
             <ContentTypesCard/>
             <GenderDistributionCard/>
-<!--            <AgesCard></AgesCard>-->
+            <AgesCard></AgesCard>
 <!--            <CitiesCard></CitiesCard>-->
 <!--            <CountryDistibutionCard/>-->
 <!--            <GenderAgesCard></GenderAgesCard>-->

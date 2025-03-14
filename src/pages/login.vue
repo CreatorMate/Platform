@@ -83,69 +83,69 @@
 
                         </div>
                     </NuxtLink>
-                    <NuxtLink to="https://work.creatormate.com"
-                              class="w-full md:w-1/2 card flex flex-col py-3 overflow-x-hidden relative">
-                        <Icon name="material-symbols:north-east" class="absolute right-3 top-3"/>
-                        <p class="px-6">i'm a creator</p>
-                        <h2 class="text-2xl mt-4 mb-10 md:mb-32 px-6">looking for work and hire</h2>
-                        <div class="flex gap-3 flex-col">
-                            <div class="flex sliding-left w-full">
-                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">
-                                    <p class="label">i'm a photographer</p>
-                                    <p class="label">i'm a videographer</p>
-                                    <p class="label">i'm a content creator</p>
-                                    <p class="label">i'm a cinematographer</p>
-                                    <p class="label">i'm a filmmaker</p>
-                                    <p class="label mr-3">i'm a musician</p>
-                                </div>
-                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">
-                                    <p class="label">i'm a photographer</p>
-                                    <p class="label">i'm a videographer</p>
-                                    <p class="label">i'm a content creator </p>
-                                    <p class="label">i'm a cinematographer </p>
-                                    <p class="label">i'm a filmmaker </p>
-                                    <p class="label mr-3">i'm a musician</p>
-                                </div>
-                            </div>
-                            <div class="flex sliding-right w-full">
-                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">
-                                    <p class="ml-3 label">i'm a filmmaker</p>
-                                    <p class="label">i'm a content creator</p>
-                                    <p class="label">i'm an artist</p>
-                                    <p class="label">i'm a cinematographer</p>
-                                    <p class="label">i'm a cameraman</p>
-                                    <p class="label">i'm an editor</p>
+<!--                    <NuxtLink to="https://work.creatormate.com"-->
+<!--                              class="w-full md:w-1/2 card flex flex-col py-3 overflow-x-hidden relative">-->
+<!--                        <Icon name="material-symbols:north-east" class="absolute right-3 top-3"/>-->
+<!--                        <p class="px-6">i'm a creator</p>-->
+<!--                        <h2 class="text-2xl mt-4 mb-10 md:mb-32 px-6">looking for work and hire</h2>-->
+<!--                        <div class="flex gap-3 flex-col">-->
+<!--                            <div class="flex sliding-left w-full">-->
+<!--                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">-->
+<!--                                    <p class="label">i'm a photographer</p>-->
+<!--                                    <p class="label">i'm a videographer</p>-->
+<!--                                    <p class="label">i'm a content creator</p>-->
+<!--                                    <p class="label">i'm a cinematographer</p>-->
+<!--                                    <p class="label">i'm a filmmaker</p>-->
+<!--                                    <p class="label mr-3">i'm a musician</p>-->
+<!--                                </div>-->
+<!--                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">-->
+<!--                                    <p class="label">i'm a photographer</p>-->
+<!--                                    <p class="label">i'm a videographer</p>-->
+<!--                                    <p class="label">i'm a content creator </p>-->
+<!--                                    <p class="label">i'm a cinematographer </p>-->
+<!--                                    <p class="label">i'm a filmmaker </p>-->
+<!--                                    <p class="label mr-3">i'm a musician</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="flex sliding-right w-full">-->
+<!--                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">-->
+<!--                                    <p class="ml-3 label">i'm a filmmaker</p>-->
+<!--                                    <p class="label">i'm a content creator</p>-->
+<!--                                    <p class="label">i'm an artist</p>-->
+<!--                                    <p class="label">i'm a cinematographer</p>-->
+<!--                                    <p class="label">i'm a cameraman</p>-->
+<!--                                    <p class="label">i'm an editor</p>-->
 
-                                </div>
-                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">
-                                    <p class="ml-3 label">i'm a filmmaker</p>
-                                    <p class="label">i'm a content creator</p>
-                                    <p class="label">i'm an artist</p>
-                                    <p class="label">i'm a cinematographer</p>
-                                    <p class="label">i'm a cameraman</p>
-                                    <p class="label">i'm an editor</p>
-                                </div>
-                            </div>
-                            <div class="hidden md:flex sliding-left w-full">
-                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">
-                                    <p class="label">i'm a videographer</p>
-                                    <p class="label">i'm a color grading editor</p>
-                                    <p class="label">i'm an editor</p>
-                                    <p class="label">i'm a cameraman</p>
-                                    <p class="label">i'm a content creator</p>
-                                    <p class="label mr-3">i'm a photographer</p>
-                                </div>
-                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">
-                                    <p class="label">i'm a videographer</p>
-                                    <p class="label">i'm a color grading editor</p>
-                                    <p class="label">i'm an editor</p>
-                                    <p class="label">i'm a cameraman</p>
-                                    <p class="label">i'm a content creator</p>
-                                    <p class="label mr-3">i'm a photographer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </NuxtLink>
+<!--                                </div>-->
+<!--                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">-->
+<!--                                    <p class="ml-3 label">i'm a filmmaker</p>-->
+<!--                                    <p class="label">i'm a content creator</p>-->
+<!--                                    <p class="label">i'm an artist</p>-->
+<!--                                    <p class="label">i'm a cinematographer</p>-->
+<!--                                    <p class="label">i'm a cameraman</p>-->
+<!--                                    <p class="label">i'm an editor</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hidden md:flex sliding-left w-full">-->
+<!--                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">-->
+<!--                                    <p class="label">i'm a videographer</p>-->
+<!--                                    <p class="label">i'm a color grading editor</p>-->
+<!--                                    <p class="label">i'm an editor</p>-->
+<!--                                    <p class="label">i'm a cameraman</p>-->
+<!--                                    <p class="label">i'm a content creator</p>-->
+<!--                                    <p class="label mr-3">i'm a photographer</p>-->
+<!--                                </div>-->
+<!--                                <div class="flex items-center justify-between text-xs w-[200%] flex-shrink-0">-->
+<!--                                    <p class="label">i'm a videographer</p>-->
+<!--                                    <p class="label">i'm a color grading editor</p>-->
+<!--                                    <p class="label">i'm an editor</p>-->
+<!--                                    <p class="label">i'm a cameraman</p>-->
+<!--                                    <p class="label">i'm a content creator</p>-->
+<!--                                    <p class="label mr-3">i'm a photographer</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </NuxtLink>-->
                 </div>
             </div>
         </section>
