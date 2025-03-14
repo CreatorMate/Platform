@@ -26,7 +26,7 @@
     <Teleport to="body">
         <Transition name="modal-outer">
             <div :class="{'items-center': center}" v-show="modelActive"
-                 class="absolute top-0 screen-size flex justify-center  z-40 bg-black bg-opacity-10 backdrop-blur-[2px]">
+                 class="absolute top-0 screen-size flex justify-center  z-40 bg-black bg-opacity-20">
                 <Transition name="modal-inner">
                     <div :class="{'mt-20': !center}" autofocus @keydown.esc="emit('close')" v-if="modelActive" @click.stop>
                         <slot  ></slot>
@@ -37,7 +37,10 @@
     </Teleport>
 </template>
 
-<style scoped>
+<style >
+.popup {
+    box-shadow: 0 3px 12px 0 rgb(0 0 0 / 0.15);
+}
 .modal-outer-enter-active, .modal-outer-leave-active {
     transition: opacity 0.2s cubic-bezier(0.52, 0.02, 0.19, 1.02);
 }

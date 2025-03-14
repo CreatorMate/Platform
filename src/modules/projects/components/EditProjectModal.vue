@@ -85,7 +85,7 @@
 </script>
 
 <template>
-    <div class="bg-white w-[500px] rounded-lg p-4">
+    <div class="bg-white w-[500px] rounded-3xl p-6 popup">
         <div class="w-full flex justify-between items-center">
             <h1 class="font-semibold text-3xl">edit project</h1>
             <Icon @click="emits('close')" class="cursor-pointer" icon="material-symbols:close"/>

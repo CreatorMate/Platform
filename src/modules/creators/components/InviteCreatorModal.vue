@@ -55,7 +55,7 @@
 </script>
 
 <template>
-    <div class="p-10 bg-background-foreground w-[512px] flex flex-col rounded-xl text-text-dark text-sm">
+    <div class="p-10 bg-background-foreground w-[512px] flex flex-col rounded-3xl popup text-text-dark text-sm">
         <h1 class="text-lg mb-1">invite creators to your workspace</h1>
         <p class=" text-black text-opacity-30">this workspace is private, only select members and roles can use this
             workspace. this workspace is opted out of training.</p>

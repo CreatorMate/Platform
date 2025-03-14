@@ -144,7 +144,7 @@
 </script>
 
 <template>
-    <div class="bg-white w-[750px] rounded-2xl max-h-[570px] min-h-[570px] flex flex-col">
+    <div class="bg-white w-[750px] rounded-2xl max-h-[570px] min-h-[570px] flex flex-col popup">
         <div class="flex rounded-t-2xl min-h-12 items-center justify-between px-4 border-b text-gray-400">
             <div>
                 <Icon height="24" icon="material-symbols:search-rounded"></Icon>

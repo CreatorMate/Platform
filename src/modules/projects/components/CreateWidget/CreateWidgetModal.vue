@@ -67,7 +67,7 @@
 </script>
 
 <template>
-    <div class="bg-white w-[700px] rounded-lg p-4 max-h-[600px] min-h-[600px] overflow-y-scroll">
+    <div class="bg-white w-[700px] rounded-3xl p-6 popup max-h-[600px] min-h-[600px] overflow-y-auto">
         <div class="w-full flex justify-between items-center">
             <div class="font-semibold text-3xl flex gap-2">
                 <h1 class="">add widget</h1>
