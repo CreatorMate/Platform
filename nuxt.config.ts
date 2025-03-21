@@ -9,14 +9,11 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   pages: true,
   devtools: { enabled: true },
-  modules: ['nuxt-oidc-auth', '@nuxtjs/tailwindcss', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/color-mode', '@vueuse/nuxt', '@nuxtjs/supabase'],
+  modules: ['nuxt-oidc-auth', '@nuxtjs/tailwindcss', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/color-mode', '@vueuse/nuxt'],
   hooks: {
     'pages:extend' (pages) {
       pages.push(...moduleRoutes);
     }
-  },
-  supabase: {
-    redirect: false,
   },
   oidc: {
     defaultProvider: "auth0",
@@ -57,7 +54,7 @@ export default defineNuxtConfig({
       link: [
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap'
+          href: 'https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
         },
       ]
     }
@@ -68,8 +65,6 @@ export default defineNuxtConfig({
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_KEY: process.env.STRIPE_WEBHOOK_KEY,
     NUXT_SUPABASE_SECRET: process.env.NUXT_SUPABASE_SECRET,
-    SUPABASE_AUTH_URL: process.env.SUPABASE_AUTH_URL,
-    SUPABASE_AUTH_KEY: process.env.SUPABASE_AUTH_KEY,
     PHYLLO_KEY: process.env.PHYLLO_KEY,
     META_CLIENT_ID: process.env.META_CLIENT_ID,
     META_REDIRECT_URL: process.env.META_REDIRECT_URL,
